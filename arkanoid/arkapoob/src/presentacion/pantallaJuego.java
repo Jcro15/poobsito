@@ -13,6 +13,8 @@ import aplicacion.Arkapoob;
 public class pantallaJuego  extends JFrame{
 	private pinter pin;
 	private Container container;
+	private JButton jugar;
+	private Arkapoob asd;
 	
 	
 	public pantallaJuego(){
@@ -24,7 +26,18 @@ public class pantallaJuego  extends JFrame{
 	public void prepareElementos() {
 		ajusteFrame();
 		preparePantalla();
+		jugar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				machetin();
+			}
+		});
 		
+	}
+	public void machetin() {
+		while (true) {
+			
+			pin.play();
+		}
 	}
 	public void ajusteFrame(){
 		Dimension size=Toolkit.getDefaultToolkit().getScreenSize();
@@ -42,7 +55,9 @@ public class pantallaJuego  extends JFrame{
 		
 		pin = new pinter(550,550);
 		container = getContentPane();
-		container.add(pin, BorderLayout.CENTER); 
+		container.add(pin, BorderLayout.CENTER);
+		jugar=new JButton("jugar");
+		container.add(jugar,BorderLayout.NORTH);
+		
 	}
-	
 }

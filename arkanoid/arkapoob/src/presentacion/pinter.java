@@ -18,22 +18,32 @@ public class pinter extends JPanel {
 	private int width;
 	private int height;
 	private Graphics2D g2;
-	private Ellipse2D figura;
+	private Ellipse2D.Double figura;
 	
 	
 	public pinter(int w, int h){
 		width = w;
 		height = h;
 		setBackground(Color.BLACK);
+		game=new Arkapoob(w,h);
 	}
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		g2 = (Graphics2D) g ;
 		g2.setColor(Color.WHITE);
-		figura = game.getBola().getFigura();
-		g2.fill(figura);
-		
+		figura = game.getBola().getShape();
+		g2.fill(figura);	
+	}
+	public void play() {
+		try {
+			Thread.sleep(20);
+		}
+		catch(InterruptedException e) {
+			e.printStackTrace();
+		}
+		game.moverBola();
+		paint(getGraphics());
 	}
 	
 	
