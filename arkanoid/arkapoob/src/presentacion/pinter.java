@@ -7,6 +7,9 @@ import javax.swing.event.*;
 import javax.swing.border.*;
 import java.io.*;
 import java.util.*;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
 
 import aplicacion.Arkapoob;
 public class pinter extends JPanel {
@@ -14,6 +17,8 @@ public class pinter extends JPanel {
 	private Arkapoob game;
 	private int width;
 	private int height;
+	private Graphics2D g2;
+	private Ellipse2D figura;
 	
 	
 	public pinter(int w, int h){

@@ -10,12 +10,12 @@ import java.util.*;
 
 import aplicacion.Arkapoob;
 
-public class PantallaJuego  extends JFrame{
+public class pantallaJuego  extends JFrame{
 	private pinter pin;
 	private Container container;
 	
 	
-	public PantallaJuego(){
+	public pantallaJuego(){
 		super("sPOOBce Invaders");
 		setResizable(false);
 		prepareElementos();
@@ -40,7 +40,7 @@ public class PantallaJuego  extends JFrame{
 	
 	private void preparePantalla() {
 		
-		pin = new Dibujador(550,550);
+		pin = new pinter(550,550);
 		container = getContentPane();
 		container.add(pin, BorderLayout.CENTER); 
 	}
