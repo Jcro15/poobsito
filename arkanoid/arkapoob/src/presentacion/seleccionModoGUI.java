@@ -215,7 +215,15 @@ public class seleccionModoGUI extends JFrame{
 		CardLayout c1 = (CardLayout)(cards.getLayout());
 		c1.show(cards,"Configuracion");
 	}
-	public void juegue(){}
+	public void juegue(){
+		dispose();
+		pantallaJuego j = null;
+		j=new pantallaJuego();
+		j.setVisible(true);
+		
+		
+		
+	}
 	
 	
 	private void principal() {
