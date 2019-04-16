@@ -12,12 +12,12 @@ public class seleccionModoGUI extends JFrame{
 	
 	private JPanelB panelPantalla;
 	private JPanel	panelBotones, panelLogo;
-	private JButton single;
-	private JButton  coop;
-	private JButton  jVsCpu;
-	private JButton  volverBoton;
-	private JButton  jugarBoton;
-	private JButton  cancelarBoton;
+	private myButton single;
+	private myButton  coop;
+	private myButton  jVsCpu;
+	private myButton  volverBoton;
+	private myButton  jugarBoton;
+	private myButton  cancelarBoton;
 	private JLabel logo;
 	private Container contenedor;
 	private JComboBox<String> selecColorBall;
@@ -77,20 +77,20 @@ public class seleccionModoGUI extends JFrame{
 		panelBotones = new JPanel(new GridLayout(2,3));
 		panelBotones.setOpaque(false);
 		Icon icono1j = new ImageIcon("1J.png");
-		single = new JButton(icono1j);
-		setTransparent(single);
+		single = new myButton(icono1j);
+		single.setTransparent();
 		Icon icono2j = new ImageIcon("2J.png");
-		coop = new JButton(icono2j);
-		setTransparent(coop);
+		coop = new myButton(icono2j);
+		coop.setTransparent();
 		Icon iconoJVC = new ImageIcon("jVC.png");
-		jVsCpu = new JButton(iconoJVC);
-		setTransparent(jVsCpu);
+		jVsCpu = new myButton(iconoJVC);
+		jVsCpu.setTransparent();
 		Icon iconot = new ImageIcon("blan.png");
-		JButton t = new JButton(iconot);
-		setTransparent(t);
+		myButton t = new myButton(iconot);
+		t.setTransparent();
 		Icon iconoCancelar = new ImageIcon("volver.png");
-		cancelarBoton = new JButton(iconoCancelar);
-		setTransparent(cancelarBoton);
+		cancelarBoton = new myButton(iconoCancelar);
+		cancelarBoton.setTransparent();
 		
 		
 		panelBotones.add(single);
@@ -142,12 +142,12 @@ public class seleccionModoGUI extends JFrame{
 		combo.add(selecColorBar);
 		
 		Icon iconoCancelar = new ImageIcon("volver.png");
-		volverBoton = new JButton(iconoCancelar);
-		setTransparent(volverBoton);
+		volverBoton = new myButton(iconoCancelar);
+		volverBoton.setTransparent();
 		
 		Icon iconoJ = new ImageIcon("jugar1.png");
-		jugarBoton = new JButton(iconoJ);
-		setTransparent(jugarBoton);
+		jugarBoton = new myButton(iconoJ);
+		jugarBoton.setTransparent();
 		
 		panelCButton.add(jugarBoton);
 		panelCButton.add(volverBoton);
@@ -216,13 +216,7 @@ public class seleccionModoGUI extends JFrame{
 		c1.show(cards,"Configuracion");
 	}
 	public void juegue(){}
-	public void setTransparent(JButton boton){
-		
-		boton.setOpaque(false);
-		boton.setContentAreaFilled(false);
-		boton.setBorderPainted(false);
-		boton.setFocusable(false);
-	}
+	
 	
 	private void principal() {
 		setTitle("Configuracion");

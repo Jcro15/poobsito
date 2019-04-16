@@ -16,8 +16,8 @@ public class arkapoobGUI extends JFrame{
 	private JPanel panelLogo;
 	private JPanel panelBotones;
 	private JLabel logo;
-	private JButton jugarBoton;
-	private JButton abrirBoton;
+	private myButton jugarBoton;
+	private myButton abrirBoton;
 	
 	
 	
@@ -101,15 +101,15 @@ public class arkapoobGUI extends JFrame{
 		
 		panelBotones.add(new JLabel()); 
 		Icon icono = new ImageIcon("jugar.png");
-		jugarBoton = new JButton(icono);
-		setTransparent(jugarBoton);
+		jugarBoton = new myButton(icono);
+		jugarBoton.setTransparent();
 		panelBotones.add(jugarBoton);
 		panelBotones.add(new JLabel()); 
 		
 		panelBotones.add(new JLabel());
 		Icon icono1 = new ImageIcon("abrir.png");
-		abrirBoton = new JButton(icono1);
-		setTransparent(abrirBoton);
+		abrirBoton = new myButton(icono1);
+		abrirBoton.setTransparent();
 		panelBotones.add(abrirBoton);
 		panelBotones.add(new JLabel());
 		
@@ -151,13 +151,7 @@ public class arkapoobGUI extends JFrame{
 		modoGui.setVisible(true);
 	}
 	
-	public void setTransparent(JButton boton){
-		
-		boton.setOpaque(false);
-		boton.setContentAreaFilled(false);
-		boton.setBorderPainted(false);
-		boton.setFocusable(false);
-	}
+	
 	
 	
 	public static void main(String[] args) {
