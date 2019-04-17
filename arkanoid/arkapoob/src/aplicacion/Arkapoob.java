@@ -68,6 +68,7 @@ public class Arkapoob {
 	}
 
 	public void moverPlataformaDerecha() {
+		System.out.println("aaaa");
 		jugador.moverPlataformaDerecha();
 	}
 	public void moverPlataformaIzquierda() {
