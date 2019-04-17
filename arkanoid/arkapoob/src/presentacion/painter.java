@@ -12,18 +12,15 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
 import aplicacion.*;
-public class pinter extends JPanel {
+public class painter extends JPanel {
 	
 	private Arkapoob game;
-	private int width;
-	private int height;
 	private Graphics2D g2;
 	private Ellipse2D.Double figura;
 	
 	
-	public pinter(int w, int h){
-		width = w;
-		height = h;
+	public painter(int w, int h){
+		setPreferredSize(new Dimension(w, h));
 		setBackground(Color.BLACK);
 		game=new Arkapoob(w,h);
 	}

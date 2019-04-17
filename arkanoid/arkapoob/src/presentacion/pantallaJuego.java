@@ -11,7 +11,7 @@ import java.util.*;
 import aplicacion.Arkapoob;
 
 public class pantallaJuego  extends JFrame{
-	private pinter pin;
+	private painter pin;
 	private Container container;
 	private JButton jugar;
 	private Arkapoob asd;
@@ -53,7 +53,7 @@ public class pantallaJuego  extends JFrame{
 	
 	private void preparePantalla() {
 		
-		pin = new pinter(550,550);
+		pin = new painter(580,641);
 		container = getContentPane();
 		container.add(pin, BorderLayout.CENTER);
 		jugar=new JButton("jugar");
