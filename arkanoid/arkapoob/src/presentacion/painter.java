@@ -10,6 +10,7 @@ import java.util.*;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+import javax.swing.Timer;
 
 import aplicacion.*;
 public class painter extends JPanel {
@@ -17,12 +18,28 @@ public class painter extends JPanel {
 	private Arkapoob game;
 	private Graphics2D g2;
 	private Ellipse2D.Double figura;
+	private pantallaJuego pantallaJ;
+	private boolean play;
+	private Timer playerTimer;
 	
 	
 	public painter(int w, int h){
 		setPreferredSize(new Dimension(w, h));
 		setBackground(Color.BLACK);
 		game=new Arkapoob(w,h);
+		
+		playerTimer = new Timer(35,new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				game.moverBola();
+				paint(getGraphics());
+
+			}
+		});
+		playerTimer.start();
+		
+		
 	}
 	
 	public void paintComponent(Graphics g){
@@ -37,16 +54,32 @@ public class painter extends JPanel {
 			g2.fill(r);
 		}
 	}
+	
+	
 	public void play() {
-		try {
-			Thread.sleep(20);
+		
+		if(play) {
+			play = false;
+			playerTimer.stop();
 		}
-		catch(InterruptedException e) {
-			e.printStackTrace();
+		else {
+			play = true;
+			playerTimer.start();
 		}
-		game.moverBola();
-		paint(getGraphics());
+		
 	}
+	
+	public void cierre() {
+		playerTimer.stop();
+	}
+	private void detengase() {
+		
+		pantallaJ.cerrar();
+		
+		
+	}
+	
+	
 	
 	
 }

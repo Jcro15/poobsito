@@ -12,7 +12,7 @@ public class Arkapoob {
 	public Arkapoob(int maxX ,int maxY) {
 		this.maxX=maxX;
 		this.maxY=maxY;
-		bola=new Bola(500 , 500);//temporal
+		bola=new Bola(400 , 450);//temporal
 		bloques=new ArrayList<Bloque>();
 		for (int i =0;i<maxX;i+=45) {
 			bloques.add(new Bloque(i,300));
