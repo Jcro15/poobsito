@@ -32,17 +32,17 @@ public class Arkapoob {
 	}
 	
 	private void colisionBloques() {
-		for(Bloque i:bloques) {
-			System.out.println(bola.getY());
-			System.out.println(bola.getShape().intersects(i.getX(), i.getY(), i.getWidth(), 2));
-			
-			if(bola.getShape().intersects(i.getX(), i.getY(), i.getWidth(), 1)||
-					bola.getShape().intersects(i.getX(), i.getY()+i.getHeight()-1, i.getWidth(), 2)) {
+		for(int j=0;j<bloques.size();j++) {
+			Bloque b=bloques.get(j);
+			if(bola.getShape().intersects(b.getX(), b.getY(), b.getWidth(), 1)||
+					bola.getShape().intersects(b.getX(), b.getY()+b.getHeight()-1, b.getWidth(), 2)) {
 				bola.invertYComponent();
+				bloques.remove(j);
 			}
-			else if(bola.getShape().intersects(i.getX(), i.getY(), 2, i.getHeight() )||
-					bola.getShape().intersects(i.getX()+i.getWidth()-1, i.getY(), 2, i.getHeight())) {
+			else if(bola.getShape().intersects(b.getX(), b.getY(), 2, b.getHeight() )||
+					bola.getShape().intersects(b.getX()+b.getWidth()-1, b.getY(), 2, b.getHeight())) {
 				bola.invertXComponent();
+				bloques.remove(j);
 			}
 		}
 		
