@@ -16,7 +16,6 @@ public class pantallaJuego  extends JFrame{
 	private Container container;
 	private JButton jugar;
 	private myButton pausaBoton;
-	private Arkapoob asd;
 	private boolean pausa;
 	
 	
@@ -74,8 +73,6 @@ public class pantallaJuego  extends JFrame{
 		opciones.add(pausaBoton);
 		pin = new painter(485,641);
 		container.add(pin, BorderLayout.CENTER);
-		
-		
 	}
 	
 	public void prepareAcciones(){

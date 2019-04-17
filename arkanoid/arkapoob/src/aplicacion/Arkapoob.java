@@ -12,8 +12,9 @@ public class Arkapoob {
 	public Arkapoob(int maxX ,int maxY) {
 		this.maxX=maxX;
 		this.maxY=maxY;
-		bola=new Bola(400 , 450);//temporal
+		bola=new Bola(300 , 600);//temporal
 		bloques=new ArrayList<Bloque>();
+		jugador=new Jugador("assd");
 		for (int i =0;i<maxX;i+=45) {
 			bloques.add(new Bloque(i,300));
 		}
@@ -28,21 +29,31 @@ public class Arkapoob {
 	public void moverBola() {
 		bolaEnBorde();
 		colisionBloques();
+		colisionJugador();
 		bola.move();
 	}
-	
+	private void colisionJugador() {
+		if(jugador.collisionRight(bola.getShape())) {
+			bola.setRight();
+			bola.invertYComponent();
+		}
+		else if(jugador.collisionLeft(bola.getShape())) {
+			bola.setLeft();
+			bola.invertYComponent();
+		}
+	}
 	private void colisionBloques() {
 		for(int j=0;j<bloques.size();j++) {
 			Bloque b=bloques.get(j);
-			if(bola.getShape().intersects(b.getX(), b.getY(), b.getWidth(), 1)||
-					bola.getShape().intersects(b.getX(), b.getY()+b.getHeight()-1, b.getWidth(), 2)) {
-				bola.invertYComponent();
-				bloques.remove(j);
-			}
-			else if(bola.getShape().intersects(b.getX(), b.getY(), 2, b.getHeight() )||
-					bola.getShape().intersects(b.getX()+b.getWidth()-1, b.getY(), 2, b.getHeight())) {
-				bola.invertXComponent();
-				bloques.remove(j);
+			if(b.collision(bola.getShape())) {
+				if(b.verticalCollision(bola.getShape())) {
+					bola.invertYComponent();
+				}
+				else if(b.horizontalCollision(bola.getShape())) {
+					bola.invertXComponent();
+				}
+				b.reduceResistance(bola.getDamage());
+				if (b.destroyed())bloques.remove(j);
 			}
 		}
 		
@@ -54,6 +65,16 @@ public class Arkapoob {
 		else if(bola.getY()<0||bola.getY()>maxY) {
 			bola.invertYComponent();
 		}
+	}
+
+	public void moverPlataformaDerecha() {
+		jugador.moverPlataformaDerecha();
+	}
+	public void moverPlataformaIzquierda() {
+		jugador.moverPlataformaIzquierda();
+	}
+	public Jugador getJugador() {
+		return jugador;
 	}
 	
 }

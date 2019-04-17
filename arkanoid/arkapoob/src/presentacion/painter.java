@@ -28,7 +28,7 @@ public class painter extends JPanel {
 		setBackground(Color.BLACK);
 		game=new Arkapoob(w,h);
 		
-		playerTimer = new Timer(35,new ActionListener() {
+		playerTimer = new Timer(20,new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -51,6 +51,7 @@ public class painter extends JPanel {
 		ArrayList<Bloque> s= game.getBloques();
 		for(Bloque i:s) {
 			Rectangle  r= i.getShape();
+			g2.setColor(i.getColor());
 			g2.fill(r);
 		}
 	}

@@ -6,6 +6,7 @@ public class Bola {
 	private int yPosition;
 	private int dx;
 	private int dy;
+	private int damage;
 	private Ellipse2D.Double shape;
 	
 	
@@ -15,9 +16,13 @@ public class Bola {
 		shape=new Ellipse2D.Double(xPosition,yPosition,10,10);
 		dx=1;
 		dy=-1;
+		damage=1;
 	}
 	public Ellipse2D.Double getShape(){
 		return shape;
+	}
+	public int getDamage() {
+		return damage;
 	}
 	public int getX() {
 		return xPosition;
@@ -35,5 +40,11 @@ public class Bola {
 	}
 	public void invertYComponent () {
 			dy=-dy;
+	}
+	public void setLeft() {
+		dx=-1;
+	}
+	public void setRight() {
+		dx=1;
 	}
 }
