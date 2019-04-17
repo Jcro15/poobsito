@@ -1,21 +1,24 @@
 package aplicacion;
-import java.awt.Rectangle;
 
-public class Plataforma {
+import java.awt.*;
+
+public class Bloque {
 	private int xPosition;
 	private int yPosition;
 	private int height;
 	private int width;
-	private int velocity;
+	private int resistance;
 	private Rectangle shape;
+	private Color color;
 	
-	public Plataforma(int x,int y) {
+	public Bloque(int x, int y) {
 		xPosition=x;
 		yPosition=y;
-		height=10;
-		width=30;
-		shape=new Rectangle(x,y,width,height);
-		velocity=5;
+		resistance=1;
+		height=20;
+		width=40;
+		shape=new Rectangle(xPosition,yPosition, width, height);
+		color=Color.RED;
 	}
 	public int getX() {
 		return xPosition;
@@ -32,12 +35,5 @@ public class Plataforma {
 	public int getWidth() {
 		return width;
 	}
-	public void moveRight() {
-		xPosition+=velocity;
-		shape.setLocation(xPosition, yPosition);
-	}
-	public void moveLeft() {
-		yPosition-=velocity;
-		shape.setLocation(xPosition, yPosition);
-	}
+	
 }

@@ -11,7 +11,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
-import aplicacion.Arkapoob;
+import aplicacion.*;
 public class pinter extends JPanel {
 	
 	private Arkapoob game;
@@ -33,7 +33,12 @@ public class pinter extends JPanel {
 		g2 = (Graphics2D) g ;
 		g2.setColor(Color.WHITE);
 		figura = game.getBola().getShape();
-		g2.fill(figura);	
+		g2.fill(figura);
+		ArrayList<Bloque> s= game.getBloques();
+		for(Bloque i:s) {
+			Rectangle  r= i.getShape();
+			g2.fill(r);
+		}
 	}
 	public void play() {
 		try {

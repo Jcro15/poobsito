@@ -6,16 +6,15 @@ public class Bola {
 	private int yPosition;
 	private int dx;
 	private int dy;
-	private int velocity;
 	private Ellipse2D.Double shape;
-
-	public Bola(int x ,int y, int velocity) {
+	
+	
+	public Bola(int x ,int y) {
 		xPosition=x;
 		yPosition=y;
-		shape=new Ellipse2D.Double(xPosition,yPosition,20,20);
+		shape=new Ellipse2D.Double(xPosition,yPosition,10,10);
 		dx=1;
 		dy=-1;
-		this.velocity=velocity;
 	}
 	public Ellipse2D.Double getShape(){
 		return shape;
@@ -27,25 +26,14 @@ public class Bola {
 		return yPosition;
 	}
 	public void move() {
-		xPosition+=(dx*velocity);
-		yPosition+=(dy*velocity);
-		shape=new Ellipse2D.Double(xPosition,yPosition,20,20);
+		xPosition+=dx;
+		yPosition+=dy;
+		shape=new Ellipse2D.Double(xPosition,yPosition,10,10);
 	}
-	public void outOfHorizontal (int maxX) {
-		boolean out=false;
-		if(xPosition<0||xPosition>maxX) {
+	public void invertXComponent () {
 			dx=-dx;
-			out=true;
-		}
-	//	return out;
 	}
-	public void outOfVertical (int maxY) {
-		boolean out=false;
-		if(yPosition<0||yPosition>maxY) {
+	public void invertYComponent () {
 			dy=-dy;
-			out=true;
-		}
-		//return out;
 	}
-	
 }
