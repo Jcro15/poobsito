@@ -45,7 +45,7 @@ public class Plataforma {
 		createBorders();
 	}
 	public void moveLeft() {
-		yPosition-=velocity;
+		xPosition-=velocity;
 		shape.setLocation(xPosition, yPosition);
 		createBorders();
 	}

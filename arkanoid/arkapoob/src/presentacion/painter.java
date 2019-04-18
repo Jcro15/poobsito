@@ -1,24 +1,32 @@
 package presentacion;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.event.*;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.border.*;
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.util.ArrayList;
+
+import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+import javax.swing.Timer;
+
+import java.awt.Rectangle;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
-import javax.swing.Timer;
-import javax.swing.KeyStroke;
 
 import aplicacion.*;
 
-public class painter extends JPanel {
+public class painter extends JPanelB {
 	
 	private Arkapoob game;
 	private Graphics2D g2;
@@ -26,13 +34,17 @@ public class painter extends JPanel {
 	private pantallaJuego pantallaJ;
 	private boolean play;
 	private Timer playerTimer;
-	private boolean p1Izq, p1Der = false;
+	private boolean p1Left, p1Right = false;
 	
 	
 	public painter(int w, int h){
+		
+		setBackground("fondo1.png");
 		setPreferredSize(new Dimension(w, h));
 		setBackground(Color.BLACK);
+		play = true;
 		game=new Arkapoob(w,h);
+		setFocusable(true);
 		prepareAcciones();
 		
 		playerTimer = new Timer(20,new ActionListener() {
@@ -40,7 +52,7 @@ public class painter extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				movePlat();
-
+				
 				game.moverBola();
 				paint(getGraphics());
 				
@@ -51,32 +63,35 @@ public class painter extends JPanel {
 		
 	}
 	private void movePlat() {
-
-		if (p1Der) {
+		//System.out.println("ddd");
+		if (p1Right) {
 			moverPlatDer();
 		}
-		if (p1Izq) {
+		if (p1Left) {
 			moverPlatIzq();
 		}
 	}
 	
 	private void prepareAcciones() {
-		setFocusable(true);
-
 		
+		setFocusable(true);
+		
+        //requestFocusInWindow();
 		getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0, false), "right1down");
 		getActionMap().put("right1down", new AbstractAction() {
 
-			@Override
+			
 			public void actionPerformed(ActionEvent arg0) {
-				p1Der=true;			
+				
+				p1Right = true;				
 			}
 		});
 
 		getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0, true), "right1up");
 		getActionMap().put("right1up", new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				p1Der = false;
+				
+				p1Right = false;
 			}
 		});
 
@@ -86,30 +101,44 @@ public class painter extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				p1Izq = true;				
+				p1Left = true;				
 			}
 		});
 
 		getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_A, 0, true), "left1up");
 		getActionMap().put("left1up", new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				p1Izq = false;
+				p1Left = false;
 			}
 		});
-		
-		addKeyListener(new KeyAdapter() {
-			@Override
+
+		/**
+		addKeyListener(new KeyListener() {
+			
+            public void keyTyped(KeyEvent e) {}
+
+                    
+            public void keyReleased(KeyEvent e) {}
+			
 			public void keyPressed(KeyEvent e) {
+				//System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
+				
 				if ( e.getKeyCode() == KeyEvent.VK_P) {
+					
 					play();
 					pantallaJ.actualiceBotonPausa(play);
 				}
+				
 			}
 		});
+		*/
+		//setFocusable(true);
+        //requestFocusInWindow();
+        
 	}
 	
 	public void moverPlatDer(){
-		System.out.println("bbb");
+		
 		game.moverPlataformaDerecha();
 		
 	}

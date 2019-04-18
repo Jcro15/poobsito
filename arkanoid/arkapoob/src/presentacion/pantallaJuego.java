@@ -14,15 +14,16 @@ public class pantallaJuego  extends JFrame{
 	private painter pin;
 	private JPanelB opciones;
 	private Container container;
-	private JButton jugar;
 	private myButton pausaBoton;
 	private Arkapoob asd;
 	private boolean pausa;
+	private JLabel score;
+	private JLabel vidas;
 	
 	
 	
 	public pantallaJuego(){
-		super("sPOOBce Invaders");
+		super("Arkapoob");
 		setResizable(false);
 		pausa=false;
 		prepareElementos();
@@ -63,9 +64,10 @@ public class pantallaJuego  extends JFrame{
 	private void preparePantalla() {
 		
 		container = getContentPane();
-		jugar=new JButton("jugar");
-		container.add(jugar,BorderLayout.NORTH);
+		
+		
 		opciones = new JPanelB();
+		opciones.setLayout(new GridLayout(3,1));
 		opciones.setPreferredSize(new Dimension(100, 700));
 		opciones.setBackground("fondo.png");
 		container.add(opciones,BorderLayout.EAST);
@@ -73,9 +75,15 @@ public class pantallaJuego  extends JFrame{
 		pausaBoton = new myButton(iconoP);
 		pausaBoton.setTransparent();
 		opciones.add(pausaBoton);
-		pin = new painter(485,641);
-		container.add(pin, BorderLayout.CENTER);
+		score=new JLabel("<html>Score<br><H1 align=center>0</H1></html>",SwingConstants.CENTER);
+		vidas=new JLabel("<html>Lives<br><H1 align=center>0</H1></html>",SwingConstants.CENTER);
+		opciones.add(score);
+		opciones.add(vidas);
+		pin = new painter(485,665);
 		
+		container.add(pin, BorderLayout.CENTER);
+		pin.setFocusable(true);
+		//pin.requestFocusInWindow();
 		
 	}
 	
@@ -98,10 +106,10 @@ public class pantallaJuego  extends JFrame{
 	public void prepareAccionesPantalla(){
 		
 		
-		ActionListener play = new ActionListener() {
+		pausaBoton.addActionListener( new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (!pausa) {
+				if (pausa) {
 					 
 					pausaBoton.setIcon(new ImageIcon("pausa.png"));
 				}
@@ -111,8 +119,8 @@ public class pantallaJuego  extends JFrame{
 				}
 				play();
 			}
-		};
-		pausaBoton.addActionListener(play);
+		});
+		
 	}
 	
 	public void play() {
@@ -129,10 +137,10 @@ public class pantallaJuego  extends JFrame{
 	public void actualiceBotonPausa(boolean pausa) {
 		this.pausa = pausa;
 		if (pausa) {
-			pausaBoton.setText("Pausar");
+			pausaBoton.setIcon(new ImageIcon("pausa.png"));
 		}
 		else {
-			pausaBoton.setText("Continuar");
+			pausaBoton.setIcon(new ImageIcon("continuar.png"));
 		}
 		
 	}
