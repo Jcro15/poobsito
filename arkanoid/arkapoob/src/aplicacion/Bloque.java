@@ -4,7 +4,8 @@ import java.awt.*;
 import java.awt.geom.RectangularShape;
 /**
  * la clase representa un bloque, definido por un rectangulo con coordenadas (xPosition,yPosition)
- * un alto y un ancho(height,width) un color y 4 rectangulos que representan sus bordes o margenes
+ * un alto y un ancho(height,width) un color y 4 rectangulos que representan sus bordes o margenes,ademas de un puntaje 
+ * que da al momento de ser destruido
  * @author Juan Camilo Rojas & Juan Camilo Angel
  *
  */
@@ -14,9 +15,11 @@ public class Bloque {
 	private int height;
 	private int width;
 	private int resistance;
+	private int puntaje;
 	private Rectangle shape;
 	private Rectangle upBorder,downBorder,rightBorder,leftBorder;
 	private Color color;
+	
 	/**
 	 * construye un nuevo bloque en las coordenadas x ,y
 	 * @param x la coordenada x donde se creara el bloque
@@ -28,6 +31,7 @@ public class Bloque {
 		resistance=1;
 		height=20;
 		width=40;
+		puntaje=100;
 		shape=new Rectangle(xPosition,yPosition, width, height);
 		upBorder=new Rectangle(xPosition,yPosition,width, 1);
 		downBorder=new Rectangle(xPosition, yPosition+height-1,width, 1);
@@ -116,5 +120,13 @@ public class Bloque {
 	public boolean horizontalCollision(RectangularShape inShape) {
 		return inShape.intersects(rightBorder )||inShape.intersects(leftBorder);
 	}
+	/**
+	 * retorna el puntaje que da este bloque al ser destruido
+	 * @return el puntaje que da el bloque
+	 */
+	public int getPuntaje() {
+		return puntaje;
+	}
+
 	
 }

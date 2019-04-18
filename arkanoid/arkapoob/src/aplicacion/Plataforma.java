@@ -15,10 +15,10 @@ public class Plataforma {
 		xPosition=x;
 		yPosition=y;
 		height=10;
-		width=30;
+		width=120;
 		createBorders();
 		shape=new Rectangle(x,y,width,height);
-		velocity=5;
+		velocity=1;
 	}
 	private void createBorders() {
 		leftBorder=new Rectangle(xPosition,yPosition,width/2,height);

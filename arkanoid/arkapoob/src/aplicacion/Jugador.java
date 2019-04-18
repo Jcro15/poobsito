@@ -12,7 +12,7 @@ public class Jugador {
 		this.name=name;
 		lives=3;
 		score=0;
-		platform=new Plataforma(100, 587);//temporal mientras se decide donde colocarla inicialmente
+		platform=new Plataforma(300, 640);//temporal mientras se decide donde colocarla inicialmente
 	}
 	public int getLives() {
 		return lives;
@@ -32,11 +32,17 @@ public class Jugador {
 	public void moverPlataformaIzquierda() {
 		platform.moveLeft();
 	}
+	public void quitarVida() {
+		lives-=1;
+	}
 	public boolean collisionRight(RectangularShape inShape) {
 		return platform.collisionRight(inShape);
 	}
 	public boolean collisionLeft(RectangularShape inShape) {
 		return platform.collisionLeft(inShape);
+	}
+	public void sumarPuntos(int puntos) {
+		score+=puntos;
 	}
 	
 }

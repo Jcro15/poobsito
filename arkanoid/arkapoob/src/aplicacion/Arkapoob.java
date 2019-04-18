@@ -12,13 +12,19 @@ public class Arkapoob {
 	public Arkapoob(int maxX ,int maxY) {
 		this.maxX=maxX;
 		this.maxY=maxY;
-		bola=new Bola(300 , 600);//temporal
+		bola=new Bola(360 , 641);//temporal
 		bloques=new ArrayList<Bloque>();
 		jugador=new Jugador("assd");
 		for (int i =0;i<maxX;i+=45) {
 			bloques.add(new Bloque(i,300));
 		}
 			
+	}
+	public boolean isGameOver() {
+		return jugador.getLives()==0;
+	}
+	public boolean playerWin() {
+		return bloques.size()==0;
 	}
 	public Bola getBola(){
 		return bola;
@@ -34,12 +40,12 @@ public class Arkapoob {
 	}
 	private void colisionJugador() {
 		if(jugador.collisionRight(bola.getShape())) {
-			bola.setRight();
-			bola.invertYComponent();
+			bola.setDx(Bola.DERECHA);
+			bola.setDy(Bola.ARRIBA);
 		}
 		else if(jugador.collisionLeft(bola.getShape())) {
-			bola.setLeft();
-			bola.invertYComponent();
+			bola.setDx(Bola.IZQUIERDA);
+			bola.setDy(Bola.ARRIBA);
 		}
 	}
 	private void colisionBloques() {
@@ -47,32 +53,45 @@ public class Arkapoob {
 			Bloque b=bloques.get(j);
 			if(b.collision(bola.getShape())) {
 				if(b.verticalCollision(bola.getShape())) {
-					bola.invertYComponent();
+					bola.setDy(bola.getDy()*-1);
 				}
 				else if(b.horizontalCollision(bola.getShape())) {
-					bola.invertXComponent();
+					bola.setDx(bola.getDx()*-1);
 				}
 				b.reduceResistance(bola.getDamage());
-				if (b.destroyed())bloques.remove(j);
+				if (b.destroyed()) {
+					bloques.remove(j);
+					jugador.sumarPuntos(b.getPuntaje());
+				}
 			}
 		}
 		
 	}
 	private void bolaEnBorde() {
 		if(bola.getX()>maxX||bola.getX()<0) {
-			bola.invertXComponent();
+			bola.setDx(bola.getDx()*-1);
 		}
-		else if(bola.getY()<0||bola.getY()>maxY) {
-			bola.invertYComponent();
+		else if(bola.getY()<0) {
+			bola.setDy(bola.getDy()*-1);
+		}
+		else if(bola.getY()>maxY) {
+			bola=new Bola(360 , 641);
+			jugador.quitarVida();
 		}
 	}
-
+	
+	public int getPuntajeJugador() {
+		return jugador.getScore();
+	}
 	public void moverPlataformaDerecha() {
-		
+		if (jugador.getPlatform().getX()+jugador.getPlatform().getWidth()<maxX) {
 		jugador.moverPlataformaDerecha();
+		}
 	}
 	public void moverPlataformaIzquierda() {
-		jugador.moverPlataformaIzquierda();
+		if (jugador.getPlatform().getX()-1>0) {
+			jugador.moverPlataformaIzquierda();
+		}
 	}
 	public Jugador getJugador() {
 		return jugador;

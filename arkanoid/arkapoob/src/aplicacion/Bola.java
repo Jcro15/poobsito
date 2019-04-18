@@ -14,6 +14,11 @@ public class Bola {
 	private int damage;
 	private Ellipse2D.Double shape;
 	
+	public static final int DERECHA=1;
+	public static final int IZQUIERDA=-1;
+	public static final int ARRIBA=-1;
+	public static final int ABAJO=1;
+	
 	/**
 	 * construye una nueva bola en las coordenadas x ,y
 	 * @param x la coordenada x donde se creara la bola
@@ -63,30 +68,24 @@ public class Bola {
 		yPosition+=dy;
 		shape=new Ellipse2D.Double(xPosition,yPosition,10,10);
 	}
-	/**
-	 * modifica el componente x del movimiento de la bola para que de dirija en la direccion opuesta
-	 * a la que anteriormente se movia
-	 */
-	public void invertXComponent () {
-			dx=-dx;
+
+	public int getDx() {
+			return dx;
+	}
+	public int getDy() {
+			return dy;
 	}
 	/**
-	 * modifica el componente y del movimiento de la bola para que de dirija en la direccion opuesta
-	 * a la que anteriormente se movia
+	 * Modifica el componente y del movimiento de la bola (1 abajo -1 arriba)
 	 */
-	public void invertYComponent () {
-			dy=-dy;
+	public void setDy(int dir) {
+		dy=dir;
 	}
 	/**
-	 * Modifica el componente x del movimiento de la bola para que se dirija a la derecha
+	 * Modifica el componente y del movimiento de la bola (1 derecha -1 izquierda)
 	 */
-	public void setLeft() {
-		dx=-1;
+	public void setDx(int dir) {
+		dx=dir;
 	}
-	/**
-	 * Modifica el componente x del movimiento de la bola para que se dirija a la derecha
-	 */
-	public void setRight() {
-		dx=1;
-	}
+	
 }
