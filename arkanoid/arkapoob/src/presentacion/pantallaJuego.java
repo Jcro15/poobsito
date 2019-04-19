@@ -75,14 +75,15 @@ public class pantallaJuego  extends JFrame{
 		pausaBoton = new myButton(iconoP);
 		pausaBoton.setTransparent();
 		opciones.add(pausaBoton);
-		score=new JLabel("<html>Score<br><H1 align=center>0</H1></html>",SwingConstants.CENTER);
-		vidas=new JLabel("<html>Lives<br><H1 align=center>0</H1></html>",SwingConstants.CENTER);
-		opciones.add(score);
-		opciones.add(vidas);
-		pin = new painter(485,665);
+		
+		pin = new painter(485,665,this);
 		
 		container.add(pin, BorderLayout.CENTER);
 		pin.setFocusable(true);
+		score=new JLabel("<html>Score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>",SwingConstants.CENTER);
+		vidas=new JLabel("<html>Lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>",SwingConstants.CENTER);
+		opciones.add(score);
+		opciones.add(vidas);
 		//pin.requestFocusInWindow();
 		
 	}
@@ -136,6 +137,7 @@ public class pantallaJuego  extends JFrame{
 	
 	public void actualiceBotonPausa(boolean pausa) {
 		this.pausa = pausa;
+		
 		if (pausa) {
 			pausaBoton.setIcon(new ImageIcon("pausa.png"));
 		}
@@ -143,5 +145,15 @@ public class pantallaJuego  extends JFrame{
 			pausaBoton.setIcon(new ImageIcon("continuar.png"));
 		}
 		
+		
 	}
+	
+	public void actualiceDatos(){
+		score.setText("<html>Score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>");
+		vidas.setText("<html>Lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>");
+		
+		
+	}
+	
+	
 }
