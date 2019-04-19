@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.geom.RectangularShape;
 /**
  * la clase representa un bloque, definido por un rectangulo con coordenadas (xPosition,yPosition)
- * un alto y un ancho(height,width) un color y 4 rectangulos que representan sus bordes o margenes,ademas de un puntaje 
+ * un alto y un ancho(height,width) un color y un puntaje 
  * que da al momento de ser destruido
  * @author Juan Camilo Rojas & Juan Camilo Angel
  *
@@ -17,7 +17,6 @@ public class Bloque {
 	private int resistance;
 	private int puntaje;
 	private Rectangle shape;
-	private Rectangle upBorder,downBorder,rightBorder,leftBorder;
 	private Color color;
 	
 	/**
@@ -33,11 +32,6 @@ public class Bloque {
 		width=40;
 		puntaje=100;
 		shape=new Rectangle(xPosition,yPosition, width, height);
-		upBorder=new Rectangle(xPosition,yPosition,width, 1);
-		downBorder=new Rectangle(xPosition, yPosition+height-1,width, 1);
-		rightBorder=new Rectangle(xPosition+width-1, yPosition, 1, height);
-		leftBorder=new Rectangle(xPosition, yPosition, 1, height );
-		
 		color=Color.RED;
 	}
 	/**
@@ -107,18 +101,16 @@ public class Bloque {
 	/**
 	 * Detecta si hay una colision entre alguno de los margenes verticales y otro elemento
 	 * @param inShape  el objeto geometrico que representa al elemento entrante
-	 * @return true si existe una colision ; false sino
+	 * @return true si existe una colision ; false si es una collision horizontal
 	 */
 	public boolean verticalCollision(RectangularShape inShape) {
-		return inShape.intersects(upBorder)||inShape.intersects(downBorder);
-	}
-	/**
-	 * Detecta si hay una colision entre alguno de los margenes horizontales y otro elemento
-	 * @param inShape  el objeto geometrico que representa al elemento entrante
-	 * @return true si existe una colision ; false sino
-	 */
-	public boolean horizontalCollision(RectangularShape inShape) {
-		return inShape.intersects(rightBorder )||inShape.intersects(leftBorder);
+		double interseccionIzquierda = inShape.getMaxX() - shape.getMinX();
+		double interseccionDerecha = shape.getMaxX() - inShape.getMinX();
+		double interseccionArriba = inShape.getMaxY() - shape.getMinY();
+		double interseccionAbajo = shape.getMaxY() - inShape.getMinY();
+		double minInterseccionX = Math.min(interseccionIzquierda, interseccionDerecha);
+		double minInterseccionY = Math.min(interseccionAbajo, interseccionArriba);
+		return minInterseccionY<minInterseccionX;
 	}
 	/**
 	 * retorna el puntaje que da este bloque al ser destruido

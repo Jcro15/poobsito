@@ -15,8 +15,10 @@ public class Arkapoob {
 		bola=new Bola(360 , 641);//temporal
 		bloques=new ArrayList<Bloque>();
 		jugador=new Jugador("assd");
-		for (int i =0;i<maxX;i+=45) {
-			bloques.add(new Bloque(i,300));
+		for (int j =100;j<225;j+=25) {
+			for (int i =0;i<maxX;i+=45) {
+				bloques.add(new Bloque(i,j));
+			}
 		}
 			
 	}
@@ -39,30 +41,32 @@ public class Arkapoob {
 		bola.move();
 	}
 	private void colisionJugador() {
-		if(jugador.collisionRight(bola.getShape())) {
-			bola.setDx(Bola.DERECHA);
+		if(jugador.collision(bola.getShape())) {
 			bola.setDy(Bola.ARRIBA);
-		}
-		else if(jugador.collisionLeft(bola.getShape())) {
-			bola.setDx(Bola.IZQUIERDA);
-			bola.setDy(Bola.ARRIBA);
+			if(jugador.collisionRight(bola.getShape())) {
+				bola.setDx(Bola.DERECHA);
+			}
+			else {
+				bola.setDx(Bola.IZQUIERDA);
+			}
 		}
 	}
 	private void colisionBloques() {
 		for(int j=0;j<bloques.size();j++) {
 			Bloque b=bloques.get(j);
 			if(b.collision(bola.getShape())) {
+				b.reduceResistance(bola.getDamage());
 				if(b.verticalCollision(bola.getShape())) {
 					bola.setDy(bola.getDy()*-1);
 				}
-				else if(b.horizontalCollision(bola.getShape())) {
+				else{
 					bola.setDx(bola.getDx()*-1);
 				}
-				b.reduceResistance(bola.getDamage());
 				if (b.destroyed()) {
 					bloques.remove(j);
 					jugador.sumarPuntos(b.getPuntaje());
 				}
+				break;
 			}
 		}
 		

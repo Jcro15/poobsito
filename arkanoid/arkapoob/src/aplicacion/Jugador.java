@@ -38,8 +38,8 @@ public class Jugador {
 	public boolean collisionRight(RectangularShape inShape) {
 		return platform.collisionRight(inShape);
 	}
-	public boolean collisionLeft(RectangularShape inShape) {
-		return platform.collisionLeft(inShape);
+	public boolean collision(RectangularShape inShape) {
+		return platform.collision(inShape);
 	}
 	public void sumarPuntos(int puntos) {
 		score+=puntos;
