@@ -33,7 +33,7 @@ public class painter extends JPanelB {
 	private Ellipse2D.Double figura;
 	private pantallaJuego pantallaJ;
 	private boolean play;
-	private Timer playerTimer;
+	private Timer elementosTimer;
 	private Timer juegoTimer;
 	private boolean p1Izq, p1Der = false;
 	
@@ -64,7 +64,8 @@ public class painter extends JPanelB {
 		juegoTimer.start();
 		
 		
-		playerTimer = new Timer(5,new ActionListener() {
+
+		elementosTimer = new Timer(5,new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -76,7 +77,7 @@ public class painter extends JPanelB {
 				
 			}
 		});
-		playerTimer.start();
+		elementosTimer.start();
 		
 		
 	}
@@ -186,19 +187,19 @@ public class painter extends JPanelB {
 		
 		if(play) {
 			play = false;
-			playerTimer.stop();
+			elementosTimer.stop();
 			juegoTimer.stop();
 		}
 		else {
 			play = true;
-			playerTimer.start();
+			elementosTimer.start();
 			juegoTimer.start();
 		}
 		
 	}
 	
 	public void cierre() {
-		playerTimer.stop();
+		elementosTimer.stop();
 		juegoTimer.stop();
 	}
 	public Arkapoob getGame(){
