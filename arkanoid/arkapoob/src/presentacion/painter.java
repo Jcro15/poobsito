@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
+import javax.swing.ImageIcon;
 
 import java.awt.Rectangle;
 import java.awt.Dimension;
@@ -64,13 +65,11 @@ public class painter extends JPanelB {
 		juegoTimer.start();
 		
 		
-
-		elementosTimer = new Timer(5,new ActionListener() {
+		elementosTimer = new Timer(8,new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				movePlat();
-				
 				game.moverBola();
 				repaint();
 				//paint(getGraphics());
@@ -207,10 +206,16 @@ public class painter extends JPanelB {
 		return game;
 	}
 	private void detengase() {
-		
+		cierre();
+		if (game.isGameOver()){
+			ImageIcon perdiste = new ImageIcon("perder.png");
+			JOptionPane.showMessageDialog(pantallaJ, "Perdiste!","Mensaje",JOptionPane.INFORMATION_MESSAGE, perdiste);
+		}
+		else if (game.playerWin()) {
+			ImageIcon ganaste = new ImageIcon("ganar.png");
+			JOptionPane.showMessageDialog(pantallaJ, "Ganaste!","Mensaje",JOptionPane.INFORMATION_MESSAGE, ganaste);
+		}
 		pantallaJ.cerrar();
-		
-		
 	}
 	public void refresqueDatos(){
 		pantallaJ.actualiceDatos();
