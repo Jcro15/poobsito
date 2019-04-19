@@ -14,6 +14,7 @@ public class Jugador {
 		score=0;
 		platform=new Plataforma(300, 640);//temporal mientras se decide donde colocarla inicialmente
 	}
+	
 	public int getLives() {
 		return lives;
 	}
