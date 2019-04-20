@@ -67,28 +67,28 @@ public class seleccionModoGUI extends JFrame{
 	public void prepareElementosPantalla(){
 		panelPantalla = new JPanelB();
 		panelPantalla.setLayout(new GridLayout(2,1));
-		panelPantalla.setBackground("fondo.png");
+		panelPantalla.setBackground(new ImageIcon(getClass().getResource("/resources/fondo.png")));
 		contenedor.add(panelPantalla);
 		panelLogo = new JPanel(new GridBagLayout());
-		logo = new JLabel(new ImageIcon("logo.png"));
+		logo = new JLabel(new ImageIcon(getClass().getResource("/resources/logo.png")));
 		panelLogo.add(logo);
 		panelPantalla.add(panelLogo);
 		panelLogo.setOpaque(false);
 		panelBotones = new JPanel(new GridLayout(2,3));
 		panelBotones.setOpaque(false);
-		Icon icono1j = new ImageIcon("1J.png");
+		Icon icono1j = new ImageIcon(getClass().getResource("/resources/1J.png"));
 		single = new myButton(icono1j);
 		single.setTransparent();
-		Icon icono2j = new ImageIcon("2J.png");
+		Icon icono2j = new ImageIcon(getClass().getResource("/resources/2J.png"));
 		coop = new myButton(icono2j);
 		coop.setTransparent();
-		Icon iconoJVC = new ImageIcon("jVC.png");
+		Icon iconoJVC = new ImageIcon(getClass().getResource("/resources/jVC.png"));
 		jVsCpu = new myButton(iconoJVC);
 		jVsCpu.setTransparent();
-		Icon iconot = new ImageIcon("blan.png");
+		Icon iconot = new ImageIcon(getClass().getResource("/resources/blan.png"));
 		myButton t = new myButton(iconot);
 		t.setTransparent();
-		Icon iconoCancelar = new ImageIcon("volver.png");
+		Icon iconoCancelar = new ImageIcon(getClass().getResource("/resources/volver.png"));
 		cancelarBoton = new myButton(iconoCancelar);
 		cancelarBoton.setTransparent();
 		
@@ -111,13 +111,13 @@ public class seleccionModoGUI extends JFrame{
 	public void prepareElementosConfig(){
 		JPanelB configPanel = new JPanelB();
 		configPanel.setLayout(new GridLayout(3,1));
-		configPanel.setBackground("fondo.png");
+		configPanel.setBackground(new ImageIcon(getClass().getResource("/resources/fondo.png")));
 		cards.add(configPanel,"Configuracion");
 		JPanel panelCButton = new JPanel();
 		panelCButton.setOpaque(false);
 		
 		JPanel panelConfigLogo= new JPanel(new GridBagLayout());
-		logo = new JLabel(new ImageIcon("logo.png"));
+		logo = new JLabel(new ImageIcon(getClass().getResource("/resources/logo.png")));
 		panelConfigLogo.add(logo);
 		panelConfigLogo.setOpaque(false);
 		
@@ -141,11 +141,11 @@ public class seleccionModoGUI extends JFrame{
 		selecColorBar.setBounds(135, 132, 242, 17);
 		combo.add(selecColorBar);
 		
-		Icon iconoCancelar = new ImageIcon("volver.png");
+		Icon iconoCancelar = new ImageIcon(getClass().getResource("/resources/volver.png"));
 		volverBoton = new myButton(iconoCancelar);
 		volverBoton.setTransparent();
 		
-		Icon iconoJ = new ImageIcon("jugar1.png");
+		Icon iconoJ = new ImageIcon(getClass().getResource("/resources/jugar1.png"));
 		jugarBoton = new myButton(iconoJ);
 		jugarBoton.setTransparent();
 		

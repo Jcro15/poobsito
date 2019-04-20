@@ -34,11 +34,11 @@ public class JPanelB extends JPanel {
 	}
  
 	
-	public void setBackground(String imagePath) {
+	public void setBackground(ImageIcon image) {
 		
 		
 		this.setOpaque(false);
-		this.background = new ImageIcon(imagePath).getImage();
+		this.background = image.getImage();
 		repaint();
 		
 	}

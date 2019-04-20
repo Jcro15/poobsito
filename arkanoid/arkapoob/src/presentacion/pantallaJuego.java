@@ -69,9 +69,9 @@ public class pantallaJuego  extends JFrame{
 		opciones = new JPanelB();
 		opciones.setLayout(new GridLayout(3,1));
 		opciones.setPreferredSize(new Dimension(100, 700));
-		opciones.setBackground("fondo.png");
+		opciones.setBackground(new ImageIcon(getClass().getResource("/resources/fondo.png")));
 		container.add(opciones,BorderLayout.EAST);
-		Icon iconoP= new ImageIcon("pausa.png");
+		Icon iconoP= new ImageIcon(getClass().getResource("/resources/pausa.png"));
 		pausaBoton = new myButton(iconoP);
 		pausaBoton.setTransparent();
 		opciones.add(pausaBoton);
@@ -112,11 +112,11 @@ public class pantallaJuego  extends JFrame{
 				
 				if (pausa) {
 					 
-					pausaBoton.setIcon(new ImageIcon("pausa.png"));
+					pausaBoton.setIcon(new ImageIcon(getClass().getResource("/resources/pausa.png")));
 				}
 				else {
 					
-					pausaBoton.setIcon(new ImageIcon("continuar.png"));
+					pausaBoton.setIcon(new ImageIcon(getClass().getResource("/resources/continuar.png")));
 				}
 				play();
 			}
@@ -139,10 +139,10 @@ public class pantallaJuego  extends JFrame{
 		this.pausa = pausa;
 		
 		if (pausa) {
-			pausaBoton.setIcon(new ImageIcon("pausa.png"));
+			pausaBoton.setIcon(new ImageIcon(getClass().getResource("/resources/pausa.png")));
 		}
 		else {
-			pausaBoton.setIcon(new ImageIcon("continuar.png"));
+			pausaBoton.setIcon(new ImageIcon(getClass().getResource("/resources/continuar.png")));
 		}
 		
 		

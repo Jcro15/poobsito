@@ -41,7 +41,7 @@ public class painter extends JPanelB {
 	
 	public painter(int w, int h,pantallaJuego pantallaJ){
 		this.pantallaJ=pantallaJ;
-		setBackground("fondo1.png");
+		setBackground(new ImageIcon(getClass().getResource("/resources/fondo1.png")));
 		setPreferredSize(new Dimension(w, h));
 		setBackground(Color.BLACK);
 		play = true;
@@ -208,11 +208,11 @@ public class painter extends JPanelB {
 	private void detengase() {
 		cierre();
 		if (game.isGameOver()){
-			ImageIcon perdiste = new ImageIcon("perder.png");
+			ImageIcon perdiste = new ImageIcon(getClass().getResource("/resources/perder.png"));
 			JOptionPane.showMessageDialog(pantallaJ, "Perdiste!","Mensaje",JOptionPane.INFORMATION_MESSAGE, perdiste);
 		}
 		else if (game.playerWin()) {
-			ImageIcon ganaste = new ImageIcon("ganar.png");
+			ImageIcon ganaste = new ImageIcon(getClass().getResource("/resources/ganar.png"));
 			JOptionPane.showMessageDialog(pantallaJ, "Ganaste!","Mensaje",JOptionPane.INFORMATION_MESSAGE, ganaste);
 		}
 		pantallaJ.cerrar();

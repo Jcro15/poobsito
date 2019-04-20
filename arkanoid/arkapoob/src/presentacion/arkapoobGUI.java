@@ -49,7 +49,7 @@ public class arkapoobGUI extends JFrame{
 		panelPantalla = new JPanelB();
 		
 		panelPantalla.setLayout(new GridLayout(2,1));
-		panelPantalla.setBackground("fondo.png");
+		panelPantalla.setBackground(new ImageIcon(getClass().getResource("/resources/fondo.png")));
 		panelLogo = new JPanel();
 		panelLogo.setLayout(new GridBagLayout());
 		panelPantalla.add(panelLogo);
@@ -100,14 +100,15 @@ public class arkapoobGUI extends JFrame{
 	public void preparePanelBotones(){
 		
 		panelBotones.add(new JLabel()); 
-		Icon icono = new ImageIcon("jugar.png");
+		Icon icono = new ImageIcon(getClass().getResource("/resources/jugar.png"));
 		jugarBoton = new myButton(icono);
 		jugarBoton.setTransparent();
 		panelBotones.add(jugarBoton);
 		panelBotones.add(new JLabel()); 
 		
+		
 		panelBotones.add(new JLabel());
-		Icon icono1 = new ImageIcon("abrir.png");
+		Icon icono1 = new ImageIcon(getClass().getResource("/resources/abrir.png"));
 		abrirBoton = new myButton(icono1);
 		abrirBoton.setTransparent();
 		panelBotones.add(abrirBoton);
@@ -120,7 +121,7 @@ public class arkapoobGUI extends JFrame{
 	}
 	
 	private void preparePanelLogo() {
-		logo = new JLabel(new ImageIcon("logo.png"));
+		logo = new JLabel(new ImageIcon(getClass().getResource("/resources/logo.png")));
 		panelLogo.add(logo);		
 	}
 	
