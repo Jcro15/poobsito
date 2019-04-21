@@ -35,7 +35,7 @@ public class Bloque {
 		color=Color.RED;
 	}
 	/**
-	 * retorna la posicion x que tiene la esquina superior izquierda del bloque en el tablero como un entero
+	 * retorna la posicion x que tiene el bloque en el tablero como un entero
 	 * @return la posicion x que tiene el bloque en el tablero
 	 */
 	public int getX() { 

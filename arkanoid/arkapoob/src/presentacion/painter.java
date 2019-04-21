@@ -81,7 +81,6 @@ public class painter extends JPanelB {
 		
 	}
 	private void movePlat() {
-		//System.out.println("ddd");
 		if (p1Der) {
 			moverPlatDer();
 		}
@@ -91,7 +90,6 @@ public class painter extends JPanelB {
 	}
 	
 	private void prepareAcciones() {
-		
 		setFocusable(true);
 		
         //requestFocusInWindow();
@@ -135,7 +133,6 @@ public class painter extends JPanelB {
 			public void keyTyped(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {
-				//System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
 				
 				if ( e.getKeyCode() == KeyEvent.VK_P) {
 					
@@ -149,41 +146,35 @@ public class painter extends JPanelB {
 		
 		//setFocusable(true);
         //requestFocusInWindow();
-        
-	}
+    }
 	
 	public void moverPlatDer(){
-		
 		game.moverPlataformaDerecha();
-		
 	}
 	
 	public void moverPlatIzq(){
 		game.moverPlataformaIzquierda();
-		
 	}
+	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		g2 = (Graphics2D) g ;
 		g2.setColor(Color.WHITE);
 		figura = game.getBola().getShape();
-		g2.fill(figura);
+		g2.fill(figura); // dibuja bola
 		Jugador j = game.getJugador();
 		Plataforma p = j.getPlatform();
 		Rectangle pla = p.getShape();
-		g2.fill(pla);
+		g2.fill(pla); //dibuja plataforma
 		ArrayList<Bloque> s= game.getBloques();
 		for(Bloque i:s) {
 			Rectangle  r= i.getShape();
 			g2.setColor(i.getColor());
-			g2.fill(r);
+			g2.fill(r); //dibuja bloques
 		}
-		
 	}
 	
-	
 	public void play() {
-		
 		if(play) {
 			play = false;
 			elementosTimer.stop();
@@ -194,17 +185,17 @@ public class painter extends JPanelB {
 			elementosTimer.start();
 			juegoTimer.start();
 		}
-		
 	}
 	
 	public void cierre() {
 		elementosTimer.stop();
 		juegoTimer.stop();
 	}
+	
 	public Arkapoob getGame(){
-		
 		return game;
 	}
+	
 	private void detengase() {
 		cierre();
 		if (game.isGameOver()){
@@ -217,12 +208,8 @@ public class painter extends JPanelB {
 		}
 		pantallaJ.cerrar();
 	}
+	
 	public void refresqueDatos(){
 		pantallaJ.actualiceDatos();
-		
 	}
-	
-	
-	
-	
 }

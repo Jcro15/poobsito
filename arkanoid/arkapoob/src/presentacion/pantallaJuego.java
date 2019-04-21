@@ -15,12 +15,9 @@ public class pantallaJuego  extends JFrame{
 	private JPanelB opciones;
 	private Container container;
 	private myButton pausaBoton;
-	private Arkapoob asd;
 	private boolean pausa;
 	private JLabel score;
 	private JLabel vidas;
-	
-	
 	
 	public pantallaJuego(){
 		super("Arkapoob");
@@ -29,6 +26,7 @@ public class pantallaJuego  extends JFrame{
 		prepareElementos();
 		prepareAcciones();
 	}
+	
 	public void prepareElementos() {
 		ajusteFrame();
 		preparePantalla();
@@ -39,8 +37,8 @@ public class pantallaJuego  extends JFrame{
 			}
 		});
 		*/
-		
 	}
+	
 	/**
 	public void machetin() {
 		while (true) {
@@ -49,6 +47,7 @@ public class pantallaJuego  extends JFrame{
 		}
 	}
 	*/
+	
 	public void ajusteFrame(){
 		Dimension size=Toolkit.getDefaultToolkit().getScreenSize();
 		int height=700;
@@ -62,38 +61,32 @@ public class pantallaJuego  extends JFrame{
 	}
 	
 	private void preparePantalla() {
-		
 		container = getContentPane();
-		
-		
 		opciones = new JPanelB();
 		opciones.setLayout(new GridLayout(3,1));
 		opciones.setPreferredSize(new Dimension(100, 700));
 		opciones.setBackground(new ImageIcon(getClass().getResource("/resources/fondo.png")));
 		container.add(opciones,BorderLayout.EAST);
+		
 		Icon iconoP= new ImageIcon(getClass().getResource("/resources/pausa.png"));
 		pausaBoton = new myButton(iconoP);
 		pausaBoton.setTransparent();
 		opciones.add(pausaBoton);
 		
 		pin = new painter(485,665,this);
-		
 		container.add(pin, BorderLayout.CENTER);
 		pin.setFocusable(true);
+		
 		score=new JLabel("<html>Score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>",SwingConstants.CENTER);
 		vidas=new JLabel("<html>Lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>",SwingConstants.CENTER);
 		opciones.add(score);
 		opciones.add(vidas);
 		//pin.requestFocusInWindow();
-		
 	}
 	
 	public void prepareAcciones(){
 		prepareAccionesVentana();
 		prepareAccionesPantalla();
-		
-		
-		
 	}
 	
 	public void prepareAccionesVentana(){
@@ -105,23 +98,18 @@ public class pantallaJuego  extends JFrame{
 	}
 	
 	public void prepareAccionesPantalla(){
-		
-		
 		pausaBoton.addActionListener( new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				if (pausa) {
-					 
 					pausaBoton.setIcon(new ImageIcon(getClass().getResource("/resources/pausa.png")));
 				}
 				else {
-					
 					pausaBoton.setIcon(new ImageIcon(getClass().getResource("/resources/continuar.png")));
 				}
 				play();
 			}
 		});
-		
 	}
 	
 	public void play() {
@@ -144,16 +132,10 @@ public class pantallaJuego  extends JFrame{
 		else {
 			pausaBoton.setIcon(new ImageIcon(getClass().getResource("/resources/continuar.png")));
 		}
-		
-		
 	}
 	
 	public void actualiceDatos(){
 		score.setText("<html>Score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>");
 		vidas.setText("<html>Lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>");
-		
-		
 	}
-	
-	
 }

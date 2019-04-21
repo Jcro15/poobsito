@@ -38,8 +38,8 @@ public class seleccionModoGUI extends JFrame{
 		prepareElementosPantalla();
 		prepareElementosConfig();
 	}
+	
 	public void ajusteFrame(){
-		
 		Dimension size=Toolkit.getDefaultToolkit().getScreenSize();
 		int height=250;
 		int width=700;
@@ -61,7 +61,6 @@ public class seleccionModoGUI extends JFrame{
 		int halfWidth = width/2;
 		int halfHeight = height-340;
 		setLocation(centerX - halfWidth, centerY - halfHeight);
-		
 	}
 	
 	public void prepareElementosPantalla(){
@@ -69,11 +68,13 @@ public class seleccionModoGUI extends JFrame{
 		panelPantalla.setLayout(new GridLayout(2,1));
 		panelPantalla.setBackground(new ImageIcon(getClass().getResource("/resources/fondo.png")));
 		contenedor.add(panelPantalla);
+		
 		panelLogo = new JPanel(new GridBagLayout());
 		logo = new JLabel(new ImageIcon(getClass().getResource("/resources/logo.png")));
 		panelLogo.add(logo);
 		panelPantalla.add(panelLogo);
 		panelLogo.setOpaque(false);
+		
 		panelBotones = new JPanel(new GridLayout(2,3));
 		panelBotones.setOpaque(false);
 		Icon icono1j = new ImageIcon(getClass().getResource("/resources/1J.png"));
@@ -92,22 +93,19 @@ public class seleccionModoGUI extends JFrame{
 		cancelarBoton = new myButton(iconoCancelar);
 		cancelarBoton.setTransparent();
 		
-		
 		panelBotones.add(single);
 		panelBotones.add(coop);
 		panelBotones.add(jVsCpu);
 		panelBotones.add(t);
 		panelBotones.add(cancelarBoton);
 		
-		
 		panelPantalla.add(panelBotones);
 		
 		cards = new JPanel(new CardLayout());
 		cards.add(panelPantalla, "Principal");
 		contenedor.add(cards);
-		
-		
 	}
+	
 	public void prepareElementosConfig(){
 		JPanelB configPanel = new JPanelB();
 		configPanel.setLayout(new GridLayout(3,1));
@@ -152,15 +150,13 @@ public class seleccionModoGUI extends JFrame{
 		panelCButton.add(jugarBoton);
 		panelCButton.add(volverBoton);
 		
-		
 		configPanel.add(panelConfigLogo);
 		configPanel.add(combo);
 		configPanel.add(panelCButton);
 		configPanel.setOpaque(false);
 		prepareAccionesConfig();
-		
-		
 	}
+	
 	public void prepareAcciones(){
 		
 		single.addActionListener(new ActionListener(){
@@ -186,25 +182,18 @@ public class seleccionModoGUI extends JFrame{
 				abrirConfig();
 			}
 		});
-		
-		
 	}
+	
 	private void prepareAccionesConfig() {
 		volverBoton.addActionListener(new ActionListener() {
-			
-			
 			public void actionPerformed(ActionEvent e) {
 				principal();
-				
 			}
 		});
 		
 		jugarBoton.addActionListener(new ActionListener() {
-			
-			
 			public void actionPerformed(ActionEvent e) {
 				juegue();
-				
 			}
 		});
 	}
@@ -215,22 +204,18 @@ public class seleccionModoGUI extends JFrame{
 		CardLayout c1 = (CardLayout)(cards.getLayout());
 		c1.show(cards,"Configuracion");
 	}
+	
 	public void juegue(){
 		dispose();
 		pantallaJuego j = null;
 		j=new pantallaJuego();
 		j.setVisible(true);
-		
-		
-		
 	}
-	
 	
 	private void principal() {
 		setTitle("Configuracion");
 		CardLayout c1 = (CardLayout)(cards.getLayout());
 		c1.show(cards,"Principal");
 		ajusteFrame();
-		
 	}
 }

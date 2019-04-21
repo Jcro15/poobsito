@@ -19,9 +19,6 @@ public class arkapoobGUI extends JFrame{
 	private myButton jugarBoton;
 	private myButton abrirBoton;
 	
-	
-	
-	
 	public arkapoobGUI(){
 		super("Arkapoob");
 		setResizable(false);
@@ -34,6 +31,7 @@ public class arkapoobGUI extends JFrame{
 		ajusteFrame();
 		prepareElementosPantalla();
 	}
+	
 	public void ajusteFrame(){
 		Dimension size=Toolkit.getDefaultToolkit().getScreenSize();
 		int height=700;
@@ -45,24 +43,26 @@ public class arkapoobGUI extends JFrame{
 		int halfHeight = height-340;
 		setLocation(centerX - halfWidth, centerY - halfHeight);
 	}
+	
 	public void prepareElementosPantalla(){
 		panelPantalla = new JPanelB();
-		
 		panelPantalla.setLayout(new GridLayout(2,1));
 		panelPantalla.setBackground(new ImageIcon(getClass().getResource("/resources/fondo.png")));
+		
 		panelLogo = new JPanel();
 		panelLogo.setLayout(new GridBagLayout());
 		panelPantalla.add(panelLogo);
 		panelLogo.setOpaque(false);
+		
 		panelBotones = new JPanel();
 		panelBotones.setLayout(new GridLayout(3,3,0,5));
 		panelPantalla.add(panelBotones);
 		panelBotones.setOpaque(false);
+		
 		preparePanelBotones();
 		preparePanelLogo();
 		contenedor.add(panelPantalla);
 	}
-	
 	
 	public void prepareAcciones(){
 		prepareAccionesVentana();
@@ -76,7 +76,6 @@ public class arkapoobGUI extends JFrame{
 				salga();
 			}
 		});
-		
 	}
 	
 	public void prepareAccionesPantalla(){
@@ -91,11 +90,7 @@ public class arkapoobGUI extends JFrame{
 				abra();
 			}
 		});
-		
-		
 	}
-	
-	
 	
 	public void preparePanelBotones(){
 		
@@ -105,7 +100,6 @@ public class arkapoobGUI extends JFrame{
 		jugarBoton.setTransparent();
 		panelBotones.add(jugarBoton);
 		panelBotones.add(new JLabel()); 
-		
 		
 		panelBotones.add(new JLabel());
 		Icon icono1 = new ImageIcon(getClass().getResource("/resources/abrir.png"));
@@ -117,15 +111,12 @@ public class arkapoobGUI extends JFrame{
 		panelBotones.add(new JLabel());
 		panelBotones.add(new JLabel());
 		panelBotones.add(new JLabel());
-		
 	}
 	
 	private void preparePanelLogo() {
 		logo = new JLabel(new ImageIcon(getClass().getResource("/resources/logo.png")));
 		panelLogo.add(logo);		
 	}
-	
-	
 	
 	public void abra(){
 		JFileChooser file=new JFileChooser();
@@ -152,12 +143,8 @@ public class arkapoobGUI extends JFrame{
 		modoGui.setVisible(true);
 	}
 	
-	
-	
-	
 	public static void main(String[] args) {
 		arkapoobGUI a = new arkapoobGUI();
 		a.setVisible(true);
 	}
-	
 }
