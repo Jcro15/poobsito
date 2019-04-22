@@ -218,7 +218,7 @@ public class seleccionModoGUI extends JFrame{
 	public void juegue(){
 		dispose();
 		pantallaJuego j = null;
-		j=new pantallaJuego(nameJ1.getText());
+		j=new pantallaJuego(nameJ1.getText(),(String)selecColorBall.getSelectedItem(),(String)selecColorBar.getSelectedItem());
 		j.setVisible(true);
 	}
 	

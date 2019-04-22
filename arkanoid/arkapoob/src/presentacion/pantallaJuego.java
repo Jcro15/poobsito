@@ -19,15 +19,18 @@ public class pantallaJuego  extends JFrame{
 	private JLabel score;
 	private JLabel vidas;
 	private String name;
+	private String colorBola;
+	private String colorPlata;
 	
-	public pantallaJuego(String name){
+	public pantallaJuego(String name,String colorBola, String colorPlata){
 		super("Arkapoob");
 		this.name = name;
 		setResizable(false);
 		pausa=false;
 		prepareElementos();
 		prepareAcciones();
-		
+		this.colorBola=colorBola;
+		this.colorPlata=colorPlata;
 		pin.updName(name);
 		
 	}
@@ -142,5 +145,13 @@ public class pantallaJuego  extends JFrame{
 	public void actualiceDatos(){
 		score.setText("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>");
 		vidas.setText("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>");
+	}
+	
+	public String getColorBola(){
+		return colorBola;
+	}
+	
+	public String getColorPlataforma(){
+		return colorPlata;
 	}
 }

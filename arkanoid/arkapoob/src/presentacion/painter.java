@@ -37,6 +37,7 @@ public class painter extends JPanelB {
 	private Timer elementosTimer;
 	private Timer juegoTimer;
 	private boolean p1Izq, p1Der = false;
+	private Color colorBola, colorPlata;
 	
 	
 	public painter(int w, int h,pantallaJuego pantallaJ){
@@ -161,10 +162,12 @@ public class painter extends JPanelB {
 		g2 = (Graphics2D) g ;
 		g2.setColor(Color.WHITE);
 		figura = game.getBola().getShape();
+		g2.setColor(setColorBola(pantallaJ.getColorBola()));
 		g2.fill(figura); // dibuja bola
 		Jugador j = game.getJugador();
 		Plataforma p = j.getPlatform();
 		Rectangle pla = p.getShape();
+		g2.setColor(setColorPlataforma(pantallaJ.getColorPlataforma()));
 		g2.fill(pla); //dibuja plataforma
 		ArrayList<Bloque> s= game.getBloques();
 		for(Bloque i:s) {
@@ -215,6 +218,45 @@ public class painter extends JPanelB {
 	
 	public void updName(String name){
 		game.getJugador().setName(name);
+	}
+	
+	public Color setColorBola(String color){
+		Color colorB=null;
+		if(color.equals("Verde")){
+			colorB=Color.GREEN;
+		}
+		else if(color.equals("Azul")){
+			colorB=Color.BLUE;
+		}
+		else if(color.equals("Amarillo")){
+			colorB=Color.YELLOW;
+		}
+		else if(color.equals("Rojo")){
+			colorB=Color.RED;
+		}
+		game.getBola().setColor(colorB);
+		return colorB;
+	}
+	
+	public Color setColorPlataforma(String color){
+		Color colorP=null;
+		if(color.equals("Verde")){
+			colorP=Color.GREEN;
+		}
+		else if(color.equals("Azul")){
+			colorP=Color.BLUE;
+			
+		}
+		else if(color.equals("Amarillo")){
+			colorP=Color.YELLOW;
+			
+		}
+		else if(color.equals("Rojo")){
+			colorP=Color.RED;
+			
+		}
+		game.getJugador().getPlatform().setColor(colorP);
+		return colorP;
 	}
 	
 }

@@ -1,6 +1,7 @@
 package aplicacion;
 import java.awt.Rectangle;
 import java.awt.geom.RectangularShape;
+import java.awt.Color;
 
 public class Plataforma {
 	private int xPosition;
@@ -9,6 +10,7 @@ public class Plataforma {
 	private int width;
 	private int velocity;
 	private Rectangle shape;
+	private Color color;
 	
 	public Plataforma(int x,int y) {
 		xPosition=x;
@@ -46,5 +48,9 @@ public class Plataforma {
 	}
 	public boolean collisionRight(RectangularShape inShape) {
 		return inShape.getCenterX()>=shape.getCenterX();
+	}
+	
+	public void setColor(Color color){
+		this.color=color;
 	}
 }

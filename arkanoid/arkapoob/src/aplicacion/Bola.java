@@ -1,5 +1,6 @@
 package aplicacion;
 import java.awt.geom.*;
+import java.awt.Color;
 /**
  * la clase representa una bola , definida por una elipse con coordenadas (xPosition,yPosition)
  * cuenta con direcciones de movimiento(dx,dy) y el daño que causa a los bloques
@@ -12,7 +13,9 @@ public class Bola {
 	private int dx;
 	private int dy;
 	private int damage;
+	private Color color;
 	private Ellipse2D.Double shape;
+	
 	
 	public static final int DERECHA=1;
 	public static final int IZQUIERDA=-1;
@@ -86,6 +89,11 @@ public class Bola {
 	 */
 	public void setDx(int dir) {
 		dx=dir;
+	}
+	
+	public void setColor(Color color){
+		this.color=color;
+		
 	}
 	
 }
