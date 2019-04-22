@@ -18,13 +18,18 @@ public class pantallaJuego  extends JFrame{
 	private boolean pausa;
 	private JLabel score;
 	private JLabel vidas;
+	private String name;
 	
-	public pantallaJuego(){
+	public pantallaJuego(String name){
 		super("Arkapoob");
+		this.name = name;
 		setResizable(false);
 		pausa=false;
 		prepareElementos();
 		prepareAcciones();
+		
+		pin.updName(name);
+		
 	}
 	
 	public void prepareElementos() {
@@ -77,8 +82,8 @@ public class pantallaJuego  extends JFrame{
 		container.add(pin, BorderLayout.CENTER);
 		pin.setFocusable(true);
 		
-		score=new JLabel("<html>Score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>",SwingConstants.CENTER);
-		vidas=new JLabel("<html>Lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>",SwingConstants.CENTER);
+		score=new JLabel("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>",SwingConstants.CENTER);
+		vidas=new JLabel("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>",SwingConstants.CENTER);
 		opciones.add(score);
 		opciones.add(vidas);
 		//pin.requestFocusInWindow();
@@ -135,7 +140,7 @@ public class pantallaJuego  extends JFrame{
 	}
 	
 	public void actualiceDatos(){
-		score.setText("<html>Score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>");
-		vidas.setText("<html>Lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>");
+		score.setText("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>");
+		vidas.setText("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>");
 	}
 }

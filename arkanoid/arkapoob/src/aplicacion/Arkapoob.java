@@ -14,7 +14,7 @@ public class Arkapoob {
 		this.maxY=maxY;
 		bola=new Bola(360 , 641);//temporal
 		bloques=new ArrayList<Bloque>();
-		jugador=new Jugador("assd");
+		jugador=new Jugador(); // no recibe nombre
 		for (int j =100;j<225;j+=25) {
 			for (int i =0;i<maxX;i+=45) {
 				bloques.add(new Bloque(i,j));

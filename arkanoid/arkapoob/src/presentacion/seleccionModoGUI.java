@@ -22,6 +22,7 @@ public class seleccionModoGUI extends JFrame{
 	private Container contenedor;
 	private JComboBox<String> selecColorBall;
 	private JComboBox<String> selecColorBar;
+	private JTextField nameJ1;
 	private JPanel cards;
 	private static final String []colores = { "Verde", "Azul","Amarillo","Rojo"};
 	
@@ -123,6 +124,15 @@ public class seleccionModoGUI extends JFrame{
 		combo.setLayout(null);
 		combo.setOpaque(false);
 		
+		JLabel nombre = new JLabel("Nombre");
+		nombre.setForeground(Color.WHITE);
+		nombre.setBounds(27, 40, 78, 14);
+		combo.add(nombre);
+		nameJ1 = new JTextField();
+		nameJ1.setBounds(135, 37, 121, 23);
+		combo.add(nameJ1);
+		nameJ1.setColumns(10);
+		
 		JLabel colorBola = new JLabel("Color bola");
 		colorBola.setForeground(Color.WHITE);
 		colorBola.setBounds(27, 85, 78, 14);
@@ -208,7 +218,7 @@ public class seleccionModoGUI extends JFrame{
 	public void juegue(){
 		dispose();
 		pantallaJuego j = null;
-		j=new pantallaJuego();
+		j=new pantallaJuego(nameJ1.getText());
 		j.setVisible(true);
 	}
 	

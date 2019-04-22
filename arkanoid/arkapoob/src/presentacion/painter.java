@@ -212,4 +212,9 @@ public class painter extends JPanelB {
 	public void refresqueDatos(){
 		pantallaJ.actualiceDatos();
 	}
+	
+	public void updName(String name){
+		game.getJugador().setName(name);
+	}
+	
 }
