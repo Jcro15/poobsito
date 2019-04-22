@@ -162,7 +162,6 @@ public class painter extends JPanelB {
 		g2 = (Graphics2D) g ;
 		g2.setColor(Color.WHITE);
 		figura = game.getBola().getShape();
-		g2.setColor(setColorBola(pantallaJ.getColorBola()));
 		g2.fill(figura); // dibuja bola
 		Jugador j = game.getJugador();
 		Plataforma p = j.getPlatform();
@@ -218,24 +217,6 @@ public class painter extends JPanelB {
 	
 	public void updName(String name){
 		game.getJugador().setName(name);
-	}
-	
-	public Color setColorBola(String color){
-		Color colorB=null;
-		if(color.equals("Verde")){
-			colorB=Color.GREEN;
-		}
-		else if(color.equals("Azul")){
-			colorB=Color.BLUE;
-		}
-		else if(color.equals("Amarillo")){
-			colorB=Color.YELLOW;
-		}
-		else if(color.equals("Rojo")){
-			colorB=Color.RED;
-		}
-		game.getBola().setColor(colorB);
-		return colorB;
 	}
 	
 	public Color setColorPlataforma(String color){

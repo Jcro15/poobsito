@@ -20,7 +20,6 @@ public class seleccionModoGUI extends JFrame{
 	private myButton  cancelarBoton;
 	private JLabel logo;
 	private Container contenedor;
-	private JComboBox<String> selecColorBall;
 	private JComboBox<String> selecColorBar;
 	private JTextField nameJ1;
 	private JPanel cards;
@@ -133,20 +132,12 @@ public class seleccionModoGUI extends JFrame{
 		combo.add(nameJ1);
 		nameJ1.setColumns(10);
 		
-		JLabel colorBola = new JLabel("Color bola");
-		colorBola.setForeground(Color.WHITE);
-		colorBola.setBounds(27, 85, 78, 14);
-		combo.add(colorBola);
-		selecColorBall = new JComboBox<>(colores);
-		selecColorBall.setBounds(135, 82, 121, 17);
-		combo.add(selecColorBall);
-		
 		JLabel colorBarra = new JLabel("Color barra");
 		colorBarra.setForeground(Color.WHITE);
-		colorBarra.setBounds(27, 135, 78, 14);
+		colorBarra.setBounds(27, 85, 78, 14);
 		combo.add(colorBarra);
 		selecColorBar = new JComboBox<>(colores);
-		selecColorBar.setBounds(135, 132, 242, 17);
+		selecColorBar.setBounds(135, 82, 121, 17);
 		combo.add(selecColorBar);
 		
 		Icon iconoCancelar = new ImageIcon(getClass().getResource("/resources/volver.png"));
@@ -218,7 +209,7 @@ public class seleccionModoGUI extends JFrame{
 	public void juegue(){
 		dispose();
 		pantallaJuego j = null;
-		j=new pantallaJuego(nameJ1.getText(),(String)selecColorBall.getSelectedItem(),(String)selecColorBar.getSelectedItem());
+		j=new pantallaJuego(nameJ1.getText(),(String)selecColorBar.getSelectedItem());
 		j.setVisible(true);
 	}
 	

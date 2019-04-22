@@ -13,7 +13,6 @@ public class Bola {
 	private int dx;
 	private int dy;
 	private int damage;
-	private Color color;
 	private Ellipse2D.Double shape;
 	
 	
@@ -90,10 +89,4 @@ public class Bola {
 	public void setDx(int dir) {
 		dx=dir;
 	}
-	
-	public void setColor(Color color){
-		this.color=color;
-		
-	}
-	
 }
