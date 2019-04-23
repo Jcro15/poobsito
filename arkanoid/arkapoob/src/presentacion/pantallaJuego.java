@@ -35,6 +35,7 @@ public class pantallaJuego  extends JFrame{
 	public void prepareElementos() {
 		ajusteFrame();
 		preparePantalla();
+	}
 		
 	
 	public void ajusteFrame(){
