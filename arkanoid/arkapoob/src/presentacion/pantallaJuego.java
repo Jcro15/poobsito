@@ -35,23 +35,7 @@ public class pantallaJuego  extends JFrame{
 	public void prepareElementos() {
 		ajusteFrame();
 		preparePantalla();
-		/**
-		jugar.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				machetin();
-			}
-		});
-		*/
-	}
-	
-	/**
-	public void machetin() {
-		while (true) {
-			
-			pin.play();
-		}
-	}
-	*/
+		
 	
 	public void ajusteFrame(){
 		Dimension size=Toolkit.getDefaultToolkit().getScreenSize();
