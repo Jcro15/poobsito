@@ -66,7 +66,7 @@ public class painter extends JPanelB {
 		juegoTimer.start();
 		
 		
-		elementosTimer = new Timer(3,new ActionListener() {
+		elementosTimer = new Timer(8,new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
