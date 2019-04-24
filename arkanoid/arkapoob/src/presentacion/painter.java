@@ -66,7 +66,7 @@ public class painter extends JPanelB {
 		juegoTimer.start();
 		
 		
-		elementosTimer = new Timer(8,new ActionListener() {
+		elementosTimer = new Timer(3,new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -77,7 +77,7 @@ public class painter extends JPanelB {
 				
 			}
 		});
-		
+		elementosTimer.start();
 		
 		
 	}
@@ -144,18 +144,7 @@ public class painter extends JPanelB {
 				
 			}
 		});
-		addKeyListener(new KeyListener() {
-			public void keyTyped(KeyEvent e) {}
-			public void keyReleased(KeyEvent e) {}
-			public void keyPressed(KeyEvent e) {
-				
-				if ( e.getKeyCode() == KeyEvent.VK_SPACE) {
-					
-					elementosTimer.start();
-				}
-				
-			}
-		});
+		
 		
 		//setFocusable(true);
         //requestFocusInWindow();

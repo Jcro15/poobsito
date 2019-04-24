@@ -96,12 +96,12 @@ public class Bloque {
 	 * @return true si existe una colision ; false sino
 	 */
 	public boolean collision(RectangularShape inShape) {
-		return inShape.intersects(shape);
+		return inShape.getBounds2D().intersects(shape.getBounds2D());
 	}
 	/**
 	 * Detecta si hay una colision entre alguno de los margenes verticales y otro elemento
 	 * @param inShape  el objeto geometrico que representa al elemento entrante
-	 * @return true si existe una colision ; false si es una collision horizontal
+	 * @return true si existe una colision ; false si es una colision horizontal
 	 */
 	public boolean verticalCollision(RectangularShape inShape) {
 		double interseccionIzquierda = inShape.getMaxX() - shape.getMinX();

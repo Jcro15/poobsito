@@ -12,7 +12,7 @@ public class Jugador {
 		//this.name=name;
 		lives=3;
 		score=0;
-		platform=new Plataforma(300, 640);//temporal mientras se decide donde colocarla inicialmente
+		platform=new Plataforma(202, 640);//temporal mientras se decide donde colocarla inicialmente
 	}
 	
 	public int getLives() {

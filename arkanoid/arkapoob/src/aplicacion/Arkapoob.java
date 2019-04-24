@@ -12,9 +12,9 @@ public class Arkapoob {
 	public Arkapoob(int maxX ,int maxY) {
 		this.maxX=maxX;
 		this.maxY=maxY;
-		bola=new Bola(360 , 641);//temporal
 		bloques=new ArrayList<Bloque>();
 		jugador=new Jugador(); // no recibe nombre
+		bola=new Bola(jugador.getPlatform().getX()+jugador.getPlatform().getWidth()/2 , jugador.getPlatform().getY()-10);//temporal
 		for (int j =100;j<225;j+=25) {
 			for (int i =0;i<maxX;i+=45) {
 				bloques.add(new Bloque(i,j));
@@ -79,7 +79,7 @@ public class Arkapoob {
 			bola.setDy(bola.getDy()*-1);
 		}
 		else if(bola.getY()>maxY) {
-			bola=new Bola(360 , 641);
+			bola=new Bola(jugador.getPlatform().getX()+jugador.getPlatform().getWidth()/2 , jugador.getPlatform().getY()-10);
 			jugador.quitarVida();
 		}
 	}
