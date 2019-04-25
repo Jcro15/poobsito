@@ -17,6 +17,7 @@ public class Plataforma {
 	private int velocity;
 	private Rectangle shape;
 	private Color color;
+	
 	/**
 	 * construye un objeto de tipo plataforma en una posicion dada con un ancho y alto por defecto
 	 * @param x la posicion x inicial de la plataforma
@@ -30,6 +31,7 @@ public class Plataforma {
 		shape=new Rectangle(x,y,width,height);
 		velocity=1;
 	}
+	
 	/**
 	 * retorna la posicion x que tiene la plataforma en el tablero como un entero
 	 * @return la posicion x que tiene la plataforma en el tablero
@@ -37,6 +39,7 @@ public class Plataforma {
 	public int getX() {
 		return xPosition;
 	}
+	
 	/**
 	 * retorna la posicion y que tiene la plataforma en el tablero como un entero
 	 * @return la posicion y que tiene la plataforma en el tablero
@@ -44,6 +47,7 @@ public class Plataforma {
 	public int getY() {
 		return yPosition;
 	}
+	
 	/**
 	 * retorna el un objeto Rectangle que representa geometricamente a la plataforma
 	 * @return el rectangulo que representa a la plataforma
@@ -51,6 +55,7 @@ public class Plataforma {
 	public Rectangle getShape() {
 		return shape;
 	}
+	
 	/**
 	 * retorna la altura de la plataforma como un entero
 	 * @return la altura de la plataforma
@@ -58,6 +63,7 @@ public class Plataforma {
 	public int getHeight() {
 		return height;
 	}
+	
 	/**
 	 * retorna el ancho de la plataforma como un entero
 	 * @return el ancho  de la plataforma
@@ -65,6 +71,7 @@ public class Plataforma {
 	public int getWidth() {
 		return width;
 	}
+	
 	/**
 	 * mueve la plataforma hacia la derecha tanto como diga su velocidad
 	 */
@@ -72,6 +79,7 @@ public class Plataforma {
 		xPosition+=velocity;
 		shape.setLocation(xPosition, yPosition);
 	}
+	
 	/**
 	 * mueve la plataforma hacia la izquierda tanto como diga su velocidad
 	 */
@@ -79,6 +87,7 @@ public class Plataforma {
 		xPosition-=velocity;
 		shape.setLocation(xPosition, yPosition);
 	}
+	
 	/**
 	 * detecta si hay una colision entre el objeto entrante y la plataforma
 	 * @param inShape la figura geometrica que representa a la figura entrante 
@@ -87,6 +96,7 @@ public class Plataforma {
 	public boolean collision(RectangularShape inShape) {
 		return inShape.getBounds2D().intersects(shape.getBounds2D());
 	}
+	
 	/**
 	 * detecta si hay una colision entre el objeto entrante y la parte derecha de laplataforma
 	 * @param inShape inShape la figura geometrica que representa a la figura entrante 
@@ -95,6 +105,7 @@ public class Plataforma {
 	public boolean collisionRight(RectangularShape inShape) {
 		return inShape.getCenterX()>=shape.getCenterX();
 	}
+	
 	/**
 	 * establece el color de la plataforma
 	 * @param color el color que se le dara a la plataforma

@@ -132,7 +132,7 @@ public class Arkapoob {
 	 * mueve al jugador a la izquierda  si es posible
 	 */
 	public void moverPlataformaIzquierda() {
-		if (jugador.getPlatform().getX()-1>0) {
+		if (jugador.getPlatform().getX()>0) {
 			jugador.moverPlataformaIzquierda();
 		}
 	}
