@@ -45,6 +45,8 @@ public class arkapoobGUI extends JFrame{
 	}
 	
 	public void prepareElementosPantalla(){
+		setIconImage(new ImageIcon(getClass().getResource("/resources/icono.png")).getImage());
+		
 		panelPantalla = new JPanelB();
 		panelPantalla.setLayout(new GridLayout(2,1));
 		panelPantalla.setBackground(new ImageIcon(getClass().getResource("/resources/fondo.png")));

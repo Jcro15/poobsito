@@ -51,6 +51,7 @@ public class pantallaJuego  extends JFrame{
 	}
 	
 	private void preparePantalla() {
+		setIconImage(new ImageIcon(getClass().getResource("/resources/icono.png")).getImage());
 		container = getContentPane();
 		opciones = new JPanelB();
 		opciones.setLayout(new GridLayout(3,1));
