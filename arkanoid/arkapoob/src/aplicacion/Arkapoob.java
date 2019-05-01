@@ -17,7 +17,7 @@ public class Arkapoob {
 		bola=new Bola(jugador.getPlatform().getX()+jugador.getPlatform().getWidth()/2 , jugador.getPlatform().getY()-10);
 		for (int j =100;j<225;j+=25) {
 			for (int i =0;i<maxX;i+=45) {
-				bloques.add(new Bloque(i,j));
+				bloques.add(new BloqueIndestructible(this,i,j));
 			}
 		}
 			
@@ -34,7 +34,11 @@ public class Arkapoob {
 	 * @return true si el numero de bloques destruibles es 0 ; false si no
 	 */
 	public boolean playerWin() {
-		return bloques.size()==0;
+		int bloquesRestantes=0;
+		for(Bloque b:bloques) {
+			if (b.isDestroyable())bloquesRestantes+=1;
+		}
+		return bloquesRestantes==0;
 	}
 	/**
 	 * retorna la bola que se esta usando en el juego
@@ -43,6 +47,7 @@ public class Arkapoob {
 	public Bola getBola(){
 		return bola;
 	}
+
 	/**
 	 * retorna la lista de bloques que quedan en la partida
 	 * @return los bloques de la partida
@@ -81,12 +86,17 @@ public class Arkapoob {
 		for(int j=0;j<bloques.size();j++) {
 			Bloque b=bloques.get(j);
 			if(b.collision(bola.getShape())) {
+				//System.out.println(j);
+				//System.out.println(b.getX()+" "+b.getY());
+				//System.out.println(bola.getX()+" "+bola.getY());
 				b.reduceResistance(bola.getDamage());
 				if(b.verticalCollision(bola.getShape())) {
 					bola.setDy(bola.getDy()*-1);
+					//System.out.println("vertical");
 				}
 				else{
 					bola.setDx(bola.getDx()*-1);
+					//System.out.println("horizontal");
 				}
 				if (b.destroyed()) {
 					bloques.remove(j);

@@ -14,17 +14,19 @@ public class Bloque {
 	private int yPosition;
 	private int height;
 	private int width;
-	private int resistance;
-	private int puntaje;
+	protected int resistance;
+	protected int puntaje;
 	private Rectangle shape;
-	private Color color;
+	protected Color color;
+	private Arkapoob tablero;
+	protected boolean destroyable;
 	
 	/**
 	 * construye un nuevo bloque en las coordenadas x ,y
 	 * @param x la coordenada x donde se creara el bloque
 	 * @param y la coordenada y donde se creara el bloque
 	 */
-	public Bloque(int x, int y) {
+	public Bloque(Arkapoob tablero,int x, int y) {
 		xPosition=x;
 		yPosition=y;
 		resistance=1;
@@ -33,6 +35,8 @@ public class Bloque {
 		puntaje=100;
 		shape=new Rectangle(xPosition,yPosition, width, height);
 		color=Color.RED;
+		this.tablero=tablero;
+		destroyable=true;
 	}
 	/**
 	 * retorna la posicion x que tiene el bloque en el tablero como un entero
@@ -62,6 +66,9 @@ public class Bloque {
 	public Color getColor() {
 		return color;
 	}
+	public boolean isDestroyable() {
+		return destroyable;
+	}
 	/**
 	 * retorna la altura del bloque como un entero
 	 * @return la altura del bloque
@@ -77,7 +84,7 @@ public class Bloque {
 		return width;
 	}
 	/**
-	 * evalua si el bloque ha sido destruido, un bloque se considera destruido si su resistencia es 0
+	 * evalua si el bloque ha sido destruido, un bloque se considera destruido si su resistencia es 0 
 	 * @return true si el bloque ha sido destruido ; false sino
 	 */
 	public boolean destroyed() {
@@ -110,7 +117,8 @@ public class Bloque {
 		double interseccionAbajo = shape.getMaxY() - inShape.getMinY();
 		double minInterseccionX = Math.min(interseccionIzquierda, interseccionDerecha);
 		double minInterseccionY = Math.min(interseccionAbajo, interseccionArriba);
-		return minInterseccionY<minInterseccionX;
+		//System.out.println(interseccionAbajo+" "+interseccionArriba+" "+interseccionDerecha+" "+interseccionIzquierda);
+		return minInterseccionY<=minInterseccionX;
 	}
 	/**
 	 * retorna el puntaje que da este bloque al ser destruido
