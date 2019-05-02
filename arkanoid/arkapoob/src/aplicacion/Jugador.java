@@ -16,10 +16,10 @@ public class Jugador {
 	 * Construye un nuevo objeto de tipo jugador con un valor por defecto de vidas, de puntaje y una plataforma
 	 * en una posicion por defecto
 	 */
-	public Jugador() {
+	public Jugador(Arkapoob tablero) {
 		lives=3;
 		score=0;
-		platform=new Plataforma(202, 640);
+		platform=new Plataforma(202, 640,tablero);
 	}
 	/**
 	 * retorna el numero de vida del jugador
@@ -64,8 +64,8 @@ public class Jugador {
 	/**
 	 * reduce las vidas del jugador
 	 */
-	public void quitarVida() {
-		lives-=1;
+	public void setVidas(int vidas) {
+		lives=vidas;
 	}
 	/**
 	 * ordena a la plataforma a verificar si existe una colision  entre la parte derecha de la barra y

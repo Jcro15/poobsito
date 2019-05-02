@@ -89,4 +89,12 @@ public class Bola {
 	public void setDx(int dir) {
 		dx=dir;
 	}
+	public void reactToCollision(Bloque bloque) {
+		if(bloque.verticalCollision(getShape())) {
+			setDy(getDy()*-1);
+		}
+		else{
+			setDx(getDx()*-1);
+		}
+	}
 }

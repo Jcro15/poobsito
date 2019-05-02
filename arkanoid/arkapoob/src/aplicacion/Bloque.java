@@ -10,15 +10,15 @@ import java.awt.geom.RectangularShape;
  *
  */
 public class Bloque {
-	private int xPosition;
-	private int yPosition;
-	private int height;
-	private int width;
+	protected int xPosition;
+	protected int yPosition;
+	protected int height;
+	protected int width;
 	protected int resistance;
 	protected int puntaje;
-	private Rectangle shape;
+	protected Rectangle shape;
 	protected Color color;
-	private Arkapoob tablero;
+	protected Arkapoob tablero;
 	protected boolean destroyable;
 	
 	/**
@@ -117,8 +117,7 @@ public class Bloque {
 		double interseccionAbajo = shape.getMaxY() - inShape.getMinY();
 		double minInterseccionX = Math.min(interseccionIzquierda, interseccionDerecha);
 		double minInterseccionY = Math.min(interseccionAbajo, interseccionArriba);
-		//System.out.println(interseccionAbajo+" "+interseccionArriba+" "+interseccionDerecha+" "+interseccionIzquierda);
-		return minInterseccionY<=minInterseccionX;
+		return minInterseccionY<=minInterseccionX;//REVISAR!!!!!!!!!!!!!
 	}
 	/**
 	 * retorna el puntaje que da este bloque al ser destruido
@@ -127,6 +126,15 @@ public class Bloque {
 	public int getPuntaje() {
 		return puntaje;
 	}
-
+	public void reactToColission(Bola bola) {
+		reduceResistance(bola.getDamage());
+		tablero.setUltimoBloqueEliminado(this.getClass().getSimpleName());
+		bola.reactToCollision(this);
+		if (destroyed()) {
+			tablero.remove(this);
+			tablero.sumarPuntosJugador(getPuntaje());
+		}
+	}
+	
 	
 }

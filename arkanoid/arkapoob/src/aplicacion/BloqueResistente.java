@@ -10,10 +10,8 @@ public class BloqueResistente extends Bloque {
 		color=Color.GREEN;
 		puntaje=200;
 	}
-	public boolean collision(RectangularShape inShape) {
-		boolean collision=super.collision(inShape);
-		if(collision)color=Color.RED;
-		return collision;
+	public void reactToColission(Bola bola) {
+		color=Color.RED;
+		super.reactToColission(bola);
 	}
-
 }

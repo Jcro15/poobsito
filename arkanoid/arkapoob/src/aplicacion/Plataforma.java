@@ -17,19 +17,21 @@ public class Plataforma {
 	private int velocity;
 	private Rectangle shape;
 	private Color color;
+	private Arkapoob tablero;
 	
 	/**
 	 * construye un objeto de tipo plataforma en una posicion dada con un ancho y alto por defecto
 	 * @param x la posicion x inicial de la plataforma
 	 * @param y la posicion y inicial de la plataforma
 	 */
-	public Plataforma(int x,int y) {
+	public Plataforma(int x,int y,Arkapoob tablero) {
 		xPosition=x;
 		yPosition=y;
 		height=10;
 		width=120;
 		shape=new Rectangle(x,y,width,height);
 		velocity=1;
+		this.tablero=tablero;
 	}
 	
 	/**
@@ -76,16 +78,20 @@ public class Plataforma {
 	 * mueve la plataforma hacia la derecha tanto como diga su velocidad
 	 */
 	public void moveRight() {
-		xPosition+=velocity;
-		shape.setLocation(xPosition, yPosition);
+		if(canMoveRight()) {
+			xPosition+=velocity;
+			shape.setLocation(xPosition, yPosition);
+		}
 	}
 	
 	/**
 	 * mueve la plataforma hacia la izquierda tanto como diga su velocidad
 	 */
 	public void moveLeft() {
+		if(canMoveLeft()) {
 		xPosition-=velocity;
 		shape.setLocation(xPosition, yPosition);
+		}
 	}
 	
 	/**
@@ -112,5 +118,11 @@ public class Plataforma {
 	 */
 	public void setColor(Color color){
 		this.color=color;
+	}
+	private boolean canMoveLeft() {
+		return xPosition>=1;		
+	}
+	private boolean canMoveRight(){
+		return xPosition+width+1<tablero.getMaxX();
 	}
 }

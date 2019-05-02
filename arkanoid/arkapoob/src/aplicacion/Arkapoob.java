@@ -1,5 +1,6 @@
 package aplicacion;
 
+import java.awt.geom.RectangularShape;
 import java.util.ArrayList;
 
 public class Arkapoob {
@@ -8,19 +9,20 @@ public class Arkapoob {
 	private ArrayList<Bloque> bloques;
 	private int maxX;
 	private int maxY;
+	private String ultimoBloqueEliminado;
 	
 	public Arkapoob(int maxX ,int maxY) {
 		this.maxX=maxX;
 		this.maxY=maxY;
 		bloques=new ArrayList<Bloque>();
-		jugador=new Jugador(); 
+		jugador=new Jugador(this);
+		ultimoBloqueEliminado="";
 		bola=new Bola(jugador.getPlatform().getX()+jugador.getPlatform().getWidth()/2 , jugador.getPlatform().getY()-10);
-		for (int j =100;j<225;j+=25) {
+		for (int j =224;j<225;j+=25) {
 			for (int i =0;i<maxX;i+=45) {
-				bloques.add(new BloqueIndestructible(this,i,j));
+				bloques.add(new BloqueCamaleon(this,i,j));
 			}
 		}
-			
 	}
 	/**
 	 * determina si el jugador perdio la partida
@@ -59,8 +61,9 @@ public class Arkapoob {
 	 * detecta si la bola se colisiona con algun objeto y si es asi cambia su direccion, finalmente mueve la bola
 	 */
 	public void moverBola() {
+		//System.out.println(ultimoBloqueEliminado);
 		bolaEnBorde();
-		colisionBloques();
+		colisionBolaBloques();
 		colisionJugador();
 		bola.move();
 	}
@@ -78,35 +81,27 @@ public class Arkapoob {
 			}
 		}
 	}
+	public Bloque colisionBloques(RectangularShape inShape) {
+		Bloque res= null;
+		for (Bloque b:bloques) {
+			if (b.collision(inShape)) {
+				res=b;
+				break;
+			}
+		}
+		return res;
+	}
 	/**
 	 * detecta si la bola se colisiona con alguno de los bloques y si es asi cambia la direccion de la bola
 	 * y hace daño al edificio, si el edificio es destruido se remueve de la lista de bloques
 	 */
-	private void colisionBloques() {
-		for(int j=0;j<bloques.size();j++) {
-			Bloque b=bloques.get(j);
-			if(b.collision(bola.getShape())) {
-				//System.out.println(j);
-				//System.out.println(b.getX()+" "+b.getY());
-				//System.out.println(bola.getX()+" "+bola.getY());
-				b.reduceResistance(bola.getDamage());
-				if(b.verticalCollision(bola.getShape())) {
-					bola.setDy(bola.getDy()*-1);
-					//System.out.println("vertical");
-				}
-				else{
-					bola.setDx(bola.getDx()*-1);
-					//System.out.println("horizontal");
-				}
-				if (b.destroyed()) {
-					bloques.remove(j);
-					jugador.sumarPuntos(b.getPuntaje());
-				}
-				break;
-			}
+	private void colisionBolaBloques() {
+		Bloque b=colisionBloques(bola.getShape());
+		if(b!=null) {
+			b.reactToColission(bola);
 		}
-		
 	}
+		
 	/**
 	 * detecta si la bola esta en alguno de los bordes y cambia su direccion si se trata del borde superior o alguno de los laterales
 	 * si es el borde inferior resta una vida y reinicia la bola 
@@ -116,11 +111,11 @@ public class Arkapoob {
 			bola.setDx(bola.getDx()*-1);
 		}
 		else if(bola.getY()<0) {
-			bola.setDy(bola.getDy()*-1);
+			bola.setDy(bola.ABAJO);
 		}
 		else if(bola.getY()>maxY) {
 			bola=new Bola(jugador.getPlatform().getX()+jugador.getPlatform().getWidth()/2 , jugador.getPlatform().getY()-10);
-			jugador.quitarVida();
+			jugador.setVidas(jugador.getLives()-1);
 		}
 	}
 	/**
@@ -134,17 +129,13 @@ public class Arkapoob {
 	 * mueve al jugador a la derecha  si es posible
 	 */
 	public void moverPlataformaDerecha() {
-		if (jugador.getPlatform().getX()+jugador.getPlatform().getWidth()<maxX) {
 		jugador.moverPlataformaDerecha();
-		}
 	}
 	/**
 	 * mueve al jugador a la izquierda  si es posible
 	 */
 	public void moverPlataformaIzquierda() {
-		if (jugador.getPlatform().getX()>0) {
-			jugador.moverPlataformaIzquierda();
-		}
+		jugador.moverPlataformaIzquierda();
 	}
 	/**
 	 *  
@@ -153,5 +144,29 @@ public class Arkapoob {
 	public Jugador getJugador() {
 		return jugador;
 	}
-	
+	public int getMaxX() {
+		return maxX;
+	}
+	public int getMaxY() {
+		return maxY;
+	}
+	public void remove(Bloque bloque) {
+		bloques.remove(bloque);
+	}
+	public void sumarPuntosJugador(int puntaje) {
+		jugador.sumarPuntos(puntaje);
+	}
+	public void sumarVidaJugador() {
+		jugador.setVidas(jugador.getLives()+1);
+	}
+	public void setUltimoBloqueEliminado(String ultimo) {
+		ultimoBloqueEliminado=ultimo;
+	}
+	public String getUltimoBloqueEliminado() {
+		return ultimoBloqueEliminado;
+	}
+	public void añadirBloque(Bloque o) {
+		System.out.println("hola");
+		bloques.add(o);
+	}
 }
