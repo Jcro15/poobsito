@@ -136,10 +136,10 @@ public class painter extends JPanelB {
 			public void keyPressed(KeyEvent e) {
 				
 				if ( e.getKeyCode() == KeyEvent.VK_P) {
+					pantallaJ.actualiceBotonPausa(!play);
+					pantallaJ.play();
 					
-					play();
 					
-					pantallaJ.actualiceBotonPausa(play);
 				}
 				
 			}

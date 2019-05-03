@@ -168,6 +168,7 @@ public class pantallaJuego  extends JFrame{
 	public void play() {
 		if (pausa) pausa = false;
 		else pausa = true;
+		System.out.println(pausa);
 		pin.play();
 	}
 	
@@ -177,7 +178,7 @@ public class pantallaJuego  extends JFrame{
 	}
 	
 	public void actualiceBotonPausa(boolean pausa) {
-		this.pausa = pausa;
+		
 		
 		if (pausa) {
 			pausaBoton.setIcon(new ImageIcon(getClass().getResource("/resources/pausa.png")));
@@ -198,6 +199,6 @@ public class pantallaJuego  extends JFrame{
 	
 	public void accionPausa(){
 		play();
-		actualiceBotonPausa(pausa);
+		
 	}
 }
