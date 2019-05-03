@@ -25,7 +25,7 @@ public class Arkapoob implements Serializable{
 		bola=new Bola(jugador.getPlatform().getX()+jugador.getPlatform().getWidth()/2 , jugador.getPlatform().getY()-10);
 		for (int j =224;j<225;j+=25) {
 			for (int i =0;i<maxX;i+=45) {
-				bloques.add(new Bloque(this,i,j));
+				bloques.add(new BloqueCamaleon(this,i,j));
 			}
 		}
 		arkaDAO=new ArkapoobDAO();

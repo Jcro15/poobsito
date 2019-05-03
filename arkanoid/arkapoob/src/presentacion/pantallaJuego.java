@@ -168,7 +168,6 @@ public class pantallaJuego  extends JFrame{
 	public void play() {
 		if (pausa) pausa = false;
 		else pausa = true;
-		System.out.println(pausa);
 		pin.play();
 	}
 	

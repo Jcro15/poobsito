@@ -12,7 +12,7 @@ public class BloqueCamaleon extends Bloque {
 	}
 	public void reactToColission(Bola bola) {
 		String nuevo=tablero.getUltimoBloqueEliminado();
-		if (nuevo!="") {
+		if (!nuevo.equals("")) {
 			try {
 				Class <?> clase = Class.forName("aplicacion."+nuevo);
 				Object o = clase.getDeclaredConstructor(Arkapoob.class,int.class,int.class).newInstance(tablero,xPosition,yPosition);
