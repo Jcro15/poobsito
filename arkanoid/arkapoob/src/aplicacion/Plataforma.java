@@ -2,6 +2,7 @@ package aplicacion;
 import java.awt.Rectangle;
 import java.awt.geom.RectangularShape;
 import java.awt.Color;
+import java.io.*;
 /**
  * La clase representa un bloque, definido por un rectangulo con coordenadas (xPosition,yPosition)
  * un alto y un ancho(height,width) un color y una velocidad
@@ -9,7 +10,7 @@ import java.awt.Color;
  *
  */
 
-public class Plataforma {
+public class Plataforma implements Serializable {
 	private int xPosition;
 	private int yPosition;
 	private int height;

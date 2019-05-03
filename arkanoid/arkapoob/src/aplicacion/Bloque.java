@@ -1,5 +1,5 @@
 package aplicacion;
-
+import java.io.*;
 import java.awt.*;
 import java.awt.geom.RectangularShape;
 /**
@@ -9,7 +9,7 @@ import java.awt.geom.RectangularShape;
  * @author Juan Camilo Rojas & Juan Camilo Angel
  *
  */
-public class Bloque {
+public class Bloque implements Serializable{
 	protected int xPosition;
 	protected int yPosition;
 	protected int height;

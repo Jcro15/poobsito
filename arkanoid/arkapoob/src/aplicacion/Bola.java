@@ -1,13 +1,14 @@
 package aplicacion;
 import java.awt.geom.*;
 import java.awt.Color;
+import java.io.*;
 /**
  * la clase representa una bola , definida por una elipse con coordenadas (xPosition,yPosition)
  * cuenta con direcciones de movimiento(dx,dy) y el daño que causa a los bloques
  * @author Juan Camilo Rojas & Juan Camilo Angel
  *
  */
-public class Bola {
+public class Bola implements Serializable{
 	private int xPosition;
 	private int yPosition;
 	private int dx;

@@ -1,13 +1,14 @@
 package aplicacion;
 
 import java.awt.geom.RectangularShape;
+import java.io.*;
 /**
  * la clase representa un jugador definido por un nombre, unas vidas ,
  *  un puntaje y una plataforma que puede controlar
  * @author Juan Camilo Rojas & Juan Camilo Angel
  *
  */
-public class Jugador {
+public class Jugador implements Serializable{
 	private int lives;
 	private int score;
 	private String name;

@@ -1,6 +1,7 @@
 package presentacion;
 
 import javax.swing.*;
+import javax.swing.filechooser.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.event.*;
@@ -8,7 +9,7 @@ import javax.swing.border.*;
 import java.io.*;
 import java.util.*;
 
-import aplicacion.Arkapoob;
+import aplicacion.*;
 
 public class pantallaJuego  extends JFrame{
 	private painter pin;
@@ -20,6 +21,11 @@ public class pantallaJuego  extends JFrame{
 	private JLabel vidas;
 	private String name;
 	private String colorPlata;
+	private JMenuBar mB;
+	private JMenu menu;
+	private JMenuItem salveComo;
+    private JMenuItem abra;
+	private JFileChooser chooser;
 	
 	public pantallaJuego(String name, String colorPlata){
 		super("Arkapoob");
@@ -51,6 +57,15 @@ public class pantallaJuego  extends JFrame{
 	}
 	
 	private void preparePantalla() {
+		chooser=new JFileChooser();
+		mB=new JMenuBar();
+		setJMenuBar(mB);
+		menu=new JMenu("Archivo");
+		mB.add(menu);
+		salveComo=new JMenuItem("Salve como");
+		abra=new JMenuItem("Abrir");
+		menu.add(abra);
+		menu.add(salveComo);
 		setIconImage(new ImageIcon(getClass().getResource("/resources/icono.png")).getImage());
 		container = getContentPane();
 		opciones = new JPanelB();
@@ -72,6 +87,7 @@ public class pantallaJuego  extends JFrame{
 		vidas=new JLabel("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>",SwingConstants.CENTER);
 		opciones.add(score);
 		opciones.add(vidas);
+		
 		//pin.requestFocusInWindow();
 	}
 	
@@ -101,6 +117,52 @@ public class pantallaJuego  extends JFrame{
 				play();
 			}
 		});
+		
+		salveComo.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				opcionSalveComo();
+			}
+			});
+		
+		abra.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				opcionAbra();
+			}
+			});
+	}
+	
+	private void opcionSalveComo(){
+		if (!pausa){ accionPausa();}
+		chooser.setFileFilter(new FileNameExtensionFilter("archivos .dat", "dat"));
+		int opc =chooser.showSaveDialog(this);
+		try{
+			if (opc==JFileChooser.APPROVE_OPTION){
+				File file =chooser.getSelectedFile();
+				pin.salvar(file);
+			}
+		}
+		catch (ArkapoobException e){
+			JOptionPane.showMessageDialog(this,e.getMessage());
+		}
+	}
+	
+	private void opcionAbra(){
+		if (!pausa){ accionPausa();}
+		chooser.setFileFilter(new FileNameExtensionFilter("archivos .dat", "dat"));
+		int opc =chooser.showOpenDialog(this);
+		try{
+			if (opc==JFileChooser.APPROVE_OPTION){
+				File file =chooser.getSelectedFile();
+				pin.abrir(file);
+				pin.jugar();
+				accionPausa();
+				actualiceDatos();
+			}
+		}
+		catch (ArkapoobException e){
+			JOptionPane.showMessageDialog(this,e.getMessage());
+		}
+		
 	}
 	
 	public void play() {
@@ -132,5 +194,10 @@ public class pantallaJuego  extends JFrame{
 	
 	public String getColorPlataforma(){
 		return colorPlata;
+	}
+	
+	public void accionPausa(){
+		play();
+		actualiceBotonPausa(pausa);
 	}
 }

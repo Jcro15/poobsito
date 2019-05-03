@@ -2,16 +2,21 @@ package aplicacion;
 
 import java.awt.geom.RectangularShape;
 import java.util.ArrayList;
+import java.io.*;
+import persistencia.*;
 
-public class Arkapoob {
+public class Arkapoob implements Serializable{
 	private Bola bola;
 	private Jugador jugador;
 	private ArrayList<Bloque> bloques;
 	private int maxX;
 	private int maxY;
 	private String ultimoBloqueEliminado;
+	private static transient ArkapoobDAO arkaDAO;
+	private static final long serialVersionUID = 8799656478674716638L;
 	
-	public Arkapoob(int maxX ,int maxY) {
+	public Arkapoob(int maxX ,int maxY)  {
+		
 		this.maxX=maxX;
 		this.maxY=maxY;
 		bloques=new ArrayList<Bloque>();
@@ -20,9 +25,10 @@ public class Arkapoob {
 		bola=new Bola(jugador.getPlatform().getX()+jugador.getPlatform().getWidth()/2 , jugador.getPlatform().getY()-10);
 		for (int j =224;j<225;j+=25) {
 			for (int i =0;i<maxX;i+=45) {
-				bloques.add(new BloqueCamaleon(this,i,j));
+				bloques.add(new BloqueResistente(this,i,j));
 			}
 		}
+		arkaDAO=new ArkapoobDAO();
 	}
 	/**
 	 * determina si el jugador perdio la partida
@@ -168,5 +174,11 @@ public class Arkapoob {
 	public void añadirBloque(Bloque o) {
 		System.out.println("hola");
 		bloques.add(o);
+	}
+	public void salvar(File file) throws ArkapoobException{
+		arkaDAO.salvar(this,file);
+	}
+	public Arkapoob abrir(File file) throws ArkapoobException{
+		return arkaDAO.abrir(file);
 	}
 }

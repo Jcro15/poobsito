@@ -241,4 +241,19 @@ public class painter extends JPanelB {
 		return colorP;
 	}
 	
+	public void jugar(){
+		elementosTimer.start();
+		juegoTimer.start();
+		game.moverBola();
+		repaint();
+	}
+	
+	public void salvar(File file) throws ArkapoobException{
+		game.salvar(file);
+		
+	}
+	
+	public void abrir(File file) throws ArkapoobException{
+		game = game.abrir(file);
+	}
 }
