@@ -24,6 +24,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 
 import aplicacion.*;
 
@@ -66,7 +67,7 @@ public class painter extends JPanelB {
 		juegoTimer.start();
 		
 		
-		elementosTimer = new Timer(4,new ActionListener() {
+		elementosTimer = new Timer(3,new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -166,14 +167,18 @@ public class painter extends JPanelB {
 		g2.fill(figura); // dibuja bola
 		Jugador j = game.getJugador();
 		Plataforma p = j.getPlatform();
-		Rectangle pla = p.getShape();
+		Rectangle2D.Double pla = p.getShape();
 		g2.setColor(setColorPlataforma(pantallaJ.getColorPlataforma()));
 		g2.fill(pla); //dibuja plataforma
 		ArrayList<Bloque> s= game.getBloques();
+		ArrayList<Poder> poderes=game.getPoderes();
 		for(Bloque i:s) {
 			Rectangle  r= i.getShape();
 			g2.setColor(i.getColor());
 			g2.fill(r); //dibuja bloques
+		}
+		for(Poder pp:poderes) {
+			g2.fill(pp.getShape());
 		}
 	}
 	

@@ -27,7 +27,7 @@ public class Arkapoob implements Serializable{
 		setBall();
 		for (int j =224;j<225;j+=25) {
 			for (int i =0;i<maxX;i+=45) {
-				bloques.add(new BloqueResistente(this,i,j));
+				bloques.add(new BloqueSorpresa(this,i,j));
 			}
 		}
 		arkaDAO=new ArkapoobDAO();
@@ -65,13 +65,35 @@ public class Arkapoob implements Serializable{
 	public ArrayList<Bloque> getBloques() {
 		return bloques;
 	}
+	public ArrayList<Poder> getPoderes(){
+		return poderes;
+	}
+	private void moverPoderes() {
+		ArrayList<Poder> borrar=new ArrayList<Poder>();
+		for(Poder p:poderes) {
+			if(!p.move())borrar.add(p);
+		}
+		for(Poder p:borrar) {
+			poderes.remove(p);
+		}
+	}
 	/**
 	 * detecta si la bola se colisiona con algun objeto y si es asi cambia su direccion, finalmente mueve la bola
 	 */
 	public void moverElementos() {
+		colisionJugadorPoderes();
+		moverPoderes();
 		colisionBolaBloques();
 		colisionJugador();
 		bola.move();
+	}
+	private void colisionJugadorPoderes() {
+		for(Poder p:poderes) {
+			if (jugador.collision(p.getShape())){
+				p.reactToCollision(jugador.getPlatform());
+				break;
+			}
+		}
 	}
 	/**
 	 * detecta si la bola se colisiona con la barra del jugador y si es asi cambia la direccion de la bola
@@ -173,5 +195,8 @@ public class Arkapoob implements Serializable{
 	}
 	public Arkapoob abrir(File file) throws ArkapoobException{
 		return arkaDAO.abrir(file);
+	}
+	public void removerPoder(Poder poder) {
+		poderes.remove(poder);
 	}
 }

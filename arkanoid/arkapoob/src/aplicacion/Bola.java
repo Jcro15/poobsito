@@ -9,15 +9,17 @@ import java.io.*;
  *
  */
 public class Bola implements Serializable{
-	private int xPosition;
-	private int yPosition;
+	private double xPosition;
+	private double yPosition;
 	private int dx;
 	private int dy;
 	private int damage;
+	private double velocity;
 	private Ellipse2D.Double shape;
 	private Arkapoob tablero;
 	
-	
+	public static final double VMAX=1.2;
+	public static final double VMIN=0.6;
 	public static final int DERECHA=1;
 	public static final int IZQUIERDA=-1;
 	public static final int ARRIBA=-1;
@@ -28,9 +30,10 @@ public class Bola implements Serializable{
 	 * @param x la coordenada x donde se creara la bola
 	 * @param y la coordenada y donde se creara la bola
 	 */
-	public Bola(int x ,int y,Arkapoob tablero) {
+	public Bola(double x ,double y,Arkapoob tablero) {
 		xPosition=x;
 		yPosition=y;
+		velocity=0.8;
 		shape=new Ellipse2D.Double(xPosition,yPosition,10,10);
 		dx=1;
 		dy=-1;
@@ -55,14 +58,14 @@ public class Bola implements Serializable{
 	 * retorna la posicion x que tiene la bola como un entero
 	 * @return la posicion x de la bola
 	 */
-	public int getX() {
+	public double getX() {
 		return xPosition;
 	}
 	/**
 	 * retorna la posicion y que tiene la bola como un entero
 	 * @return la posicion y de la bola
 	 */
-	public int getY() {
+	public double getY() {
 		return yPosition;
 	}
 	/**
@@ -84,13 +87,19 @@ public class Bola implements Serializable{
 	}
 	public void move() {
 		testBorder();
-		xPosition+=dx;
-		yPosition+=dy;
+		xPosition+=dx*velocity;
+		yPosition+=dy*velocity;
 		shape=new Ellipse2D.Double(xPosition,yPosition,10,10);
 	}
 
 	public int getDx() {
 			return dx;
+	}
+	public void aumentarVelocidad() {
+		if(velocity<VMAX)velocity+=0.1;
+	}
+	public void disminuirVelocidad() {
+		if(velocity>VMIN)velocity-=0.1;
 	}
 	public int getDy() {
 			return dy;
@@ -107,6 +116,7 @@ public class Bola implements Serializable{
 	public void setDx(int dir) {
 		dx=dir;
 	}
+	
 	public void reactToCollision(Bloque bloque) {
 		int anterior=getDy();
 		boolean derecha=shape.getMaxX()>bloque.getX()+bloque.getWidth();

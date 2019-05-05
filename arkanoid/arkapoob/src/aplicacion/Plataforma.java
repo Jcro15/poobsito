@@ -1,5 +1,5 @@
 package aplicacion;
-import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
 import java.awt.Color;
 import java.io.*;
@@ -11,27 +11,29 @@ import java.io.*;
  */
 
 public class Plataforma implements Serializable {
-	private int xPosition;
-	private int yPosition;
+	private double xPosition;
+	private double yPosition;
 	private int height;
 	private int width;
-	private int velocity;
-	private Rectangle shape;
+	private double velocity;
+	private Rectangle2D.Double shape;
 	private Color color;
 	private Arkapoob tablero;
 	
+	public static final int MAXW=200;
+	public static final int MINW=80;
 	/**
 	 * construye un objeto de tipo plataforma en una posicion dada con un ancho y alto por defecto
 	 * @param x la posicion x inicial de la plataforma
 	 * @param y la posicion y inicial de la plataforma
 	 */
-	public Plataforma(int x,int y,Arkapoob tablero) {
+	public Plataforma(double x,double y,Arkapoob tablero) {
 		xPosition=x;
 		yPosition=y;
 		height=10;
 		width=120;
-		shape=new Rectangle(x,y,width,height);
-		velocity=1;
+		shape=new Rectangle2D.Double(xPosition, yPosition, width, height);
+		velocity=0.6;
 		this.tablero=tablero;
 	}
 	
@@ -39,7 +41,7 @@ public class Plataforma implements Serializable {
 	 * retorna la posicion x que tiene la plataforma en el tablero como un entero
 	 * @return la posicion x que tiene la plataforma en el tablero
 	 */
-	public int getX() {
+	public double getX() {
 		return xPosition;
 	}
 	
@@ -47,7 +49,7 @@ public class Plataforma implements Serializable {
 	 * retorna la posicion y que tiene la plataforma en el tablero como un entero
 	 * @return la posicion y que tiene la plataforma en el tablero
 	 */
-	public int getY() {
+	public double getY() {
 		return yPosition;
 	}
 	
@@ -55,7 +57,7 @@ public class Plataforma implements Serializable {
 	 * retorna el un objeto Rectangle que representa geometricamente a la plataforma
 	 * @return el rectangulo que representa a la plataforma
 	 */
-	public Rectangle getShape() {
+	public Rectangle2D.Double getShape() {
 		return shape;
 	}
 	
@@ -81,7 +83,7 @@ public class Plataforma implements Serializable {
 	public void moveRight() {
 		if(canMoveRight()) {
 			xPosition+=velocity;
-			shape.setLocation(xPosition, yPosition);
+			shape=new Rectangle2D.Double(xPosition, yPosition, width, height);
 		}
 	}
 	
@@ -91,7 +93,8 @@ public class Plataforma implements Serializable {
 	public void moveLeft() {
 		if(canMoveLeft()) {
 		xPosition-=velocity;
-		shape.setLocation(xPosition, yPosition);
+		shape=new Rectangle2D.Double(xPosition, yPosition, width, height);
+		
 		}
 	}
 	
@@ -121,9 +124,21 @@ public class Plataforma implements Serializable {
 		this.color=color;
 	}
 	private boolean canMoveLeft() {
-		return xPosition>=1;		
+		return xPosition>=velocity;		
 	}
 	private boolean canMoveRight(){
-		return xPosition+width+1<tablero.getMaxX();
+		return xPosition+width+velocity<tablero.getMaxX();
+	}
+	public void aumentarTamaño() {
+		if(width<MAXW) {
+			width+=40;
+			shape=new Rectangle2D.Double(xPosition, yPosition, width, height);
+		}
+	}
+	public void disminuirTamaño() {
+		if(width>MINW) {
+			width-=40;
+			shape=new Rectangle2D.Double(xPosition, yPosition, width, height);
+		}
 	}
 }
