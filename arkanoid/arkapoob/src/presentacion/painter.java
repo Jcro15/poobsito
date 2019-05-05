@@ -178,7 +178,7 @@ public class painter extends JPanelB {
 			g2.fill(r); //dibuja bloques
 		}
 		for(Poder pp:poderes) {
-			g2.fill(pp.getShape());
+			pp.putImg(g2);
 		}
 	}
 	
