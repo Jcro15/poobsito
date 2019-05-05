@@ -71,7 +71,7 @@ public class painter extends JPanelB {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				movePlat();
-				game.moverBola();
+				game.moverElementos();
 				repaint();
 				//paint(getGraphics());
 				
@@ -244,7 +244,7 @@ public class painter extends JPanelB {
 	public void jugar(){
 		elementosTimer.start();
 		juegoTimer.start();
-		game.moverBola();
+		game.moverElementos();
 		repaint();
 	}
 	

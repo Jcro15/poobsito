@@ -14,18 +14,20 @@ public class Arkapoob implements Serializable{
 	private String ultimoBloqueEliminado;
 	private static transient ArkapoobDAO arkaDAO;
 	private static final long serialVersionUID = 8799656478674716638L;
+	private ArrayList<Poder> poderes;
 	
 	public Arkapoob(int maxX ,int maxY)  {
 		
 		this.maxX=maxX;
 		this.maxY=maxY;
+		poderes=new ArrayList<Poder>();
 		bloques=new ArrayList<Bloque>();
 		jugador=new Jugador(this);
 		ultimoBloqueEliminado="";
-		bola=new Bola(jugador.getPlatform().getX()+jugador.getPlatform().getWidth()/2 , jugador.getPlatform().getY()-10);
+		setBall();
 		for (int j =224;j<225;j+=25) {
 			for (int i =0;i<maxX;i+=45) {
-				bloques.add(new BloqueCamaleon(this,i,j));
+				bloques.add(new BloqueResistente(this,i,j));
 			}
 		}
 		arkaDAO=new ArkapoobDAO();
@@ -66,9 +68,7 @@ public class Arkapoob implements Serializable{
 	/**
 	 * detecta si la bola se colisiona con algun objeto y si es asi cambia su direccion, finalmente mueve la bola
 	 */
-	public void moverBola() {
-		//System.out.println(ultimoBloqueEliminado);
-		bolaEnBorde();
+	public void moverElementos() {
 		colisionBolaBloques();
 		colisionJugador();
 		bola.move();
@@ -107,23 +107,11 @@ public class Arkapoob implements Serializable{
 			b.reactToColission(bola);
 		}
 	}
-		
-	/**
-	 * detecta si la bola esta en alguno de los bordes y cambia su direccion si se trata del borde superior o alguno de los laterales
-	 * si es el borde inferior resta una vida y reinicia la bola 
-	 */
-	private void bolaEnBorde() {
-		if(bola.getX()>maxX||bola.getX()<0) {
-			bola.setDx(bola.getDx()*-1);
-		}
-		else if(bola.getY()<0) {
-			bola.setDy(bola.ABAJO);
-		}
-		else if(bola.getY()>maxY) {
-			bola=new Bola(jugador.getPlatform().getX()+jugador.getPlatform().getWidth()/2 , jugador.getPlatform().getY()-10);
-			jugador.setVidas(jugador.getLives()-1);
-		}
+	public void setBall() {
+		bola=new Bola(jugador.getPlatform().getX()+jugador.getPlatform().getWidth()/2 , jugador.getPlatform().getY()-10,this);
 	}
+		
+
 	/**
 	 * retorna el puntaje del jugador como un entero
 	 * @return retorna el puntaje del jugador
@@ -165,15 +153,20 @@ public class Arkapoob implements Serializable{
 	public void sumarVidaJugador() {
 		jugador.setVidas(jugador.getLives()+1);
 	}
+	public void restarVidaJugador() {
+		jugador.setVidas(jugador.getLives()-1);
+	}
 	public void setUltimoBloqueEliminado(String ultimo) {
 		ultimoBloqueEliminado=ultimo;
 	}
 	public String getUltimoBloqueEliminado() {
 		return ultimoBloqueEliminado;
 	}
-	public void añadirBloque(Bloque o) {
-		System.out.println("hola");
-		bloques.add(o);
+	public void añadirBloque(Bloque b) {
+		bloques.add(b);
+	}
+	public void añadirPoder(Poder p) {
+		poderes.add(p);
 	}
 	public void salvar(File file) throws ArkapoobException{
 		arkaDAO.salvar(this,file);

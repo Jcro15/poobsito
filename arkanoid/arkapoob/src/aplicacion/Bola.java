@@ -15,6 +15,7 @@ public class Bola implements Serializable{
 	private int dy;
 	private int damage;
 	private Ellipse2D.Double shape;
+	private Arkapoob tablero;
 	
 	
 	public static final int DERECHA=1;
@@ -27,13 +28,14 @@ public class Bola implements Serializable{
 	 * @param x la coordenada x donde se creara la bola
 	 * @param y la coordenada y donde se creara la bola
 	 */
-	public Bola(int x ,int y) {
+	public Bola(int x ,int y,Arkapoob tablero) {
 		xPosition=x;
 		yPosition=y;
 		shape=new Ellipse2D.Double(xPosition,yPosition,10,10);
 		dx=1;
 		dy=-1;
 		damage=1;
+		this.tablero=tablero;
 	}
 	/**
 	 * retorna la figura que representa la bola como un objeto de tipo Ellipse2D.Double
@@ -66,7 +68,22 @@ public class Bola implements Serializable{
 	/**
 	 * mueve la bola una unidad en direccion dx y una unidad en direccion dy
 	 */
+	
+	
+	private void testBorder() {
+		if(getX()>tablero.getMaxX()||getX()<0) {
+			setDx(getDx()*-1);
+		}
+		else if(getY()<0) {
+			setDy(Bola.ABAJO);
+		}
+		else if(getY()>tablero.getMaxY()) {
+			tablero.setBall();
+			tablero.restarVidaJugador();
+		}
+	}
 	public void move() {
+		testBorder();
 		xPosition+=dx;
 		yPosition+=dy;
 		shape=new Ellipse2D.Double(xPosition,yPosition,10,10);
@@ -91,11 +108,17 @@ public class Bola implements Serializable{
 		dx=dir;
 	}
 	public void reactToCollision(Bloque bloque) {
+		int anterior=getDy();
+		boolean derecha=shape.getMaxX()>bloque.getX()+bloque.getWidth();
+		boolean abajo=shape.getMaxY()>bloque.getY()+bloque.getHeight();
 		if(bloque.verticalCollision(getShape())) {
-			setDy(getDy()*-1);
+			setDy(abajo?Bola.ABAJO:Bola.ARRIBA);
+			if(getDy()==anterior) {
+				setDx(derecha? Bola.DERECHA:Bola.IZQUIERDA);
+			} 
 		}
 		else{
-			setDx(getDx()*-1);
+			setDx(derecha?Bola.DERECHA:Bola.IZQUIERDA);
 		}
 	}
 }

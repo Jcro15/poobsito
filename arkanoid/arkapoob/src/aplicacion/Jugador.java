@@ -20,7 +20,7 @@ public class Jugador implements Serializable{
 	public Jugador(Arkapoob tablero) {
 		lives=3;
 		score=0;
-		platform=new Plataforma(202, 640,tablero);
+		platform=new Plataforma(202, 620,tablero);
 	}
 	/**
 	 * retorna el numero de vida del jugador
