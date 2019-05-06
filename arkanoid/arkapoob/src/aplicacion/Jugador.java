@@ -68,6 +68,9 @@ public class Jugador implements Serializable{
 	public void setVidas(int vidas) {
 		lives=vidas;
 	}
+	public void setPlataforma(Plataforma plataforma) {
+		platform=plataforma;
+	}
 	/**
 	 * ordena a la plataforma a verificar si existe una colision  entre la parte derecha de la barra y
 	 * la figura entrante
