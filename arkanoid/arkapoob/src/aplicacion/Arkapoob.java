@@ -90,7 +90,7 @@ public class Arkapoob implements Serializable{
 	private void colisionJugadorPoderes() {
 		for(Poder p:poderes) {
 			if (jugador.collision(p.getShape())){
-				p.reactToCollision(jugador.getPlatform());
+				p.reactToCollision(jugador);
 				break;
 			}
 		}

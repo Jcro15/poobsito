@@ -10,8 +10,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,11 +23,16 @@ import javax.swing.Timer;
 import javax.swing.ImageIcon;
 
 import java.awt.Rectangle;
+import java.awt.TexturePaint;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+
+
+
 
 import aplicacion.*;
 
@@ -178,7 +186,18 @@ public class painter extends JPanelB {
 			g2.fill(r); //dibuja bloques
 		}
 		for(Poder pp:poderes) {
-			pp.putImg(g2);
+			BufferedImage img = null;
+			URL ruta=getClass().getResource(pp.getImg());
+			try{
+				img=ImageIO.read(ruta);
+			}
+			catch(IOException e){
+				e.printStackTrace();
+			}
+			Rectangle2D r1=new Rectangle2D.Double(pp.getX(),pp.getY(),pp.getShape().getWidth(),pp.getShape().getHeight());
+			TexturePaint tp =new TexturePaint(img,r1);
+			g2.setPaint(tp);
+			g2.fill(pp.getShape());
 		}
 	}
 	
