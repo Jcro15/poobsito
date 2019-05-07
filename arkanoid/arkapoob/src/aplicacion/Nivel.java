@@ -1,6 +1,7 @@
 package aplicacion;
 import java.util.*;
-public class Nivel {
+import java.io.*;
+public class Nivel implements Serializable{
 	int maxX;
 	int maxY;
 	public Nivel(int maxX,int maxY) {
@@ -12,7 +13,7 @@ public class Nivel {
 		for (int j =100;j<225;j+=25) {
 			for (int i =0;i<maxX;i+=45) {
 				Random random =new Random();
-				System.out.println("sss");
+				
 				Bloque b =generarBloque(i,j,random.nextInt(100),tablero);
 				
 				if(b!=null) {

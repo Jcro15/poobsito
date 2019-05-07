@@ -9,14 +9,18 @@ public class PoderAumentarTamaño extends Poder {
 		super(tablero, xPosition, yPosition);
 		// TODO Auto-generated constructor stub
 		
-		Image imagen= new ImageIcon(getClass().getResource("/resources/suma.png")).getImage();
-		this.img=imagen;
+		
+		
 	}
 
 
 	public void reactToCollision(Jugador jugador) {
 		jugador.getPlatform().aumentarTamaño();
 		tablero.removerPoder(this);
+	}
+	public Image getImage(){
+		Image img = new ImageIcon(getClass().getResource("/resources/suma.png")).getImage();
+		return img;
 	}
 	
 	

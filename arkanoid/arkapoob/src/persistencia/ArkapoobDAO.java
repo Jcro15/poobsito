@@ -16,6 +16,7 @@ public class ArkapoobDAO{
 			out.close();
 		}
 		catch(IOException e){
+			System.out.println(e.getMessage());
 			throw new ArkapoobException("Ocurrio un error al salvar " + file.getName());
 		}
 	}

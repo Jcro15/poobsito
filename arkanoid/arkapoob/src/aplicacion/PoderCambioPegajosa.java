@@ -7,9 +7,7 @@ public class PoderCambioPegajosa extends Poder {
 		super(tablero, xPosition, yPosition);
 		// TODO Auto-generated constructor stub
 	
-		Image imagen= new ImageIcon(getClass().getResource("/resources/pegajosa.png")).getImage();
-		
-		this.img=imagen;
+	
 	}
 
 	@Override
@@ -17,6 +15,11 @@ public class PoderCambioPegajosa extends Poder {
 		Plataforma p=jugador.getPlatform();
 		jugador.setPlataforma(new PlataformaPegajosa(p.getX(),p.getY(), tablero,p.getHeight(),p.getWidth()));
 		tablero.removerPoder(this);
+	}
+	
+	public Image getImage(){
+		Image img = new ImageIcon(getClass().getResource("/resources/pegajosa.png")).getImage();
+		return img;
 	}
 
 }
