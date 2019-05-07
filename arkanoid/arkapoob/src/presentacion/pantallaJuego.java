@@ -200,4 +200,13 @@ public class pantallaJuego  extends JFrame{
 		play();
 		
 	}
+	public String getName(){
+		return name;
+	}
+	public void setGame(File file) throws ArkapoobException {
+		pin.abrir(file);
+	}
+	public painter getPainter(){
+		return pin;
+	}
 }

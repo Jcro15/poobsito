@@ -276,6 +276,8 @@ public class painter extends JPanelB {
 			
 		}
 		game.getJugador().getPlatform().setColor(colorP);
+		game.getJugador().getPlatform().setColorString(pantallaJ.getColorPlataforma());
+		
 		return colorP;
 	}
 	

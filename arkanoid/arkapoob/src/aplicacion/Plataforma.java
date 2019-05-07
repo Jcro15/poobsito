@@ -18,6 +18,7 @@ public class Plataforma implements Serializable {
 	private double velocity;
 	private Rectangle2D.Double shape;
 	private Color color;
+	private String colorString;
 	private Arkapoob tablero;
 	
 	public static final int MAXW=200;
@@ -122,6 +123,15 @@ public class Plataforma implements Serializable {
 	 */
 	public void setColor(Color color){
 		this.color=color;
+	}
+	
+	public void setColorString(String colorString){
+		this.colorString=colorString;
+		
+	}
+	
+	public String getColorString(){
+		return colorString;
 	}
 	private boolean canMoveLeft() {
 		return xPosition>=velocity;		

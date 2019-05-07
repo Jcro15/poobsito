@@ -2,6 +2,7 @@ package presentacion;
 
 
 import javax.swing.*;
+import javax.swing.filechooser.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.event.*;
@@ -9,6 +10,8 @@ import javax.swing.border.*;
 import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.*;
+import persistencia.*;
+import aplicacion.*;
 
 public class arkapoobGUI extends JFrame{
 	private Container contenedor;
@@ -18,11 +21,14 @@ public class arkapoobGUI extends JFrame{
 	private JLabel logo;
 	private myButton jugarBoton;
 	private myButton abrirBoton;
+	private JFileChooser chooser;
+	private static transient ArkapoobDAO arkaDAO;
 	
 	public arkapoobGUI(){
 		super("Arkapoob");
 		setResizable(false);
 		contenedor = getContentPane();
+		
 		prepareElementos();
 		prepareAcciones();
 	}
@@ -45,6 +51,7 @@ public class arkapoobGUI extends JFrame{
 	}
 	
 	public void prepareElementosPantalla(){
+		chooser=new JFileChooser();
 		setIconImage(new ImageIcon(getClass().getResource("/resources/icono.png")).getImage());
 		
 		panelPantalla = new JPanelB();
@@ -121,11 +128,28 @@ public class arkapoobGUI extends JFrame{
 	}
 	
 	public void abra(){
-		JFileChooser file=new JFileChooser();
-		int f=file.showOpenDialog(this);
-		if (f==JFileChooser.APPROVE_OPTION){
-			File archivo=file.getSelectedFile();
-			opcionEnConstruccion("No se puede abrir el archivo "+archivo.getName());
+		chooser.setFileFilter(new FileNameExtensionFilter("archivos .dat", "dat"));
+		int opc =chooser.showOpenDialog(this);
+		arkaDAO=new ArkapoobDAO();
+		try{
+			if (opc==JFileChooser.APPROVE_OPTION){
+				File file =chooser.getSelectedFile();
+				Arkapoob game = arkaDAO.abrir(file);
+				pantallaJuego pj= new pantallaJuego(game.getJugador().getName(),game.getJugador().getPlatform().getColorString());
+				
+				
+				pj.setGame(file);
+				
+				pj.getPainter().jugar();
+				pj.accionPausa();
+				pj.actualiceDatos();
+				
+				pj.setVisible(true);
+				
+			}
+		}
+		catch (ArkapoobException e){
+			JOptionPane.showMessageDialog(this,e.getMessage());
 		}
 	}
 	
