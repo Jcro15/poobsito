@@ -9,13 +9,15 @@ import java.net.URL;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
 public abstract class Poder implements Serializable {
 	
 	private int xPosition;
 	private int yPosition;
 	private Ellipse2D.Double shape;
-	protected String img;
+	protected Image img;
 	protected Arkapoob tablero;
 	public Poder(Arkapoob tablero,int xPosition,int yPosition) {
 		this.tablero=tablero;
@@ -46,7 +48,7 @@ public abstract class Poder implements Serializable {
 	public boolean testBorder() {
 		return yPosition>tablero.getMaxY(); 
 	}
-	public String getImg() {
+	public Image getImage() {
 		
 		return img;
 	}

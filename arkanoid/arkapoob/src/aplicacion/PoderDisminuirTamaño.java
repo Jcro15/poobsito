@@ -1,12 +1,15 @@
 package aplicacion;
-
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
 public class PoderDisminuirTamaño extends Poder {
 
 	public PoderDisminuirTamaño(Arkapoob tablero, int xPosition, int yPosition) {
 		super(tablero, xPosition, yPosition);
 		// TODO Auto-generated constructor stub
-		this.img="/resources/resta.png";
+		
+		Image imagen= new ImageIcon(getClass().getResource("/resources/resta.png")).getImage();
+		this.img=imagen;
 	}
 
 	public void reactToCollision(Jugador jugador) {

@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
+import java.awt.Image;
 
 import java.awt.Rectangle;
 import java.awt.TexturePaint;
@@ -200,18 +201,7 @@ public class painter extends JPanelB {
 			g2.fill(r); //dibuja bloques
 		}
 		for(Poder pp:poderes) {
-			BufferedImage img = null;
-			URL ruta=getClass().getResource(pp.getImg());
-			try{
-				img=ImageIO.read(ruta);
-			}
-			catch(IOException e){
-				e.printStackTrace();
-			}
-			Rectangle2D r1=new Rectangle2D.Double(pp.getX(),pp.getY(),pp.getShape().getWidth(),pp.getShape().getHeight());
-			TexturePaint tp =new TexturePaint(img,r1);
-			g2.setPaint(tp);
-			g2.fill(pp.getShape());
+			g2.drawImage(pp.getImage(),(int)pp.getX(), (int)pp.getY(),this);
 		}
 	}
 	

@@ -1,11 +1,15 @@
 package aplicacion;
-
+import javax.swing.ImageIcon;
+import java.awt.Image;
 public class PoderCambioPegajosa extends Poder {
 
 	public PoderCambioPegajosa(Arkapoob tablero, int xPosition, int yPosition) {
 		super(tablero, xPosition, yPosition);
 		// TODO Auto-generated constructor stub
-		this.img="/resources/pegajosa.png";
+	
+		Image imagen= new ImageIcon(getClass().getResource("/resources/pegajosa.png")).getImage();
+		
+		this.img=imagen;
 	}
 
 	@Override
