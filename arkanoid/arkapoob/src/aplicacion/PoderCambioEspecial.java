@@ -10,10 +10,8 @@ public class PoderCambioEspecial extends Poder {
 	@Override
 	public void reactToCollision(Jugador jugador) {
 		Plataforma p=jugador.getPlatform();
-		jugador.setPlataforma(new PlataformaEspecial(p.getX(),p.getY(), tablero));
+		jugador.setPlataforma(new PlataformaEspecial(p.getX(),p.getY(), tablero,p.getHeight(),p.getWidth()));
 		tablero.removerPoder(this);
-
-
 	}
 
 }

@@ -24,6 +24,7 @@ public class Bola implements Serializable{
 	public static final int IZQUIERDA=-1;
 	public static final int ARRIBA=-1;
 	public static final int ABAJO=1;
+	public static final int V0=0;
 	
 	/**
 	 * construye una nueva bola en las coordenadas x ,y
@@ -116,6 +117,12 @@ public class Bola implements Serializable{
 	public void setDx(int dir) {
 		dx=dir;
 	}
+	public double getVelocity() {
+		return velocity;
+	}
+	public void setVelocity(double nv) {
+		velocity=nv;
+	}
 	
 	public void reactToCollision(Bloque bloque) {
 		int anterior=getDy();
@@ -129,6 +136,15 @@ public class Bola implements Serializable{
 		}
 		else{
 			setDx(derecha?Bola.DERECHA:Bola.IZQUIERDA);
+		}
+	}
+	public void reactToCollision(Plataforma plataforma) {
+		setDy(Bola.ARRIBA);
+		if(plataforma.collisionRight(getShape())) {
+			setDx(Bola.DERECHA);
+		}
+		else {
+			setDx(Bola.IZQUIERDA);
 		}
 	}
 }

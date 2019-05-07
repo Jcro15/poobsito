@@ -100,13 +100,7 @@ public class Arkapoob implements Serializable{
 	 */
 	private void colisionJugador() {
 		if(jugador.collision(bola.getShape())) {
-			bola.setDy(Bola.ARRIBA);
-			if(jugador.collisionRight(bola.getShape())) {
-				bola.setDx(Bola.DERECHA);
-			}
-			else {
-				bola.setDx(Bola.IZQUIERDA);
-			}
+			jugador.reactToCollision(bola);
 		}
 	}
 	public Bloque colisionBloques(RectangularShape inShape) {
@@ -198,5 +192,8 @@ public class Arkapoob implements Serializable{
 	}
 	public void removerPoder(Poder poder) {
 		poderes.remove(poder);
+	}
+	public void usarHabilidadJugador() {
+		jugador.usarHabilidadPlataforma();
 	}
 }

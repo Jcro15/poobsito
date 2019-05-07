@@ -15,7 +15,8 @@ public class Plataforma implements Serializable {
 	private double yPosition;
 	private int height;
 	private int width;
-	private double velocity;
+	protected int uses;
+	protected double velocity;
 	private Rectangle2D.Double shape;
 	private Color color;
 	private String colorString;
@@ -33,9 +34,16 @@ public class Plataforma implements Serializable {
 		yPosition=y;
 		height=10;
 		width=120;
+		uses=0;
 		shape=new Rectangle2D.Double(xPosition, yPosition, width, height);
 		velocity=0.6;
 		this.tablero=tablero;
+	}
+	public Plataforma(double x,double y,Arkapoob tablero,int height,int width) {
+		this(x, y, tablero);
+		this.height=height;
+		this.width=width;
+		shape=new Rectangle2D.Double(xPosition, yPosition, width, height);
 	}
 	
 	/**
@@ -98,6 +106,9 @@ public class Plataforma implements Serializable {
 		
 		}
 	}
+	public int getUses() {
+		return uses;
+	}
 	
 	/**
 	 * detecta si hay una colision entre el objeto entrante y la plataforma
@@ -133,10 +144,10 @@ public class Plataforma implements Serializable {
 	public String getColorString(){
 		return colorString;
 	}
-	private boolean canMoveLeft() {
+	protected boolean canMoveLeft() {
 		return xPosition>=velocity;		
 	}
-	private boolean canMoveRight(){
+	protected boolean canMoveRight(){
 		return xPosition+width+velocity<tablero.getMaxX();
 	}
 	public void aumentarTamaño() {
@@ -150,5 +161,11 @@ public class Plataforma implements Serializable {
 			width-=40;
 			shape=new Rectangle2D.Double(xPosition, yPosition, width, height);
 		}
+	}
+	public void usarHabilidad() {
+	}
+
+	public void reactToCollision(Bola bola) {
+		bola.reactToCollision(this);
 	}
 }

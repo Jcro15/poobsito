@@ -13,6 +13,7 @@ public class Jugador implements Serializable{
 	private int score;
 	private String name;
 	private Plataforma platform;
+	private Arkapoob tablero;
 	/**
 	 * Construye un nuevo objeto de tipo jugador con un valor por defecto de vidas, de puntaje y una plataforma
 	 * en una posicion por defecto
@@ -21,6 +22,7 @@ public class Jugador implements Serializable{
 		lives=3;
 		score=0;
 		platform=new Plataforma(202, 620,tablero);
+		this.tablero=tablero;
 	}
 	/**
 	 * retorna el numero de vida del jugador
@@ -77,8 +79,8 @@ public class Jugador implements Serializable{
 	 * @param inShape la figura entrante
 	 * @return true si existe colision;false si no
 	 */
-	public boolean collisionRight(RectangularShape inShape) {
-		return platform.collisionRight(inShape);
+	public void reactToCollision(Bola bola) {
+		platform.reactToCollision(bola);
 	}
 	/**
 	 * ordena a la plataforma a verificar si existe una colision entre esta y un objeto entrante
@@ -102,6 +104,10 @@ public class Jugador implements Serializable{
 	public void setName(String name){
 		this.name = name;
 	}
-	
-	
+	public void usarHabilidadPlataforma() {
+		platform.usarHabilidad();
+		if(platform.getUses()==0) {
+			platform=new Plataforma(platform.getX(),platform.getY(),tablero,platform.getHeight(),platform.getWidth());
+		}
+	}
 }

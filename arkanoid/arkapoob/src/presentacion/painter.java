@@ -161,7 +161,7 @@ public class painter extends JPanelB {
 				
 				if ( e.getKeyCode() == KeyEvent.VK_SPACE) {
 					
-					
+					game.usarHabilidadJugador();
 					
 				}
 				
