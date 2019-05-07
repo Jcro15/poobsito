@@ -128,10 +128,10 @@ public class Bloque implements Serializable{
 	}
 	public void reactToColission(Bola bola) {
 		reduceResistance(bola.getDamage());
-		tablero.setUltimoBloqueEliminado(this.getClass().getSimpleName());
 		bola.reactToCollision(this);
 		if (destroyed()) {
 			tablero.remove(this);
+			tablero.setUltimoBloqueEliminado(this.getClass().getSimpleName());
 			tablero.sumarPuntosJugador(getPuntaje());
 		}
 	}

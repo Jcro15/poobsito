@@ -15,21 +15,25 @@ public class Arkapoob implements Serializable{
 	private static transient ArkapoobDAO arkaDAO;
 	private static final long serialVersionUID = 8799656478674716638L;
 	private ArrayList<Poder> poderes;
+	private int nivel;
+	private Nivel generador;
 	
 	public Arkapoob(int maxX ,int maxY)  {
-		
+		nivel=1;
 		this.maxX=maxX;
 		this.maxY=maxY;
+		generador=new Nivel(maxX,maxY);
 		poderes=new ArrayList<Poder>();
 		bloques=new ArrayList<Bloque>();
 		jugador=new Jugador(this);
 		ultimoBloqueEliminado="";
 		setBall();
-		for (int j =224;j<225;j+=25) {
-			for (int i =0;i<maxX;i+=45) {
-				bloques.add(new BloqueSorpresa(this,i,j));
-			}
-		}
+		bloques= generador.generarNivel(this);
+		//for (int j =100;j<225;j+=25) {
+		//	for (int i =0;i<maxX;i+=45) {
+		//		bloques.add(new BloqueSorpresa(this,i,j));
+		//	}
+		//}
 		arkaDAO=new ArkapoobDAO();
 	}
 	/**
@@ -48,7 +52,15 @@ public class Arkapoob implements Serializable{
 		for(Bloque b:bloques) {
 			if (b.isDestroyable())bloquesRestantes+=1;
 		}
-		return bloquesRestantes==0;
+		if(bloquesRestantes==0&&nivel<5) {
+			generarNuevoNivel();
+		}
+		return bloquesRestantes==0&&nivel==5;
+	}
+	public void generarNuevoNivel() {
+		setBall();
+		bloques= generador.generarNivel(this);
+		nivel+=1;
 	}
 	/**
 	 * retorna la bola que se esta usando en el juego
