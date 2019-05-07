@@ -17,11 +17,13 @@ public class Arkapoob implements Serializable{
 	private ArrayList<Poder> poderes;
 	private int nivel;
 	private Nivel generador;
+	private int jugadores;
 	
-	public Arkapoob(int maxX ,int maxY)  {
+	public Arkapoob(int jugadores,int maxX ,int maxY)  {
 		nivel=1;
 		this.maxX=maxX;
 		this.maxY=maxY;
+		this.jugadores=jugadores;
 		generador=new Nivel(maxX,maxY);
 		poderes=new ArrayList<Poder>();
 		bloques=new ArrayList<Bloque>();
@@ -207,5 +209,8 @@ public class Arkapoob implements Serializable{
 	}
 	public void usarHabilidadJugador() {
 		jugador.usarHabilidadPlataforma();
+	}
+	public int getJugadores(){
+		return jugadores;
 	}
 }

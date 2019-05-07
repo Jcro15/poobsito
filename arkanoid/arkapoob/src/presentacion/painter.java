@@ -48,15 +48,17 @@ public class painter extends JPanelB {
 	private Timer juegoTimer;
 	private boolean p1Izq, p1Der = false;
 	private Color colorBola, colorPlata;
+	private int jugadores;
 	
 	
-	public painter(int w, int h,pantallaJuego pantallaJ){
+	public painter(int jugadores,int w, int h,pantallaJuego pantallaJ){
 		this.pantallaJ=pantallaJ;
+		this.jugadores=jugadores;
 		setBackground(new ImageIcon(getClass().getResource("/resources/fondo1.png")));
 		setPreferredSize(new Dimension(w, h));
 		setBackground(Color.BLACK);
 		play = true;
-		game=new Arkapoob(w,h);
+		game=new Arkapoob(jugadores,w,h);
 		setFocusable(true);
 		prepareAcciones();
 		
@@ -266,7 +268,7 @@ public class painter extends JPanelB {
 			
 		}
 		game.getJugador().getPlatform().setColor(colorP);
-		game.getJugador().getPlatform().setColorString(pantallaJ.getColorPlataforma());
+		
 		
 		return colorP;
 	}
@@ -280,6 +282,10 @@ public class painter extends JPanelB {
 	
 	public void salvar(File file) throws ArkapoobException{
 		game.salvar(file);
+		
+	}
+	public void updColor(String color){
+		game.getJugador().getPlatform().setColorString(color);
 		
 	}
 	

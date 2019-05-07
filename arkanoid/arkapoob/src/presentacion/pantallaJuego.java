@@ -19,25 +19,47 @@ public class pantallaJuego  extends JFrame{
 	private boolean pausa;
 	private JLabel score;
 	private JLabel vidas;
+	private JLabel score2;
+	private JLabel vidas2;
 	private String name;
 	private String colorPlata;
+	private String name2;
+	private String colorPlata2;
 	private JMenuBar mB;
 	private JMenu menu;
 	private JMenuItem salveComo;
     private JMenuItem abra;
 	private JFileChooser chooser;
+	private int jugadores;
 	
-	public pantallaJuego(String name, String colorPlata){
+	public pantallaJuego(int jugadores, String name, String colorPlata){
 		super("Arkapoob");
 		this.name = name;
+		this.jugadores=jugadores;
 		setResizable(false);
 		pausa=false;
 		prepareElementos();
 		prepareAcciones();
 		this.colorPlata=colorPlata;
 		pin.updName(name);
+		pin.updColor(colorPlata);
 	}
 	
+	public pantallaJuego(int jugadores, String name, String colorPlata,String name2, String colorPlata2){
+		super("Arkapoob");
+		this.name = name;
+		this.name2 = name2;
+		this.jugadores=jugadores;
+		setResizable(false);
+		pausa=false;
+		prepareElementos();
+		prepareAcciones();
+		this.colorPlata=colorPlata;
+		this.colorPlata2=colorPlata2;
+		//pin.updName(name);
+		//pin.updColor(colorPlata);
+		
+	}
 	public void prepareElementos() {
 		ajusteFrame();
 		preparePantalla();
@@ -69,7 +91,7 @@ public class pantallaJuego  extends JFrame{
 		setIconImage(new ImageIcon(getClass().getResource("/resources/icono.png")).getImage());
 		container = getContentPane();
 		opciones = new JPanelB();
-		opciones.setLayout(new GridLayout(3,1));
+		opciones.setLayout(new GridLayout(5,1));
 		opciones.setPreferredSize(new Dimension(100, 700));
 		opciones.setBackground(new ImageIcon(getClass().getResource("/resources/fondo.png")));
 		container.add(opciones,BorderLayout.EAST);
@@ -79,14 +101,28 @@ public class pantallaJuego  extends JFrame{
 		pausaBoton.setTransparent();
 		opciones.add(pausaBoton);
 		
-		pin = new painter(485,665,this);
+		pin = new painter(jugadores,485,665,this);
 		container.add(pin, BorderLayout.CENTER);
 		pin.setFocusable(true);
+		if(jugadores==1){
+			score=new JLabel("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>",SwingConstants.CENTER);
+			vidas=new JLabel("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>",SwingConstants.CENTER);
+			opciones.add(score);
+			opciones.add(vidas);
+			opciones.add(new JLabel());
+			opciones.add(new JLabel());
+		}
+		else{
+			score=new JLabel("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>",SwingConstants.CENTER);
+			vidas=new JLabel("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>",SwingConstants.CENTER);
+			score2=new JLabel("<html>"+name2+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>",SwingConstants.CENTER);
+			vidas2=new JLabel("<html>"+name2+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>",SwingConstants.CENTER);
+			opciones.add(score);
+			opciones.add(vidas);
+			opciones.add(score2);
+			opciones.add(vidas2);
+		}
 		
-		score=new JLabel("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>",SwingConstants.CENTER);
-		vidas=new JLabel("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>",SwingConstants.CENTER);
-		opciones.add(score);
-		opciones.add(vidas);
 		
 		//pin.requestFocusInWindow();
 	}
@@ -188,8 +224,17 @@ public class pantallaJuego  extends JFrame{
 	}
 	
 	public void actualiceDatos(){
-		score.setText("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>");
-		vidas.setText("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>");
+		if(jugadores==1){
+			score.setText("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>");
+			vidas.setText("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>");
+		}
+		else{
+			score.setText("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>");
+			vidas.setText("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>");
+			score2.setText("<html>"+name2+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>");
+			vidas2.setText("<html>"+name2+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>");
+			
+		}
 	}
 	
 	public String getColorPlataforma(){
