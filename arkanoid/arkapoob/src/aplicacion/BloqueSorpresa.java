@@ -13,7 +13,7 @@ public class BloqueSorpresa extends Bloque {
 	}
 	public void reactToColission(Bola bola){
 		Random random = new Random();
-		int num = random.nextInt(5);
+		int num = random.nextInt(6);
 		if (num==0) {
 			tablero.añadirPoder(new PoderAumentarTamaño(tablero,xPosition,yPosition));
 		}
@@ -28,6 +28,9 @@ public class BloqueSorpresa extends Bloque {
 		}
 		else if(num==4) {
 			tablero.añadirPoder(new PoderCambioEspecial(tablero,xPosition,yPosition));
+		}
+		else if(num==5) {
+			tablero.añadirPoder(new PoderCambioPegajosa(tablero,xPosition,yPosition));
 		}
 		super.reactToColission(bola);
 	}

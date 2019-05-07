@@ -5,6 +5,7 @@ public class PoderCambioPegajosa extends Poder {
 	public PoderCambioPegajosa(Arkapoob tablero, int xPosition, int yPosition) {
 		super(tablero, xPosition, yPosition);
 		// TODO Auto-generated constructor stub
+		this.img="/resources/pegajosa.png";
 	}
 
 	@Override
