@@ -224,7 +224,7 @@ public class painter extends JPanelB {
 			public void keyReleased(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {
 				
-				if ( e.getKeyCode() == KeyEvent.VK_C) {
+				if ( e.getKeyCode() == KeyEvent.VK_M) {
 					
 					game.usarHabilidadJugador(1);
 					
