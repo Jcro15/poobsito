@@ -18,10 +18,10 @@ public class Jugador implements Serializable{
 	 * Construye un nuevo objeto de tipo jugador con un valor por defecto de vidas, de puntaje y una plataforma
 	 * en una posicion por defecto
 	 */
-	public Jugador(Arkapoob tablero) {
+	public Jugador(Arkapoob tablero,int x,int y) {
 		lives=3;
 		score=0;
-		platform=new Plataforma(202, 620,tablero);
+		platform=new Plataforma(x,y,tablero);//(202, 620,tablero);
 		this.tablero=tablero;
 	}
 	/**

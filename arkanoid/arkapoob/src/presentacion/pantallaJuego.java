@@ -105,18 +105,18 @@ public class pantallaJuego  extends JFrame{
 		container.add(pin, BorderLayout.CENTER);
 		pin.setFocusable(true);
 		if(jugadores==1){
-			score=new JLabel("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>",SwingConstants.CENTER);
-			vidas=new JLabel("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>",SwingConstants.CENTER);
+			score=new JLabel("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador(0).getScore())+"</H1></html>",SwingConstants.CENTER);
+			vidas=new JLabel("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador(0).getLives())+"</H1></html>",SwingConstants.CENTER);
 			opciones.add(score);
 			opciones.add(vidas);
 			opciones.add(new JLabel());
 			opciones.add(new JLabel());
 		}
 		else{
-			score=new JLabel("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>",SwingConstants.CENTER);
-			vidas=new JLabel("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>",SwingConstants.CENTER);
-			score2=new JLabel("<html>"+name2+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>",SwingConstants.CENTER);
-			vidas2=new JLabel("<html>"+name2+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>",SwingConstants.CENTER);
+			score=new JLabel("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador(0).getScore())+"</H1></html>",SwingConstants.CENTER);
+			vidas=new JLabel("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador(0).getLives())+"</H1></html>",SwingConstants.CENTER);
+			score2=new JLabel("<html>"+name2+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador(1).getScore())+"</H1></html>",SwingConstants.CENTER);
+			vidas2=new JLabel("<html>"+name2+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador(1).getLives())+"</H1></html>",SwingConstants.CENTER);
 			opciones.add(score);
 			opciones.add(vidas);
 			opciones.add(score2);
@@ -225,14 +225,14 @@ public class pantallaJuego  extends JFrame{
 	
 	public void actualiceDatos(){
 		if(jugadores==1){
-			score.setText("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>");
-			vidas.setText("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>");
+			score.setText("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador(0).getScore())+"</H1></html>");
+			vidas.setText("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador(0).getLives())+"</H1></html>");
 		}
 		else{
-			score.setText("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>");
-			vidas.setText("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>");
-			score2.setText("<html>"+name2+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getScore())+"</H1></html>");
-			vidas2.setText("<html>"+name2+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador().getLives())+"</H1></html>");
+			score.setText("<html>"+name+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador(0).getScore())+"</H1></html>");
+			vidas.setText("<html>"+name+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador(0).getLives())+"</H1></html>");
+			score2.setText("<html>"+name2+" score<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador(1).getScore())+"</H1></html>");
+			vidas2.setText("<html>"+name2+" lives<br><H1 align=center>"+String.valueOf(pin.getGame().getJugador(1).getLives())+"</H1></html>");
 			
 		}
 	}

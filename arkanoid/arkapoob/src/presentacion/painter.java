@@ -164,7 +164,7 @@ public class painter extends JPanelB {
 				
 				if ( e.getKeyCode() == KeyEvent.VK_SPACE) {
 					
-					game.usarHabilidadJugador();
+					game.usarHabilidadJugador(0);
 					
 				}
 				
@@ -177,11 +177,11 @@ public class painter extends JPanelB {
     }
 	
 	public void moverPlatDer(){
-		game.moverPlataformaDerecha();
+		game.moverPlataformaDerecha(0);
 	}
 	
 	public void moverPlatIzq(){
-		game.moverPlataformaIzquierda();
+		game.moverPlataformaIzquierda(0);
 	}
 	
 	public void paintComponent(Graphics g){
@@ -190,7 +190,7 @@ public class painter extends JPanelB {
 		g2.setColor(Color.WHITE);
 		figura = game.getBola().getShape();
 		g2.fill(figura); // dibuja bola
-		Jugador j = game.getJugador();
+		Jugador j = game.getJugador(0);
 		Plataforma p = j.getPlatform();
 		Rectangle2D.Double pla = p.getShape();
 		g2.setColor(setColorPlataforma(pantallaJ.getColorPlataforma()));
@@ -247,7 +247,7 @@ public class painter extends JPanelB {
 	}
 	
 	public void updName(String name){
-		game.getJugador().setName(name);
+		game.getJugador(0).setName(name);
 	}
 	
 	public Color setColorPlataforma(String color){
@@ -267,7 +267,7 @@ public class painter extends JPanelB {
 			colorP=Color.RED;
 			
 		}
-		game.getJugador().getPlatform().setColor(colorP);
+		game.getJugador(0).getPlatform().setColor(colorP);
 		
 		
 		return colorP;
@@ -285,7 +285,7 @@ public class painter extends JPanelB {
 		
 	}
 	public void updColor(String color){
-		game.getJugador().getPlatform().setColorString(color);
+		game.getJugador(0).getPlatform().setColorString(color);
 		
 	}
 	

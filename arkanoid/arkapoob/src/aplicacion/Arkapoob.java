@@ -2,12 +2,13 @@ package aplicacion;
 
 import java.awt.geom.RectangularShape;
 import java.util.ArrayList;
+import java.util.Random;
 import java.io.*;
 import persistencia.*;
 
 public class Arkapoob implements Serializable{
 	private Bola bola;
-	private Jugador jugador;
+	private ArrayList<Jugador> jugadores;
 	private ArrayList<Bloque> bloques;
 	private int maxX;
 	private int maxY;
@@ -17,24 +18,28 @@ public class Arkapoob implements Serializable{
 	private ArrayList<Poder> poderes;
 	private int nivel;
 	private Nivel generador;
-	private int jugadores;
+	private int nJugadores;
+	private int ultimoJugador;
 	
-	public Arkapoob(int jugadores,int maxX ,int maxY)  {
+	public Arkapoob(int nJugadores,int maxX ,int maxY)  {
 		nivel=0;
 		this.maxX=maxX;
 		this.maxY=maxY;
-		this.jugadores=jugadores;
+		this.nJugadores=nJugadores;
+		ultimoJugador=0;
+		ultimoBloqueEliminado="";
+		bloques=new ArrayList<Bloque>();
 		generador=new Nivel(maxX,maxY);
 		poderes=new ArrayList<Poder>();
-		bloques=new ArrayList<Bloque>();
-		jugador=new Jugador(this);
-		ultimoBloqueEliminado="";
+		jugadores=new ArrayList<Jugador>();
+		if(nJugadores==1) {
+			jugadores.add(new Jugador(this,202,620));
+		}
+		else if(nJugadores==2) {
+			jugadores.add(new Jugador(this,maxX-120,620));
+			jugadores.add(new Jugador(this,0,620));
+		}
 		generarNuevoNivel();
-		//for (int j =100;j<225;j+=25) {
-		//	for (int i =0;i<maxX;i+=45) {
-		//		bloques.add(new BloqueSorpresa(this,i,j));
-		//	}
-		//}
 		arkaDAO=new ArkapoobDAO();
 	}
 	/**
@@ -42,7 +47,7 @@ public class Arkapoob implements Serializable{
 	 * @return true si el numero de vidas del jugador 0 ;false si no
 	 */
 	public boolean isGameOver() {
-		return jugador.getLives()==0;
+		return jugadores.get(0).getLives()==0&&jugadores.get(1).getLives()==0;//temp
 	}
 	/**
 	 *determina si el jugador gano la partida 
@@ -101,10 +106,12 @@ public class Arkapoob implements Serializable{
 		bola.move();
 	}
 	private void colisionJugadorPoderes() {
-		for(Poder p:poderes) {
-			if (jugador.collision(p.getShape())){
-				p.reactToCollision(jugador);
-				break;
+		for(Jugador jugador:jugadores) {
+			for(Poder p:poderes) {
+				if (jugador.collision(p.getShape())){
+					p.reactToCollision(jugador);
+					break;
+				}
 			}
 		}
 	}
@@ -112,8 +119,11 @@ public class Arkapoob implements Serializable{
 	 * detecta si la bola se colisiona con la barra del jugador y si es asi cambia la direccion de la bola
 	 */
 	private void colisionJugador() {
-		if(jugador.collision(bola.getShape())) {
-			jugador.reactToCollision(bola);
+		for(int i=0;i<jugadores.size();i++) {
+			if(jugadores.get(i).collision(bola.getShape())) {
+				jugadores.get(i).reactToCollision(bola);
+				ultimoJugador=i;
+			}
 		}
 	}
 	public Bloque colisionBloques(RectangularShape inShape) {
@@ -137,6 +147,10 @@ public class Arkapoob implements Serializable{
 		}
 	}
 	public void setBall() {
+		Random random =new Random();
+		int p =random.nextInt(nJugadores);
+		ultimoJugador=p;//temp
+		Jugador jugador=jugadores.get(p);
 		bola=new Bola(jugador.getPlatform().getX()+jugador.getPlatform().getWidth()/2 , jugador.getPlatform().getY()-10,this);
 	}
 		
@@ -145,27 +159,27 @@ public class Arkapoob implements Serializable{
 	 * retorna el puntaje del jugador como un entero
 	 * @return retorna el puntaje del jugador
 	 */
-	public int getPuntajeJugador() {
-		return jugador.getScore();
+	public int getPuntajeJugador(int numeroJugador) {
+		return jugadores.get(numeroJugador).getScore();
 	}
 	/**
 	 * mueve al jugador a la derecha  si es posible
 	 */
-	public void moverPlataformaDerecha() {
-		jugador.moverPlataformaDerecha();
+	public void moverPlataformaDerecha(int numeroJugador) {
+		jugadores.get(numeroJugador).moverPlataformaDerecha();
 	}
 	/**
 	 * mueve al jugador a la izquierda  si es posible
 	 */
-	public void moverPlataformaIzquierda() {
-		jugador.moverPlataformaIzquierda();
+	public void moverPlataformaIzquierda(int numeroJugador) {
+		jugadores.get(numeroJugador).moverPlataformaIzquierda();
 	}
 	/**
 	 *  
 	 * @return el jugador
 	 */
-	public Jugador getJugador() {
-		return jugador;
+	public Jugador getJugador(int numeroJugador) {
+		return jugadores.get(numeroJugador);
 	}
 	public int getMaxX() {
 		return maxX;
@@ -177,13 +191,13 @@ public class Arkapoob implements Serializable{
 		bloques.remove(bloque);
 	}
 	public void sumarPuntosJugador(int puntaje) {
-		jugador.sumarPuntos(puntaje);
+		jugadores.get(ultimoJugador).sumarPuntos(puntaje);
 	}
 	public void sumarVidaJugador() {
-		jugador.setVidas(jugador.getLives()+1);
+		jugadores.get(ultimoJugador).setVidas(jugadores.get(ultimoJugador).getLives()+1);
 	}
 	public void restarVidaJugador() {
-		jugador.setVidas(jugador.getLives()-1);
+		jugadores.get(ultimoJugador).setVidas(jugadores.get(ultimoJugador).getLives()-1);
 	}
 	public void setUltimoBloqueEliminado(String ultimo) {
 		ultimoBloqueEliminado=ultimo;
@@ -206,11 +220,11 @@ public class Arkapoob implements Serializable{
 	public void removerPoder(Poder poder) {
 		poderes.remove(poder);
 	}
-	public void usarHabilidadJugador() {
-		jugador.usarHabilidadPlataforma();
+	public void usarHabilidadJugador(int numeroJugador) {
+		jugadores.get(numeroJugador).usarHabilidadPlataforma();
 	}
-	public int getJugadores(){
-		return jugadores;
+	public int getNJugadores(){
+		return nJugadores;
 	}
 
 }
