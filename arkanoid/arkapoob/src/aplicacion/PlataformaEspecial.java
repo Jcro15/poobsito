@@ -16,4 +16,12 @@ public class PlataformaEspecial extends Plataforma {
 	public void moveLeft() {
 		super.moveRight();
 	}
+	public void reactToCollision(Plataforma platform) {
+		if(collisionRight(platform.getShape())) {
+			if(canMoveLeft()) super.moveLeft();
+		}
+		else {
+			if(canMoveRight())super.moveRight();
+		}
+	}
 }

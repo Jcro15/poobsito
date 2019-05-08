@@ -110,4 +110,12 @@ public class Jugador implements Serializable{
 			platform=new Plataforma(platform.getX(),platform.getY(),tablero,platform.getHeight(),platform.getWidth());
 		}
 	}
+	public void reactToCollision(Jugador jugador) {
+		jugador.getPlatform().reactToCollision(platform);
+		platform.reactToCollision(jugador.getPlatform());
+		Plataforma temp=jugador.getPlatform();
+		jugador.setPlataforma(platform);
+		setPlataforma(temp);
+	}
+
 }

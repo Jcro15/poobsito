@@ -36,8 +36,8 @@ public class Arkapoob implements Serializable{
 			jugadores.add(new Jugador(this,202,620));
 		}
 		else if(nJugadores==2) {
-			jugadores.add(new Jugador(this,maxX-120,620));
 			jugadores.add(new Jugador(this,0,620));
+			jugadores.add(new Jugador(this,maxX-120,620));
 		}
 		generarNuevoNivel();
 		arkaDAO=new ArkapoobDAO();
@@ -47,7 +47,14 @@ public class Arkapoob implements Serializable{
 	 * @return true si el numero de vidas del jugador 0 ;false si no
 	 */
 	public boolean isGameOver() {
-		return jugadores.get(0).getLives()==0&&jugadores.get(1).getLives()==0;//temp
+		boolean over= false;
+		for (Jugador jugador:jugadores) {
+			if (jugador.getLives()<=0) {
+				over=true;
+				break;
+			}
+		}
+		return over;
 	}
 	/**
 	 *determina si el jugador gano la partida 
@@ -65,7 +72,12 @@ public class Arkapoob implements Serializable{
 	}
 	public void generarNuevoNivel() {
 		setBall();
-		bloques= generador.generarNivel(this);
+		//bloques= generador.generarNivel(this);
+		for (int j =100;j<225;j+=25) {
+			for (int i =0;i<maxX;i+=45) {
+				bloques.add(new BloqueSorpresa(this,i,j));
+			}
+		}
 		nivel+=1;
 	}
 	/**
@@ -162,17 +174,33 @@ public class Arkapoob implements Serializable{
 	public int getPuntajeJugador(int numeroJugador) {
 		return jugadores.get(numeroJugador).getScore();
 	}
+	public boolean ColisionJugadores() {
+		boolean  colision =false;
+		for(int i=0;i<jugadores.size();i++) {
+			for(int j=i;j<jugadores.size();j++) {
+				if(i!=j&&jugadores.get(i).collision(jugadores.get(j).getPlatform().getShape())) {
+					colision =true;
+					jugadores.get(i).reactToCollision(jugadores.get(j));
+				}
+			}
+		}
+		return colision;
+	}
 	/**
 	 * mueve al jugador a la derecha  si es posible
 	 */
 	public void moverPlataformaDerecha(int numeroJugador) {
-		jugadores.get(numeroJugador).moverPlataformaDerecha();
+		boolean colision = ColisionJugadores();
+		if (!colision)jugadores.get(numeroJugador).moverPlataformaDerecha();
+		
 	}
 	/**
 	 * mueve al jugador a la izquierda  si es posible
 	 */
 	public void moverPlataformaIzquierda(int numeroJugador) {
-		jugadores.get(numeroJugador).moverPlataformaIzquierda();
+		boolean colision =ColisionJugadores();
+		if(!colision)jugadores.get(numeroJugador).moverPlataformaIzquierda();
+		
 	}
 	/**
 	 *  

@@ -53,5 +53,9 @@ public class PlataformaPegajosa extends Plataforma {
 		}
 		super.moveLeft();
 	}
+	public void reactToCollision(Plataforma platform) {
+		usarHabilidad();
+		super.reactToCollision(platform);
+	}
 	
 }
