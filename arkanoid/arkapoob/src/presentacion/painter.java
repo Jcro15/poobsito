@@ -46,7 +46,7 @@ public class painter extends JPanelB {
 	private boolean play;
 	private Timer elementosTimer;
 	private Timer juegoTimer;
-	private boolean p1Izq, p1Der = false;
+	private boolean p1Izq, p1Der,p2Der,p2Izq= false;
 	private Color colorBola, colorPlata;
 	private int jugadores;
 	
@@ -94,12 +94,22 @@ public class painter extends JPanelB {
 		
 	}
 	private void movePlat() {
+		
 		if (p1Der) {
-			moverPlatDer();
+			moverPlatDer(0);
 		}
 		if (p1Izq) {
-			moverPlatIzq();
+			moverPlatIzq(0);
 		}
+		if(jugadores==2){
+			if (p2Der) {
+				moverPlatDer(1);
+			}
+			if (p2Izq) {
+				moverPlatIzq(1);
+			}
+		}
+		
 	}
 	
 	private void prepareAcciones() {
@@ -140,6 +150,43 @@ public class painter extends JPanelB {
 				p1Izq = false;
 			}
 		});
+		
+		
+		
+		getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, false), "Der2down");
+		getActionMap().put("Der2down", new AbstractAction() {
+
+			
+			public void actionPerformed(ActionEvent arg0) {
+				
+				p2Der = true;				
+			}
+		});
+
+		getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, true), "Der2up");
+		getActionMap().put("Der2up", new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				
+				p2Der = false;
+			}
+		});
+
+
+		getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, false), "Izq2down");
+		getActionMap().put("Izq2down", new AbstractAction() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				p2Izq = true;				
+			}
+		});
+
+		getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, true), "Izq2up");
+		getActionMap().put("Izq2up", new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				p2Izq = false;
+			}
+		});
 
 		
 		addKeyListener(new KeyListener() {
@@ -165,6 +212,7 @@ public class painter extends JPanelB {
 				if ( e.getKeyCode() == KeyEvent.VK_SPACE) {
 					
 					game.usarHabilidadJugador(0);
+					game.usarHabilidadJugador(1);
 					
 				}
 				
@@ -176,12 +224,12 @@ public class painter extends JPanelB {
         //requestFocusInWindow();
     }
 	
-	public void moverPlatDer(){
-		game.moverPlataformaDerecha(0);
+	public void moverPlatDer(int pos){
+		game.moverPlataformaDerecha(pos);
 	}
 	
-	public void moverPlatIzq(){
-		game.moverPlataformaIzquierda(0);
+	public void moverPlatIzq(int pos){
+		game.moverPlataformaIzquierda(pos);
 	}
 	
 	public void paintComponent(Graphics g){
@@ -190,11 +238,28 @@ public class painter extends JPanelB {
 		g2.setColor(Color.WHITE);
 		figura = game.getBola().getShape();
 		g2.fill(figura); // dibuja bola
-		Jugador j = game.getJugador(0);
-		Plataforma p = j.getPlatform();
-		Rectangle2D.Double pla = p.getShape();
-		g2.setColor(setColorPlataforma(pantallaJ.getColorPlataforma()));
-		g2.fill(pla); //dibuja plataforma
+		if (jugadores==1){
+			Jugador j = game.getJugador(0);
+			Plataforma p = j.getPlatform();
+			Rectangle2D.Double pla = p.getShape();
+			
+			g2.setColor(setColorPlataforma(pantallaJ.getColorPlataforma()));
+			g2.fill(pla); //dibuja plataforma
+		}
+		else{
+			Jugador j = game.getJugador(0);
+			Plataforma p = j.getPlatform();
+			Rectangle2D.Double pla = p.getShape();
+			g2.setColor(setColorPlataforma(pantallaJ.getColorPlataforma()));
+			g2.fill(pla); //dibuja plataforma
+			
+			Jugador j2 = game.getJugador(1);
+			Plataforma p2 = j2.getPlatform();
+			Rectangle2D.Double pla2 = p2.getShape();
+			g2.setColor(setColorPlataforma(pantallaJ.getColorPlataforma2()));
+			g2.fill(pla2); 
+			
+		}
 		ArrayList<Bloque> s= game.getBloques();
 		ArrayList<Poder> poderes=game.getPoderes();
 		for(Bloque i:s) {
@@ -246,8 +311,8 @@ public class painter extends JPanelB {
 		pantallaJ.actualiceDatos();
 	}
 	
-	public void updName(String name){
-		game.getJugador(0).setName(name);
+	public void updName(String name,int pos){
+		game.getJugador(pos).setName(name);
 	}
 	
 	public Color setColorPlataforma(String color){
@@ -267,7 +332,11 @@ public class painter extends JPanelB {
 			colorP=Color.RED;
 			
 		}
-		game.getJugador(0).getPlatform().setColor(colorP);
+		if(jugadores==1){game.getJugador(0).getPlatform().setColor(colorP);}
+		else{
+			game.getJugador(0).getPlatform().setColor(colorP);
+			game.getJugador(1).getPlatform().setColor(colorP);
+		}
 		
 		
 		return colorP;
@@ -284,8 +353,8 @@ public class painter extends JPanelB {
 		game.salvar(file);
 		
 	}
-	public void updColor(String color){
-		game.getJugador(0).getPlatform().setColorString(color);
+	public void updColor(String color,int pos){
+		game.getJugador(pos).getPlatform().setColorString(color);
 		
 	}
 	

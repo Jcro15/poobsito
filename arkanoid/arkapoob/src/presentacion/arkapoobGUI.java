@@ -135,7 +135,9 @@ public class arkapoobGUI extends JFrame{
 			if (opc==JFileChooser.APPROVE_OPTION){
 				File file =chooser.getSelectedFile();
 				Arkapoob game = arkaDAO.abrir(file);
-				pantallaJuego pj= new pantallaJuego(game.getNJugadores(),game.getJugador(0).getName(),game.getJugador(0).getPlatform().getColorString());
+				pantallaJuego pj=null;
+				if(game.getNJugadores()==1){ pj= new pantallaJuego(game.getNJugadores(),game.getJugador(0).getName(),game.getJugador(0).getPlatform().getColorString());}
+				else{ pj= new pantallaJuego(game.getNJugadores(),game.getJugador(0).getName(),game.getJugador(0).getPlatform().getColorString(),game.getJugador(1).getName(),game.getJugador(1).getPlatform().getColorString());}
 				
 				
 				pj.setGame(file);

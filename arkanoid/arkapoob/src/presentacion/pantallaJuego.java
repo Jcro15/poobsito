@@ -41,8 +41,8 @@ public class pantallaJuego  extends JFrame{
 		prepareElementos();
 		prepareAcciones();
 		this.colorPlata=colorPlata;
-		pin.updName(name);
-		pin.updColor(colorPlata);
+		pin.updName(name,0);
+		pin.updColor(colorPlata,0);
 	}
 	
 	public pantallaJuego(int jugadores, String name, String colorPlata,String name2, String colorPlata2){
@@ -56,8 +56,10 @@ public class pantallaJuego  extends JFrame{
 		prepareAcciones();
 		this.colorPlata=colorPlata;
 		this.colorPlata2=colorPlata2;
-		//pin.updName(name);
-		//pin.updColor(colorPlata);
+		pin.updName(name,0);
+		pin.updColor(colorPlata,0);
+		pin.updName(name2,1);
+		pin.updColor(colorPlata2,1);
 		
 	}
 	public void prepareElementos() {
@@ -239,6 +241,9 @@ public class pantallaJuego  extends JFrame{
 	
 	public String getColorPlataforma(){
 		return colorPlata;
+	}
+	public String getColorPlataforma2(){
+		return colorPlata2;
 	}
 	
 	public void accionPausa(){
