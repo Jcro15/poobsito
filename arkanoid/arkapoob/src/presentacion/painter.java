@@ -212,7 +212,22 @@ public class painter extends JPanelB {
 				if ( e.getKeyCode() == KeyEvent.VK_SPACE) {
 					
 					game.usarHabilidadJugador(0);
+					
+					
+				}
+				
+			}
+		});
+		
+		addKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {}
+			public void keyPressed(KeyEvent e) {
+				
+				if ( e.getKeyCode() == KeyEvent.VK_M) {
+					
 					game.usarHabilidadJugador(1);
+					
 					
 				}
 				
