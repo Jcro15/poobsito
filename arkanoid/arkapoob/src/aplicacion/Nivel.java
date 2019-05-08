@@ -31,7 +31,7 @@ public class Nivel implements Serializable{
 		else if(valor>19&&valor<30)b=new BloqueSorpresa(tablero,i,j);
 		else if(valor>29&&valor<40)b= new BloqueIndestructible(tablero,i,j);
 		else if(valor>39&&valor<50)b=new BloqueEscurridizo(tablero,i,j);
-		else if(valor >49&& valor<60)b=null;
+		else if(valor >49&& valor<60)b=new BloqueNivel(tablero,i,j);
 		else if(valor>59&&valor<80)b=new Bloque(tablero,i,j);
 		else if(valor>79&&valor<100)b=new BloqueResistente(tablero,i,j);
 		return b;

@@ -20,7 +20,7 @@ public class Arkapoob implements Serializable{
 	private int jugadores;
 	
 	public Arkapoob(int jugadores,int maxX ,int maxY)  {
-		nivel=1;
+		nivel=0;
 		this.maxX=maxX;
 		this.maxY=maxY;
 		this.jugadores=jugadores;
@@ -29,8 +29,7 @@ public class Arkapoob implements Serializable{
 		bloques=new ArrayList<Bloque>();
 		jugador=new Jugador(this);
 		ultimoBloqueEliminado="";
-		setBall();
-		bloques= generador.generarNivel(this);
+		generarNuevoNivel();
 		//for (int j =100;j<225;j+=25) {
 		//	for (int i =0;i<maxX;i+=45) {
 		//		bloques.add(new BloqueSorpresa(this,i,j));
@@ -57,7 +56,7 @@ public class Arkapoob implements Serializable{
 		if(bloquesRestantes==0&&nivel<5) {
 			generarNuevoNivel();
 		}
-		return bloquesRestantes==0&&nivel==5;
+		return nivel>5;
 	}
 	public void generarNuevoNivel() {
 		setBall();
@@ -213,4 +212,5 @@ public class Arkapoob implements Serializable{
 	public int getJugadores(){
 		return jugadores;
 	}
+
 }
