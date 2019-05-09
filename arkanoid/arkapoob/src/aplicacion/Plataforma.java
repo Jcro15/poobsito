@@ -106,6 +106,11 @@ public class Plataforma implements Serializable {
 		
 		}
 	}
+
+	/**
+	 * retorna el numero veces que se puede usar la habilidad de la plataforma, si el numero es negativo la plataforma tiene infinitos turnos
+	 * @return el numero de turnos restantes en los que se puede usar la plataforma
+	 */
 	public int getUses() {
 		return uses;
 	}
@@ -120,7 +125,7 @@ public class Plataforma implements Serializable {
 	}
 	
 	/**
-	 * detecta si hay una colision entre el objeto entrante y la parte derecha de laplataforma
+	 * detecta si hay una colision entre el objeto entrante y la parte derecha de la plataforma
 	 * @param inShape inShape la figura geometrica que representa a la figura entrante 
 	 * @return true si hay colision;false si es una colision con la parte izquierda
 	 */
@@ -136,38 +141,70 @@ public class Plataforma implements Serializable {
 		this.color=color;
 	}
 	
+	/**
+	 * establece el string que representa el color de la plataforma
+	 * @param colorString el color que se le dara a la plataforma
+	 */
 	public void setColorString(String colorString){
 		this.colorString=colorString;
 		
 	}
-	
+	/**
+	 * devuelve el string que representa el color de la plataforma
+	 * @return  el color que se le dara a la plataforma
+	 */
 	public String getColorString(){
 		return colorString;
 	}
+	/**
+	 * determina si la plataforma se puede mover hacia la izquierda considerando loss limites del tablero
+	 * @return true si se puede mover;false sino
+	 */
 	protected boolean canMoveLeft() {
 		return xPosition>=velocity;		
 	}
+	/**
+	 * determina si la plataforma se puede mover hacia la derecha considerando loss limites del tablero
+	 * @return true si se puede mover;false sino
+	 */
 	protected boolean canMoveRight(){
 		return xPosition+width+velocity<tablero.getMaxX();
 	}
+	/**
+	 * aumenta el tamano de la barra siempre y cuando este por debajo del limite de tamano
+	 */
 	public void aumentarTamaño() {
 		if(width<MAXW) {
 			width+=40;
 			shape=new Rectangle2D.Double(xPosition, yPosition, width, height);
 		}
 	}
+	/**
+	 * disminuye el tamano de la barra siempre y cuando este por encima del limite de tamano
+	 */
 	public void disminuirTamaño() {
 		if(width>MINW) {
 			width-=40;
 			shape=new Rectangle2D.Double(xPosition, yPosition, width, height);
 		}
 	}
+	/**
+	 * activa la habilidad de la plataforma,este tipo de plataforma no cuenta con una habilidad
+	 */
 	public void usarHabilidad() {
 	}
-
+	
+	/**
+	 *describe el comportamiento que tendra la plataforma al colisionar con una bola 
+	 * @param bola la bola con la que se genera la colision
+	 */
 	public void reactToCollision(Bola bola) {
 		bola.reactToCollision(this);
 	}
+	/**
+	 * describe el comportamiento que tendra la plataforma al colisionar con otra plataforma 
+	 * @param platform la plataforma con la que se genera la colision
+	 */
 	public void reactToCollision(Plataforma platform) {
 		for(int i=0;i<25;i++) {
 			if(collisionRight(platform.getShape())) {

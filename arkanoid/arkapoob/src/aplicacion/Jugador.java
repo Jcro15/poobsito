@@ -21,7 +21,7 @@ public class Jugador implements Serializable{
 	public Jugador(Arkapoob tablero,int x,int y) {
 		lives=3;
 		score=0;
-		platform=new Plataforma(x,y,tablero);//(202, 620,tablero);
+		platform=new Plataforma(x,y,tablero);
 		this.tablero=tablero;
 	}
 	/**

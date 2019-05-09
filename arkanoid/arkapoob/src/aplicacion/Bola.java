@@ -72,7 +72,7 @@ public class Bola implements Serializable{
 	
 	
 	/**
-	 * detecta si la bola se enc
+	 * detecta si la bola se encuentra en uno de los bordes y cambia su direccion o genera la perdida de vida si la bola sale por el limite inferior
 	 */
 	private void testBorder() {
 		if(getX()>tablero.getMaxX()||getX()<0) {
@@ -86,23 +86,38 @@ public class Bola implements Serializable{
 			tablero.restarVidaJugador();
 		}
 	}
-	
+	/**
+	 * mueve la bola en la direccion guardada
+	 */
 	public void move() {
 		testBorder();
 		xPosition+=dx*velocity;
 		yPosition+=dy*velocity;
 		shape=new Ellipse2D.Double(xPosition,yPosition,10,10);
 	}
-
+	/**
+	 * retorna la direccion en X de la bola
+	 * @return la direccion en x de la bola
+	 */
 	public int getDx() {
 			return dx;
 	}
+	/**
+	 * aumenta la velocidad de la bola siempre y cuando se encuentre por debajo del limite
+	 */
 	public void aumentarVelocidad() {
 		if(velocity<VMAX)velocity+=0.1;
 	}
+	/**
+	 * disminuye la velocidad de la bola siempre y cuando se encuentre por encima del limite
+	 */
 	public void disminuirVelocidad() {
 		if(velocity>VMIN)velocity-=0.1;
 	}
+	/**
+	 * retorna la direccion en Y de la bola
+	 * @return la direccion en y de la bola
+	 */
 	public int getDy() {
 			return dy;
 	}
@@ -118,13 +133,24 @@ public class Bola implements Serializable{
 	public void setDx(int dir) {
 		dx=dir;
 	}
+	/**
+	 * retorna la velocidad de la bola
+	 * @return la velocidad de la bola
+	 */
 	public double getVelocity() {
 		return velocity;
 	}
+	/**
+	 * establece la velocidad de la bola
+	 * @param  la velocidad que va a tener la bola
+	 */
 	public void setVelocity(double nv) {
 		velocity=nv;
 	}
-	
+	/**
+	 * describe el comportamiento que tendra la bola al colisionar con un bloque
+	 * @param bloque el bloque con el que se genera la colision
+	 */
 	public void reactToCollision(Bloque bloque) {
 		int anterior=getDy();
 		boolean derecha=shape.getMaxX()>bloque.getX()+bloque.getWidth();
@@ -139,6 +165,10 @@ public class Bola implements Serializable{
 			setDx(derecha?Bola.DERECHA:Bola.IZQUIERDA);
 		}
 	}
+	/**
+	 * describe el comportamiento que tendra la bola al colisionar con una plataforma
+	 * @param plataforma la plataforma con la que se genera la colision
+	 */
 	public void reactToCollision(Plataforma plataforma) {
 		setDy(Bola.ARRIBA);
 		if(plataforma.collisionRight(getShape())) {
