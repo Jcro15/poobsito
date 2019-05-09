@@ -20,9 +20,11 @@ public class Arkapoob implements Serializable{
 	private Nivel generador;
 	private int nJugadores;
 	private int ultimoJugador;
+	private int i;
 	
 	public Arkapoob(int nJugadores,int maxX ,int maxY)  {
 		nivel=0;
+		i=0;
 		this.maxX=maxX;
 		this.maxY=maxY;
 		this.nJugadores=nJugadores;
@@ -111,11 +113,15 @@ public class Arkapoob implements Serializable{
 	 * detecta si la bola se colisiona con algun objeto y si es asi cambia su direccion, finalmente mueve la bola
 	 */
 	public void moverElementos() {
+		
 		colisionJugadorPoderes();
 		moverPoderes();
 		colisionBolaBloques();
 		colisionJugador();
 		bola.move();
+		
+		//System.out.println(i);
+		//i+=1;
 	}
 	private void colisionJugadorPoderes() {
 		for(Jugador jugador:jugadores) {
@@ -236,9 +242,16 @@ public class Arkapoob implements Serializable{
 	public void añadirBloque(Bloque b) {
 		bloques.add(b);
 	}
+	public void anadirBloque(Bloque b) {
+		bloques.add(b);
+	}
 	public void añadirPoder(Poder p) {
 		poderes.add(p);
 	}
+	public void anadirPoder(Poder p) {
+		poderes.add(p);
+	}
+	
 	public void salvar(File file) throws ArkapoobException{
 		arkaDAO.salvar(this,file);
 	}
