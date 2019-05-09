@@ -1,10 +1,10 @@
 package aplicacion;
 import java.awt.geom.*;
-import java.awt.Color;
 import java.io.*;
+
 /**
  * la clase representa una bola , definida por una elipse con coordenadas (xPosition,yPosition)
- * cuenta con direcciones de movimiento(dx,dy) y el daño que causa a los bloques
+ * cuenta con direcciones de movimiento(dx,dy) y el dano que causa a los bloques
  * @author Juan Camilo Rojas & Juan Camilo Angel
  *
  */
@@ -49,8 +49,8 @@ public class Bola implements Serializable{
 		return shape;
 	}
 	/**
-	 * retorna el valor de daño que hace la bola al impactar un bloque
-	 * @return el daño que hace la bola
+	 * retorna el valor de dano que hace la bola al impactar un bloque
+	 * @return el dano que hace la bola
 	 */
 	public int getDamage() {
 		return damage;
@@ -69,11 +69,11 @@ public class Bola implements Serializable{
 	public double getY() {
 		return yPosition;
 	}
+	
+	
 	/**
-	 * mueve la bola una unidad en direccion dx y una unidad en direccion dy
+	 * detecta si la bola se enc
 	 */
-	
-	
 	private void testBorder() {
 		if(getX()>tablero.getMaxX()||getX()<0) {
 			setDx(getDx()*-1);
@@ -86,6 +86,7 @@ public class Bola implements Serializable{
 			tablero.restarVidaJugador();
 		}
 	}
+	
 	public void move() {
 		testBorder();
 		xPosition+=dx*velocity;

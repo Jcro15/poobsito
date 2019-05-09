@@ -13,6 +13,7 @@ import java.util.*;
 import persistencia.*;
 import aplicacion.*;
 
+
 public class arkapoobGUI extends JFrame{
 	private Container contenedor;
 	private JPanelB panelPantalla;
@@ -128,7 +129,7 @@ public class arkapoobGUI extends JFrame{
 	}
 	
 	public void abra(){
-		chooser.setFileFilter(new FileNameExtensionFilter("archivos .dat", "dat"));
+		
 		int opc =chooser.showOpenDialog(this);
 		arkaDAO=new ArkapoobDAO();
 		try{
@@ -151,6 +152,7 @@ public class arkapoobGUI extends JFrame{
 			}
 		}
 		catch (ArkapoobException e){
+			arkaDAO.registre(e);
 			JOptionPane.showMessageDialog(this,e.getMessage());
 		}
 	}

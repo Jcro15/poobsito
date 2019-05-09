@@ -20,11 +20,9 @@ public class Arkapoob implements Serializable{
 	private Nivel generador;
 	private int nJugadores;
 	private int ultimoJugador;
-	private int i;
 	
 	public Arkapoob(int nJugadores,int maxX ,int maxY)  {
 		nivel=0;
-		i=0;
 		this.maxX=maxX;
 		this.maxY=maxY;
 		this.nJugadores=nJugadores;
@@ -46,7 +44,7 @@ public class Arkapoob implements Serializable{
 	}
 	/**
 	 * determina si el jugador perdio la partida
-	 * @return true si el numero de vidas del jugador 0 ;false si no
+	 * @return true si el numero de vidas de alguno de los  jugadores es  0 ;false si no
 	 */
 	public boolean isGameOver() {
 		boolean over= false;
@@ -59,8 +57,8 @@ public class Arkapoob implements Serializable{
 		return over;
 	}
 	/**
-	 *determina si el jugador gano la partida 
-	 * @return true si el numero de bloques destruibles es 0 ; false si no
+	 *determina si algun jugador gano la partida 
+	 * @return true si el jugador ha superado todos los niveles ; false si no
 	 */
 	public boolean playerWin() {
 		int bloquesRestantes=0;
@@ -72,15 +70,14 @@ public class Arkapoob implements Serializable{
 		}
 		return nivel>5;
 	}
+	/**
+	 * posiciona la bola sobre alguno de los jugadores y carga un nuevo nivel
+	 */
 	public void generarNuevoNivel() {
 		setBall();
-		//bloques= generador.generarNivel(this);
-		for (int j =100;j<225;j+=25) {
-			for (int i =0;i<maxX;i+=45) {
-				bloques.add(new BloqueSorpresa(this,i,j));
-			}
-		}
+		bloques= generador.generarNivel(this);
 		nivel+=1;
+		poderes.clear();
 	}
 	/**
 	 * retorna la bola que se esta usando en el juego
@@ -97,9 +94,16 @@ public class Arkapoob implements Serializable{
 	public ArrayList<Bloque> getBloques() {
 		return bloques;
 	}
+	/**
+	 * retorna la lista de poderes que estan activos en la partida
+	 * @return la lista de poderes
+	 */
 	public ArrayList<Poder> getPoderes(){
 		return poderes;
 	}
+	/**
+	 * intenta mover los poderes,si algun poder se encuentra fuera del escenario se elimina de la lista
+	 */
 	private void moverPoderes() {
 		ArrayList<Poder> borrar=new ArrayList<Poder>();
 		for(Poder p:poderes) {
@@ -110,7 +114,7 @@ public class Arkapoob implements Serializable{
 		}
 	}
 	/**
-	 * detecta si la bola se colisiona con algun objeto y si es asi cambia su direccion, finalmente mueve la bola
+	 * intenta mover los elementos del juego y detectando si hay colisiones entre ellos 
 	 */
 	public void moverElementos() {
 		
@@ -119,10 +123,10 @@ public class Arkapoob implements Serializable{
 		colisionBolaBloques();
 		colisionJugador();
 		bola.move();
-		
-		//System.out.println(i);
-		//i+=1;
 	}
+	/**
+	 * detecta si alguno de los jugadores se colisiona con algun poder
+	 */
 	private void colisionJugadorPoderes() {
 		for(Jugador jugador:jugadores) {
 			for(Poder p:poderes) {
@@ -144,6 +148,12 @@ public class Arkapoob implements Serializable{
 			}
 		}
 	}
+	/**
+	 * detecta si existe alguna colision entre un objeto del juego (representado por una forma geometrica RectangularShape) y algun bloque
+	 * retorna el indice del bloque con el que se colisiona el objeto
+	 * @param inShape la forma geometrica que representa al objeto con el que se quiere detectar la colision
+	 * @return el indice del bloque que genera la colision con el objeto entrante
+	 */
 	public Bloque colisionBloques(RectangularShape inShape) {
 		Bloque res= null;
 		for (Bloque b:bloques) {
@@ -164,6 +174,9 @@ public class Arkapoob implements Serializable{
 			b.reactToColission(bola);
 		}
 	}
+	/**
+	 * posiciona la bola sobre la plataforma de alguno de los jugadores, la seleccion de jugador es aleatoria
+	 */
 	public void setBall() {
 		Random random =new Random();
 		int p =random.nextInt(nJugadores);
@@ -172,14 +185,18 @@ public class Arkapoob implements Serializable{
 		bola=new Bola(jugador.getPlatform().getX()+jugador.getPlatform().getWidth()/2 , jugador.getPlatform().getY()-10,this);
 	}
 		
-
 	/**
-	 * retorna el puntaje del jugador como un entero
-	 * @return retorna el puntaje del jugador
+	 * retorna el puntaje de alguno de los jugadores
+	 * @param numeroJugador el indice del jugador en la lista de jugadores
+	 * @return el puntaje del jugador seleccionado
 	 */
 	public int getPuntajeJugador(int numeroJugador) {
 		return jugadores.get(numeroJugador).getScore();
 	}
+	/**
+	 * detecta si existe una colision entre los jugadores de la partida
+	 * @return true si existe una colision entre los jugadores; false si no
+	 */
 	public boolean ColisionJugadores() {
 		boolean  colision =false;
 		for(int i=0;i<jugadores.size();i++) {
@@ -215,55 +232,108 @@ public class Arkapoob implements Serializable{
 	public Jugador getJugador(int numeroJugador) {
 		return jugadores.get(numeroJugador);
 	}
+	/**
+	 * 
+	 * @return la maxima  coordenada x
+	 */
 	public int getMaxX() {
 		return maxX;
 	}
+	/**
+	 * 
+	 * @return la maxima  coordenada y
+	 */
 	public int getMaxY() {
 		return maxY;
 	}
+	/**
+	 * elimina un bloque de la lista de bloques
+	 * @param bloque el bloque que se desea eliminar
+	 */
 	public void remove(Bloque bloque) {
 		bloques.remove(bloque);
 	}
+	/**
+	 *suma puntos al ultimo jugador que hizo rebotar la bola en su plataforma 
+	 * @param puntaje la cantidad de puntos que se le sumaran al jugador
+	 * 
+	 */
 	public void sumarPuntosJugador(int puntaje) {
 		jugadores.get(ultimoJugador).sumarPuntos(puntaje);
 	}
+	/**
+	 * aumenta en uno las vidas del ultimo jugador que hizo rebotar la bola en su plataforma
+	 */
 	public void sumarVidaJugador() {
 		jugadores.get(ultimoJugador).setVidas(jugadores.get(ultimoJugador).getLives()+1);
 	}
+	/**
+	 * resta en uno las vidas del ultimo jugador que hizo rebotar la bola en su plataforma
+	 */
 	public void restarVidaJugador() {
 		jugadores.get(ultimoJugador).setVidas(jugadores.get(ultimoJugador).getLives()-1);
 	}
+	/**
+	 * guarda el nombre de la clase que representa al ultimo bloque eliminado en la partida
+	 * @param ultimo
+	 */
 	public void setUltimoBloqueEliminado(String ultimo) {
 		ultimoBloqueEliminado=ultimo;
 	}
+	/**
+	 * retorna el nombre de la clase que representa al ultimo bloque eliminado en la partida
+	 * @return el nombre de la clase que representa al ultimo bloque eliminado en la partida
+	 */
 	public String getUltimoBloqueEliminado() {
 		return ultimoBloqueEliminado;
 	}
-	public void añadirBloque(Bloque b) {
-		bloques.add(b);
-	}
+	/**
+	 * añade un bloque a la configuracion
+	 * @param b el bloque se va a añadir
+	 */
 	public void anadirBloque(Bloque b) {
 		bloques.add(b);
 	}
-	public void añadirPoder(Poder p) {
-		poderes.add(p);
-	}
+	/**
+	 * añade un poder a la lista de poderes activos 
+	 * @param p el poder que se va a añadir
+	 */
 	public void anadirPoder(Poder p) {
 		poderes.add(p);
 	}
-	
+	/**
+	 * salva una partida de arkapoob
+	 * @param file el archivo que representa la partida
+	 */
 	public void salvar(File file) throws ArkapoobException{
 		arkaDAO.salvar(this,file);
 	}
+	/**
+	 * abre una partida de arkapoob
+	 * @param file el archivo que representa la partida
+	 * @return una partida de arkpoob
+	 */
 	public Arkapoob abrir(File file) throws ArkapoobException{
 		return arkaDAO.abrir(file);
 	}
+	/**
+	 * elimina un poder de la lista de poderes activos	
+	 * @param poderel poder a eliminar
+	 */
 	public void removerPoder(Poder poder) {
 		poderes.remove(poder);
 	}
+	/**
+	 * ordena al jugador a usar la habilidad de su plataforma
+	 * @param numeroJugador el indice del jugador que va a usar la habilidad
+	 */
 	public void usarHabilidadJugador(int numeroJugador) {
 		jugadores.get(numeroJugador).usarHabilidadPlataforma();
 	}
+	/**
+	 * retorna el numero de jugadores en la partida
+	 * @return el numero de jugadores en la partida
+	 */
 	public int getNJugadores(){
 		return nJugadores;
 	}

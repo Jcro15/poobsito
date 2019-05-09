@@ -169,12 +169,14 @@ public class Plataforma implements Serializable {
 		bola.reactToCollision(this);
 	}
 	public void reactToCollision(Plataforma platform) {
-		if(collisionRight(platform.getShape())) {
-			if(canMoveLeft()) moveLeft();
-		}
-		else {
-			if(canMoveRight())moveRight();
-		}
+		for(int i=0;i<25;i++) {
+			if(collisionRight(platform.getShape())) {
+				if(canMoveLeft()) moveLeft();
+			}
+			else {
+				if(canMoveRight())moveRight();
+			}
+		}	
 	}
 
 		

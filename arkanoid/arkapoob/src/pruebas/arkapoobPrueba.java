@@ -77,24 +77,24 @@ public class arkapoobPrueba
 		
 		assertTrue(arka.getJugador(0).getPlatform().getX()+arka.getJugador(0).getPlatform().getWidth()==599.8000000000079);
 	}
-	/*
+	
 	@Test
 	public void deberiaCogerPoderMasTamano(){
 		Arkapoob arka = new Arkapoob(1,485,665);
-		Poder poder = new PoderAumentarTamaño(arka,205,620);
-		arka.añadirPoder(poder);
+		Poder poder = new PoderAumentarTamano(arka,205,620);
+		arka.anadirPoder(poder);
 		arka.moverElementos();
 		assertTrue(arka.getJugador(0).getPlatform().getWidth()==160);
 	}
 	@Test
 	public void deberiaCogerPoderMenosTamano(){
 		Arkapoob arka = new Arkapoob(1,485,6650);
-		Poder poder = new PoderDisminuirTamaño(arka,205,620);
-		arka.añadirPoder(poder);
+		Poder poder = new PoderDisminuirTamano(arka,205,620);
+		arka.anadirPoder(poder);
 		arka.moverElementos();
 		assertTrue(arka.getJugador(0).getPlatform().getWidth()==80);
 	}
-	*/
+	
 	@Test
 	public void deberiaCogerPoderMasVelocidad(){
 		Arkapoob arka = new Arkapoob(1,485,665);
@@ -144,19 +144,19 @@ public class arkapoobPrueba
 		
 	}
 	
-	/*
+	
 	@Test
 	public void deberiaSerPegajosaYMoverse(){
 		Arkapoob arka = new Arkapoob(1,485,665);
 		Plataforma p=arka.getJugador(0).getPlatform();
+		Bola bola = new Bola(205,621,arka);
 		arka.getJugador(0).setPlataforma(new PlataformaPegajosa(p.getX(),p.getY(), arka,p.getHeight(),p.getWidth()));
-		System.out.println("aa"+arka.getBola().getX());
+		bola.reactToCollision(p);
 		arka.moverPlataformaDerecha(0);
-		System.out.println("aad"+arka.getBola().getX());
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.6);
 		
 	}
-	*/
+	
 	
 	@Test
 	public void deberiaChocarConIndestructible(){
