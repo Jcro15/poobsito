@@ -10,11 +10,13 @@ import javax.swing.border.*;
 import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.*;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import persistencia.*;
 import aplicacion.*;
 
-
-public class arkapoobGUI extends JFrame{
+public class arkapoobGUI extends JFrame {
 	private Container contenedor;
 	private JPanelB panelPantalla;
 	private JPanel panelLogo;
@@ -23,13 +25,14 @@ public class arkapoobGUI extends JFrame{
 	private myButton jugarBoton;
 	private myButton abrirBoton;
 	private JFileChooser chooser;
+	private transient Clip sonido;
 	private static transient ArkapoobDAO arkaDAO;
 	
 	public arkapoobGUI(){
 		super("Arkapoob");
 		setResizable(false);
 		contenedor = getContentPane();
-		
+		prepareSonido();
 		prepareElementos();
 		prepareAcciones();
 	}
@@ -79,6 +82,16 @@ public class arkapoobGUI extends JFrame{
 		prepareAccionesPantalla();
 	}
 	
+	public void prepareSonido(){
+		try {
+			
+			sonido = AudioSystem.getClip();
+			sonido.open(AudioSystem.getAudioInputStream(new File("sonidos/tema1.wav")));
+			sonido.loop(Clip.LOOP_CONTINUOUSLY);
+		}
+		catch (Exception e) {}
+		
+	}
 	public void prepareAccionesVentana(){
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE );
 		addWindowListener (new WindowAdapter() {
@@ -165,6 +178,7 @@ public class arkapoobGUI extends JFrame{
 	public void salga(){
 		int option = JOptionPane.showConfirmDialog(null,"Are you sure you want to exit?","Exit?",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 		if(option==0){
+			sonido.close();
 			System.exit(0);
 		}
 	}

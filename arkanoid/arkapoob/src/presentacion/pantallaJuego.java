@@ -32,8 +32,9 @@ public class pantallaJuego  extends JFrame{
 	private JFileChooser chooser;
 	private int jugadores;
 	
-	public pantallaJuego(int jugadores, String name, String colorPlata){
+	public pantallaJuego(int jugadores, String name, String colorPlata) throws ArkapoobException{
 		super("Arkapoob");
+		if(name.equals("")){throw new ArkapoobException(ArkapoobException.NOMBRE_VACIO);}
 		this.name = name;
 		this.jugadores=jugadores;
 		setResizable(false);
@@ -45,8 +46,9 @@ public class pantallaJuego  extends JFrame{
 		pin.updColor(colorPlata,0);
 	}
 	
-	public pantallaJuego(int jugadores, String name, String colorPlata,String name2, String colorPlata2){
+	public pantallaJuego(int jugadores, String name, String colorPlata,String name2, String colorPlata2)throws ArkapoobException{
 		super("Arkapoob");
+		if(name.equals("")||name2.equals("")){throw new ArkapoobException(ArkapoobException.NOMBRE_VACIO);}
 		this.name = name;
 		this.name2 = name2;
 		this.jugadores=jugadores;

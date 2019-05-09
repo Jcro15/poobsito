@@ -2,6 +2,10 @@ package aplicacion;
 
 import java.awt.Color;
 import java.util.Random;
+import java.io.*;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class BloqueSorpresa extends Bloque {
 
@@ -12,6 +16,7 @@ public class BloqueSorpresa extends Bloque {
 		
 	}
 	public void reactToColission(Bola bola){
+		prepareSonido();
 		Random random = new Random();
 		int num = random.nextInt(6);
 		if (num==0) {
@@ -33,6 +38,9 @@ public class BloqueSorpresa extends Bloque {
 			tablero.anadirPoder(new PoderCambioPegajosa(tablero,xPosition,yPosition));
 		}
 		super.reactToColission(bola);
+		
 	}
-
+	
+		
+	
 }

@@ -2,6 +2,10 @@ package aplicacion;
 import java.io.*;
 import java.awt.*;
 import java.awt.geom.RectangularShape;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 /**
  * la clase representa un bloque, definido por un rectangulo con coordenadas (xPosition,yPosition)
  * un alto y un ancho(height,width) un color y un puntaje 
@@ -20,6 +24,7 @@ public class Bloque implements Serializable{
 	protected Color color;
 	protected Arkapoob tablero;
 	protected boolean destroyable;
+	protected transient Clip power;
 	
 	/**
 	 * construye un nuevo bloque en las coordenadas x ,y
@@ -37,6 +42,7 @@ public class Bloque implements Serializable{
 		color=Color.RED;
 		this.tablero=tablero;
 		destroyable=true;
+		
 	}
 	/**
 	 * retorna la posicion x que tiene el bloque en el tablero como un entero
@@ -127,13 +133,26 @@ public class Bloque implements Serializable{
 		return puntaje;
 	}
 	public void reactToColission(Bola bola) {
+		
 		reduceResistance(bola.getDamage());
 		bola.reactToCollision(this);
 		if (destroyed()) {
+			
 			tablero.remove(this);
 			tablero.setUltimoBloqueEliminado(this.getClass().getSimpleName());
 			tablero.sumarPuntosJugador(getPuntaje());
 		}
+		
+	}
+	
+	public void prepareSonido(){
+		try {
+			
+			power = AudioSystem.getClip();
+			power.open(AudioSystem.getAudioInputStream(new File("sonidos/power.wav")));
+			power.loop(0);
+		}
+		catch (Exception e) {}
 	}
 	
 	
