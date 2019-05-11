@@ -1,7 +1,11 @@
 package aplicacion;
 
 import java.awt.Color;
-
+/**
+ * representa un bloque que tiene la habilidad de convertirse en el ultimo bloque eliminado
+ * @author @author Juan Camilo Rojas & Juan Camilo Angel
+ *
+ */
 public class BloqueCamaleon extends Bloque {
 	
 
@@ -10,8 +14,11 @@ public class BloqueCamaleon extends Bloque {
 		color=Color.BLACK;
 		puntaje=600;
 	}
-	
-	
+	@Override
+	/**
+	 * antes de destruirse genera un nuevo bloque del tipo que fue el ultimo bloque que se elimino en la partida
+	 * @param bola la bola que genera la colision
+	 */
 	public void reactToColission(Bola bola) {
 		Arkapoob tablero=Arkapoob.demeTablero();
 		String nuevo=tablero.getUltimoBloqueEliminado();
