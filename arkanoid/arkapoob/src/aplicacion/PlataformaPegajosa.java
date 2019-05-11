@@ -5,13 +5,13 @@ import java.awt.geom.Rectangle2D;
 public class PlataformaPegajosa extends Plataforma {
 	private boolean bolaAtrapada;
 	private Bola bola;
-	public PlataformaPegajosa(double x, double y, Arkapoob tablero) {
-		super(x, y, tablero);
+	public PlataformaPegajosa(double x, double y) {
+		super(x, y);
 		uses=3;
 		bolaAtrapada=false;
 	}
-	public PlataformaPegajosa(double x,double y,Arkapoob tablero,int height,int width) {
-		super(x, y, tablero, height, width);
+	public PlataformaPegajosa(double x,double y,int height,int width) {
+		super(x, y,  height, width);
 		uses=3;
 		bolaAtrapada=false;
 	}

@@ -4,13 +4,14 @@ import java.awt.Image;
 
 public class PoderDisminuirVelocidad extends Poder {
 
-	public PoderDisminuirVelocidad(Arkapoob tablero, int xPosition, int yPosition) {
-		super(tablero, xPosition, yPosition);
+	public PoderDisminuirVelocidad( int xPosition, int yPosition) {
+		super( xPosition, yPosition);
 		
 		
 		
 	}
 	public  void reactToCollision(Jugador jugador) {
+		Arkapoob tablero= Arkapoob.demeTablero();
 		tablero.getBola().disminuirVelocidad();
 		tablero.removerPoder(this);
 	}

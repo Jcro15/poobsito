@@ -13,16 +13,14 @@ public class Jugador implements Serializable{
 	private int score;
 	private String name;
 	private Plataforma platform;
-	private Arkapoob tablero;
 	/**
 	 * Construye un nuevo objeto de tipo jugador con un valor por defecto de vidas, de puntaje y una plataforma
 	 * en una posicion por defecto
 	 */
-	public Jugador(Arkapoob tablero,int x,int y) {
+	public Jugador(int x,int y) {
 		lives=3;
 		score=0;
-		platform=new Plataforma(x,y,tablero);
-		this.tablero=tablero;
+		platform=new Plataforma(x,y);
 	}
 	/**
 	 * retorna el numero de vida del jugador
@@ -107,7 +105,7 @@ public class Jugador implements Serializable{
 	public void usarHabilidadPlataforma() {
 		platform.usarHabilidad();
 		if(platform.getUses()==0) {
-			platform=new Plataforma(platform.getX(),platform.getY(),tablero,platform.getHeight(),platform.getWidth());
+			platform=new Plataforma(platform.getX(),platform.getY(),platform.getHeight(),platform.getWidth());
 		}
 	}
 	public void reactToCollision(Jugador jugador) {

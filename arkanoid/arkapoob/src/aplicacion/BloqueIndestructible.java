@@ -4,8 +4,8 @@ import java.awt.*;
 
 public class BloqueIndestructible extends Bloque {
 
-	public BloqueIndestructible(Arkapoob tablero, int x, int y) {
-		super(tablero, x, y);
+	public BloqueIndestructible( int x, int y) {
+		super( x, y);
 		color=Color.GRAY;
 		puntaje=0;
 		destroyable=false;

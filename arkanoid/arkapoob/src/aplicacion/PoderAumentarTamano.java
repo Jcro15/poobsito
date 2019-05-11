@@ -5,8 +5,8 @@ import java.awt.Image;
 
 public class PoderAumentarTamano extends Poder {
 
-	public PoderAumentarTamano(Arkapoob tablero, int xPosition, int yPosition) {
-		super(tablero, xPosition, yPosition);
+	public PoderAumentarTamano( int xPosition, int yPosition) {
+		super( xPosition, yPosition);
 		// TODO Auto-generated constructor stub
 		
 		
@@ -15,6 +15,7 @@ public class PoderAumentarTamano extends Poder {
 
 
 	public void reactToCollision(Jugador jugador) {
+		Arkapoob tablero= Arkapoob.demeTablero();
 		jugador.getPlatform().aumentarTamaño();
 		tablero.removerPoder(this);
 	}

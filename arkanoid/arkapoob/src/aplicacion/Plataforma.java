@@ -20,7 +20,6 @@ public class Plataforma implements Serializable {
 	private Rectangle2D.Double shape;
 	private Color color;
 	private String colorString;
-	private Arkapoob tablero;
 	
 	public static final int MAXW=200;
 	public static final int MINW=80;
@@ -29,7 +28,7 @@ public class Plataforma implements Serializable {
 	 * @param x la posicion x inicial de la plataforma
 	 * @param y la posicion y inicial de la plataforma
 	 */
-	public Plataforma(double x,double y,Arkapoob tablero) {
+	public Plataforma(double x,double y) {
 		xPosition=x;
 		yPosition=y;
 		height=10;
@@ -37,10 +36,9 @@ public class Plataforma implements Serializable {
 		uses=0;
 		shape=new Rectangle2D.Double(xPosition, yPosition, width, height);
 		velocity=0.6;
-		this.tablero=tablero;
 	}
-	public Plataforma(double x,double y,Arkapoob tablero,int height,int width) {
-		this(x, y, tablero);
+	public Plataforma(double x,double y,int height,int width) {
+		this(x, y);
 		this.height=height;
 		this.width=width;
 		shape=new Rectangle2D.Double(xPosition, yPosition, width, height);
@@ -168,6 +166,7 @@ public class Plataforma implements Serializable {
 	 * @return true si se puede mover;false sino
 	 */
 	protected boolean canMoveRight(){
+		Arkapoob tablero=Arkapoob.demeTablero();
 		return xPosition+width+velocity<tablero.getMaxX();
 	}
 	/**

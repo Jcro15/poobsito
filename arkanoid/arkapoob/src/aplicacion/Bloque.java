@@ -31,7 +31,7 @@ public class Bloque implements Serializable{
 	 * @param x la coordenada x donde se creara el bloque
 	 * @param y la coordenada y donde se creara el bloque
 	 */
-	public Bloque(Arkapoob tablero,int x, int y) {
+	public Bloque(int x, int y) {
 		xPosition=x;
 		yPosition=y;
 		resistance=1;
@@ -40,7 +40,6 @@ public class Bloque implements Serializable{
 		puntaje=100;
 		shape=new Rectangle(xPosition,yPosition, width, height);
 		color=Color.RED;
-		this.tablero=tablero;
 		destroyable=true;
 		
 	}
@@ -123,7 +122,7 @@ public class Bloque implements Serializable{
 		double interseccionAbajo = shape.getMaxY() - inShape.getMinY();
 		double minInterseccionX = Math.min(interseccionIzquierda, interseccionDerecha);
 		double minInterseccionY = Math.min(interseccionAbajo, interseccionArriba);
-		return minInterseccionY<=minInterseccionX;//REVISAR!!!!!!!!!!!!!
+		return minInterseccionY<=minInterseccionX;
 	}
 	/**
 	 * retorna el puntaje que da este bloque al ser destruido
@@ -133,11 +132,10 @@ public class Bloque implements Serializable{
 		return puntaje;
 	}
 	public void reactToColission(Bola bola) {
-		
+		Arkapoob tablero=Arkapoob.demeTablero();
 		reduceResistance(bola.getDamage());
 		bola.reactToCollision(this);
 		if (destroyed()) {
-			
 			tablero.remove(this);
 			tablero.setUltimoBloqueEliminado(this.getClass().getSimpleName());
 			tablero.sumarPuntosJugador(getPuntaje());

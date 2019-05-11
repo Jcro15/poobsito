@@ -58,7 +58,16 @@ public class painter extends JPanelB {
 		setPreferredSize(new Dimension(w, h));
 		setBackground(Color.BLACK);
 		play = true;
-		game=new Arkapoob(jugadores,w,h);
+		Arkapoob.nuevoTablero();
+		game=Arkapoob.demeTablero();
+		if(jugadores==1) {
+			game.anadirJugador(new Jugador(202,620));
+		}
+		else if(jugadores==2) {
+			game.anadirJugador(new Jugador(0,620));
+			game.anadirJugador(new Jugador(w-120,620));
+		}
+		game.generarNuevoNivel();
 		setFocusable(true);
 		prepareAcciones();
 		

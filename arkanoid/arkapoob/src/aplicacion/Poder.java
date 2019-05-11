@@ -17,9 +17,7 @@ public abstract class Poder implements Serializable {
 	private int xPosition;
 	private int yPosition;
 	private Ellipse2D.Double shape;
-	protected Arkapoob tablero;
-	public Poder(Arkapoob tablero,int xPosition,int yPosition) {
-		this.tablero=tablero;
+	public Poder(int xPosition,int yPosition) {
 		this.xPosition=xPosition;
 		this.yPosition=yPosition;
 		shape=new Ellipse2D.Double(xPosition,yPosition,20,20);
@@ -45,6 +43,7 @@ public abstract class Poder implements Serializable {
 		return !fuera;
 	}
 	public boolean testBorder() {
+		Arkapoob tablero= Arkapoob.demeTablero();
 		return yPosition>tablero.getMaxY(); 
 	}
 	public abstract Image getImage(); 

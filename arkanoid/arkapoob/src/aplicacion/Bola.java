@@ -19,7 +19,6 @@ public class Bola implements Serializable{
 	private int damage;
 	private double velocity;
 	private Ellipse2D.Double shape;
-	private Arkapoob tablero;
 	private transient Clip hit;
 	private transient Clip death;
 	public static final double VMAX=1.2;
@@ -35,7 +34,7 @@ public class Bola implements Serializable{
 	 * @param x la coordenada x donde se creara la bola
 	 * @param y la coordenada y donde se creara la bola
 	 */
-	public Bola(double x ,double y,Arkapoob tablero) {
+	public Bola(double x ,double y) {
 		xPosition=x;
 		yPosition=y;
 		velocity=0.8;
@@ -43,7 +42,6 @@ public class Bola implements Serializable{
 		dx=1;
 		dy=-1;
 		damage=1;
-		this.tablero=tablero;
 		
 	}
 	/**
@@ -80,6 +78,7 @@ public class Bola implements Serializable{
 	 * detecta si la bola se encuentra en uno de los bordes y cambia su direccion o genera la perdida de vida si la bola sale por el limite inferior
 	 */
 	private void testBorder() {
+		Arkapoob tablero=Arkapoob.demeTablero();
 		if(getX()>tablero.getMaxX()||getX()<0) {
 			setDx(getDx()*-1);
 			prepareSonidos(1);
@@ -91,7 +90,7 @@ public class Bola implements Serializable{
 		else if(getY()>tablero.getMaxY()) {
 			prepareSonidos(2);
 			tablero.setBall();
-			tablero.restarVidaJugador();
+			tablero.restarVidaJugadores();
 		}
 	}
 	/**

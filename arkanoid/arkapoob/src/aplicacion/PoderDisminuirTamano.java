@@ -4,14 +4,15 @@ import java.awt.Image;
 
 public class PoderDisminuirTamano extends Poder {
 
-	public PoderDisminuirTamano(Arkapoob tablero, int xPosition, int yPosition) {
-		super(tablero, xPosition, yPosition);
+	public PoderDisminuirTamano( int xPosition, int yPosition) {
+		super( xPosition, yPosition);
 		// TODO Auto-generated constructor stub
 		
 		
 	}
 
 	public void reactToCollision(Jugador jugador) {
+		Arkapoob tablero= Arkapoob.demeTablero();
 		jugador.getPlatform().disminuirTamaño();
 		tablero.removerPoder(this);
 	}

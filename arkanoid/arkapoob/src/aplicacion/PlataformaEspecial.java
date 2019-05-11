@@ -4,11 +4,11 @@ import java.awt.geom.Rectangle2D;
 
 public class PlataformaEspecial extends Plataforma {
 
-	public PlataformaEspecial(double x,double y,Arkapoob tablero) {
-		super(x, y,tablero);
+	public PlataformaEspecial(double x,double y) {
+		super(x, y);
 	}
-	public PlataformaEspecial(double x,double y,Arkapoob tablero,int height,int width) {
-		super(x, y, tablero, height, width);
+	public PlataformaEspecial(double x,double y,int height,int width) {
+		super(x, y,  height, width);
 	}
 	public void moveRight() {
 		super.moveLeft();

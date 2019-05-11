@@ -10,38 +10,43 @@ public class Arkapoob implements Serializable{
 	private Bola bola;
 	private ArrayList<Jugador> jugadores;
 	private ArrayList<Bloque> bloques;
-	private int maxX;
-	private int maxY;
+	private static final int maxX= 485; 
+	private static final int maxY=665;
 	private String ultimoBloqueEliminado;
 	private static transient ArkapoobDAO arkaDAO;
 	private static final long serialVersionUID = 8799656478674716638L;
 	private ArrayList<Poder> poderes;
 	private int nivel;
 	private Nivel generador;
-	private int nJugadores;
 	private int ultimoJugador;
+	private static Arkapoob tablero=null;
 	
-	public Arkapoob(int nJugadores,int maxX ,int maxY)  {
+	private Arkapoob()  {
 		nivel=0;
-		this.maxX=maxX;
-		this.maxY=maxY;
-		this.nJugadores=nJugadores;
 		ultimoJugador=0;
 		ultimoBloqueEliminado="";
 		bloques=new ArrayList<Bloque>();
-		generador=new Nivel(maxX,maxY);
+		generador=new Nivel();
 		poderes=new ArrayList<Poder>();
 		jugadores=new ArrayList<Jugador>();
-		if(nJugadores==1) {
-			jugadores.add(new Jugador(this,202,620));
-		}
-		else if(nJugadores==2) {
-			jugadores.add(new Jugador(this,0,620));
-			jugadores.add(new Jugador(this,maxX-120,620));
-		}
-		generarNuevoNivel();
 		arkaDAO=new ArkapoobDAO();
 	}
+	/**
+	 * retorna una referencia al tablero de juego 
+	 * @return el tablero de juego
+	 */
+	public static Arkapoob demeTablero() {
+        if (tablero==null){
+            tablero=new Arkapoob();
+        }
+        return tablero;
+    }
+	/**
+	 * crea un nuevo tablero de arkapoob
+	 */
+	public static void nuevoTablero() {
+        tablero=new Arkapoob();
+    }   
 	/**
 	 * determina si el jugador perdio la partida
 	 * @return true si el numero de vidas de alguno de los  jugadores es  0 ;false si no
@@ -75,7 +80,7 @@ public class Arkapoob implements Serializable{
 	 */
 	public void generarNuevoNivel() {
 		setBall();
-		bloques= generador.generarNivel(this);
+		bloques= generador.generarNivel();
 		nivel+=1;
 		poderes.clear();
 	}
@@ -179,10 +184,10 @@ public class Arkapoob implements Serializable{
 	 */
 	public void setBall() {
 		Random random =new Random();
-		int p =random.nextInt(nJugadores);
+		int p =random.nextInt(jugadores.size());
 		ultimoJugador=p;//temp
 		Jugador jugador=jugadores.get(p);
-		bola=new Bola(jugador.getPlatform().getX()+jugador.getPlatform().getWidth()/2 , jugador.getPlatform().getY()-10,this);
+		bola=new Bola(jugador.getPlatform().getX()+jugador.getPlatform().getWidth()/2 , jugador.getPlatform().getY()-10);
 	}
 		
 	/**
@@ -262,16 +267,21 @@ public class Arkapoob implements Serializable{
 		jugadores.get(ultimoJugador).sumarPuntos(puntaje);
 	}
 	/**
-	 * aumenta en uno las vidas del ultimo jugador que hizo rebotar la bola en su plataforma
+	 * aumenta en uno las vidas de los jugadores 
 	 */
-	public void sumarVidaJugador() {
-		jugadores.get(ultimoJugador).setVidas(jugadores.get(ultimoJugador).getLives()+1);
+	public void sumarVidaJugadores() {
+		for(Jugador jugador:jugadores) {
+			jugador.setVidas(jugador.getLives()+1);
+	
+		}
 	}
 	/**
-	 * resta en uno las vidas del ultimo jugador que hizo rebotar la bola en su plataforma
+	 * resta en uno las vidas de los jugadores 
 	 */
-	public void restarVidaJugador() {
-		jugadores.get(ultimoJugador).setVidas(jugadores.get(ultimoJugador).getLives()-1);
+	public void restarVidaJugadores() {
+		for(Jugador jugador :jugadores) {
+			jugador.setVidas(jugador.getLives()-1);
+		}
 	}
 	/**
 	 * guarda el nombre de la clase que representa al ultimo bloque eliminado en la partida
@@ -335,7 +345,14 @@ public class Arkapoob implements Serializable{
 	 * @return el numero de jugadores en la partida
 	 */
 	public int getNJugadores(){
-		return nJugadores;
+		return jugadores.size();
+	}
+	/**
+	 * añade un jugador a la partida
+	 * @param jugador el jugador a añadir
+	 */
+	public void anadirJugador(Jugador jugador) {
+		jugadores.add(jugador);
 	}
 
 }
