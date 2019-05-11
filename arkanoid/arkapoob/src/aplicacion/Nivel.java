@@ -1,9 +1,22 @@
 package aplicacion;
 import java.util.*;
 import java.io.*;
+
+/**
+ * Representa un generador de niveles
+ * @author Juan Camilo Rojas & Juan Camilo Angel
+ *
+ */
 public class Nivel implements Serializable{
+	/**
+	 * crea un nuevo generador
+	 */
 	public Nivel() {
 	}
+	/**
+	 * genera una nueva configuracion aleatoria de bloques
+	 * @return un arreglo de bloques aleatorios
+	 */
 	public ArrayList<Bloque>  generarNivel() {
 		Arkapoob tablero=Arkapoob.demeTablero();
 		ArrayList<Bloque> bloques=new ArrayList<Bloque>();
@@ -20,6 +33,13 @@ public class Nivel implements Serializable{
 		}
 		return bloques;
 	}
+	/**
+	 * genera un bloque aleatorio en una posicion i,j a partir de un numero aleatorio
+	 * @param i la posicion X que tendra el bloque
+	 * @param j la posicion Y que tendra el bloque
+	 * @param valor un numero aleatorio usado para determinar que bloque crear
+	 * @return un bloque aleatorio entre los distintos tipos de bloques
+	 */
 	public Bloque generarBloque(int i ,int j, int valor){
 		Bloque b=null;
 		if (valor<5) b= new BloqueVida(i,j);

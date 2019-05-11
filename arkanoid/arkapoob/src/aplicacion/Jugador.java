@@ -68,6 +68,10 @@ public class Jugador implements Serializable{
 	public void setVidas(int vidas) {
 		lives=vidas;
 	}
+	/**
+	 * asigna una nueva plataforma a este jugador
+	 * @param plataforma la plataforma que se va a asignar
+	 */
 	public void setPlataforma(Plataforma plataforma) {
 		platform=plataforma;
 	}
@@ -102,12 +106,21 @@ public class Jugador implements Serializable{
 	public void setName(String name){
 		this.name = name;
 	}
+	/**
+	 * usa la habilidad especial de la plataforma, si la plataforma se queda sin
+	 * usos cambia la plataforma por una plataforma normal
+	 */
 	public void usarHabilidadPlataforma() {
 		platform.usarHabilidad();
 		if(platform.getUses()==0) {
 			platform=new Plataforma(platform.getX(),platform.getY(),platform.getHeight(),platform.getWidth());
 		}
 	}
+	/**
+	 * Describe el comportamiento que tiene un jugador al colisionar
+	 * con la plataforma de otro jugador
+	 * @param jugador el jugador con el que se genera la colision
+	 */
 	public void reactToCollision(Jugador jugador) {
 		jugador.getPlatform().reactToCollision(platform);
 		platform.reactToCollision(jugador.getPlatform());

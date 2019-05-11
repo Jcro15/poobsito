@@ -10,6 +10,8 @@ public class BloqueCamaleon extends Bloque {
 		color=Color.BLACK;
 		puntaje=600;
 	}
+	
+	
 	public void reactToColission(Bola bola) {
 		Arkapoob tablero=Arkapoob.demeTablero();
 		String nuevo=tablero.getUltimoBloqueEliminado();

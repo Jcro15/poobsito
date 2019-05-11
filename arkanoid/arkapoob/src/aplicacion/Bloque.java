@@ -22,7 +22,6 @@ public class Bloque implements Serializable{
 	protected int puntaje;
 	protected Rectangle shape;
 	protected Color color;
-	protected Arkapoob tablero;
 	protected boolean destroyable;
 	protected transient Clip power;
 	
@@ -71,6 +70,10 @@ public class Bloque implements Serializable{
 	public Color getColor() {
 		return color;
 	}
+	/**
+	 * retorna un booleano que indica si este bloque se puede destruir
+	 * @return true si se puede destruir;false sino
+	 */
 	public boolean isDestroyable() {
 		return destroyable;
 	}
@@ -131,6 +134,11 @@ public class Bloque implements Serializable{
 	public int getPuntaje() {
 		return puntaje;
 	}
+	/**
+	 * Describe el comportamiento del bloque al colisionar con una bola,
+	 * este bloque simplemente se destruye y redirecciona la bola
+	 * @param bola la bola con la que se genera la colision
+	 */
 	public void reactToColission(Bola bola) {
 		Arkapoob tablero=Arkapoob.demeTablero();
 		reduceResistance(bola.getDamage());

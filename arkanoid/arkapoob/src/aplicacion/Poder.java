@@ -11,12 +11,21 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
 import java.awt.Image;
-
+/**
+ *la clase representa un poder, definido por una elipse con coordenadas (xPosition,yPosition) 
+ * @author Juan Camilo Rojas & Juan Camilo Angel
+ *
+ */
 public abstract class Poder implements Serializable {
 	
 	private int xPosition;
 	private int yPosition;
 	private Ellipse2D.Double shape;
+	/**
+	 * 
+	 * @param xPosition
+	 * @param yPosition
+	 */
 	public Poder(int xPosition,int yPosition) {
 		this.xPosition=xPosition;
 		this.yPosition=yPosition;

@@ -4,8 +4,8 @@ import java.awt.geom.RectangularShape;
 import java.awt.Color;
 import java.io.*;
 /**
- * La clase representa un bloque, definido por un rectangulo con coordenadas (xPosition,yPosition)
- * un alto y un ancho(height,width) un color y una velocidad
+ * La clase representa una plataforma, definida por un rectangulo con coordenadas (xPosition,yPosition)
+ * un alto y un ancho(height,width)  una velocidad y el numero de usos que tiene su habilidad
  *@author Juan Camilo Rojas & Juan Camilo Angel
  *
  */
@@ -37,6 +37,13 @@ public class Plataforma implements Serializable {
 		shape=new Rectangle2D.Double(xPosition, yPosition, width, height);
 		velocity=0.6;
 	}
+	/**
+	 * genera una nueva plataforma con un ancho y alto especificado en una posicion x,y
+	 * @param x posicion x de la plataforma
+	 * @param y posicion y de la plataforma
+	 * @param height alto de la plataforma
+	 * @param width ancho de la plataforma
+	 */
 	public Plataforma(double x,double y,int height,int width) {
 		this(x, y);
 		this.height=height;
