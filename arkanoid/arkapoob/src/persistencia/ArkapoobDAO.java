@@ -30,9 +30,12 @@ public class ArkapoobDAO{
 	public Arkapoob abrir(File file) throws ArkapoobException{
 		if (!file.getName().endsWith(".dat")) throw new ArkapoobException(ArkapoobException.TIPO_DE_ARCHIVO_INCORRECTO);
 		Arkapoob arka = null;
+		Arkapoob arka1= null;
 		try{
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
-			arka = (Arkapoob) in.readObject();
+			arka = (Arkapoob) in.readObject(); 
+			Arkapoob.cambiarTablero(arka);
+			arka1 = arka.demeTablero();
 			in.close();
 		}
 		catch(ClassNotFoundException e) {
@@ -40,7 +43,7 @@ public class ArkapoobDAO{
 		}catch (IOException e) {
 			throw new ArkapoobException("Ocurrio un error al abrir el archivo " + file.getName());
 		}
-		return arka;
+		return arka1;
 	}
 	
 

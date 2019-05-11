@@ -354,5 +354,13 @@ public class Arkapoob implements Serializable{
 	public void anadirJugador(Jugador jugador) {
 		jugadores.add(jugador);
 	}
-
+	
+	/**
+	 * actualiza el tablero
+	 * @param game game es el nuevo tablero
+	 */
+	public static void cambiarTablero(Arkapoob game){
+		
+		tablero=game;
+	}
 }
