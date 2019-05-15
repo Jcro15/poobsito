@@ -47,7 +47,7 @@ public class arkapoobPrueba
 		arka.anadirJugador(jugador);
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.0);
 		arka.moverPlataformaDerecha(0);
-		arka.moverJugadores();
+		
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.6);
 	}
 	
@@ -59,7 +59,6 @@ public class arkapoobPrueba
 		arka.anadirJugador(jugador);
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.0);
 		arka.moverPlataformaIzquierda(0);
-		arka.moverJugadores();
 		assertTrue(arka.getJugador(0).getPlatform().getX()==201.4);
 	}
 	
@@ -72,7 +71,6 @@ public class arkapoobPrueba
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.0);
 		for(int i=0; i<341; i++){
 			arka.moverPlataformaIzquierda(0);
-			arka.moverJugadores();
 		}
 		
 		assertTrue(arka.getJugador(0).getPlatform().getX()==0.4000000000012004);
@@ -87,7 +85,6 @@ public class arkapoobPrueba
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202);
 		for(int i=0; i<700; i++){
 			arka.moverPlataformaDerecha(0);
-			arka.moverJugadores();
 		}
 		
 		assertTrue(arka.getJugador(0).getPlatform().getX()+arka.getJugador(0).getPlatform().getWidth()==484.6000000000036);
@@ -183,27 +180,11 @@ public class arkapoobPrueba
 		arka.moverElementos();
 		assertTrue(arka.getJugador(0).getPlatform().getClass().getSimpleName().equals("PlataformaEspecial"));
 		arka.moverPlataformaIzquierda(0);
-		arka.moverJugadores();
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.6);
 		
 	}
 	
-	/*
-	@Test
-	public void deberiaSerPegajosaYMoverse(){
-		Arkapoob.nuevoTablero();
-		Arkapoob arka = Arkapoob.demeTablero();
-		Jugador jugador = new Jugador(202,620);
-		arka.anadirJugador(jugador);
-		arka.setBall();
-		Plataforma p=arka.getJugador(0).getPlatform();
-		arka.getJugador(0).setPlataforma(new PlataformaPegajosa(p.getX(),p.getY(), arka,p.getHeight(),p.getWidth()));
-		bola.reactToCollision(p);
-		arka.moverPlataformaDerecha(0);
-		assertTrue(arka.getBola().getX()==202.6);
-		
-	}
-	*/
+	
 	
 	
 	@Test
@@ -222,8 +203,30 @@ public class arkapoobPrueba
 			arka.moverElementos();
 		}
 		ArrayList<Bloque> bloques1 = arka.getBloques();
-		
+		assertFalse(bloques1.get(bloques1.size()-1).destroyed());
+		assertTrue(arka.getJugador(0).getScore()==0);
 		assertTrue(len-bloques1.size()==0);
+	}
+	
+	@Test
+	public void deberiaChocarConNormal(){
+		Arkapoob.nuevoTablero();
+		Arkapoob arka = Arkapoob.demeTablero();
+		Jugador jugador = new Jugador(202,620);
+		arka.anadirJugador(jugador);
+		arka.setBall();
+		arka.anadirBloque(new Bloque(315,250));
+		ArrayList<Bloque> bloques = arka.getBloques();
+		int len= bloques.size();
+		
+		for(int i=0;i<479;i++){
+			
+			arka.moverElementos();
+		}
+		ArrayList<Bloque> bloques1 = arka.getBloques();
+		
+		assertTrue(arka.getJugador(0).getScore()==100);
+		assertTrue(len-bloques1.size()==1);
 	}
 	
 	@Test
@@ -242,7 +245,8 @@ public class arkapoobPrueba
 			arka.moverElementos();
 		}
 		ArrayList<Bloque> bloques1 = arka.getBloques();
-		
+		assertFalse(bloques1.get(bloques1.size()-1).destroyed());
+		assertTrue(arka.getJugador(0).getScore()==0);
 		assertTrue(len-bloques1.size()==0);
 	}
 	
@@ -254,14 +258,16 @@ public class arkapoobPrueba
 		arka.anadirJugador(jugador);
 		arka.setBall();
 		arka.anadirBloque(new BloqueVida(315,250));
-		
-		
+		ArrayList<Bloque> bloques = arka.getBloques();
+		int len= bloques.size();
 		for(int i=0;i<479;i++){
 			
 			arka.moverElementos();
 		}
+		ArrayList<Bloque> bloques1 = arka.getBloques();
 		
-		
+		assertTrue(arka.getJugador(0).getScore()==300);
+		assertTrue(len-bloques1.size()==1);
 		assertTrue(arka.getJugador(0).getLives()==4);
 	}
 	
@@ -273,12 +279,16 @@ public class arkapoobPrueba
 		arka.anadirJugador(jugador);
 		arka.setBall();
 		arka.anadirBloque(new BloqueSorpresa(315,250));
+		ArrayList<Bloque> bloques = arka.getBloques();
+		int len= bloques.size();
 		for(int i=0;i<479;i++){
 			
 			arka.moverElementos();
 		}
 		ArrayList<Poder> poderes = arka.getPoderes();
-		
+		ArrayList<Bloque> bloques1 = arka.getBloques();
+		assertTrue(arka.getJugador(0).getScore()==300);
+		assertTrue(len-bloques1.size()==1);
 		assertTrue(poderes.size()==1);
 	}
 	

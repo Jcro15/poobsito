@@ -75,8 +75,9 @@ public class painter extends JPanelB {
 		}
 		else if (jugadores==2&&usarCpu){
 			game.anadirJugador(new Jugador(0,620));
-			game.anadirJugador(new CpuCurioso(w-120,620));
-			//setTipo(pantallaJ.getTipo());
+			//game.anadirJugador(new CpuCurioso(w-120,620));
+			System.out.println(pantallaJ.getTipo());
+			setTipo(pantallaJ.getTipo());
 		}
 		
 		game.generarNuevoNivel();
@@ -418,7 +419,17 @@ public class painter extends JPanelB {
 	}
 	
 	public void setTipo(String tipo) {
-		game.anadirMaquina(tipo);
+		if (tipo.equals("Curioso")){
+			game.anadirJugador(new CpuCurioso(485-120,620));
+		}
+		else if (tipo.equals("Mimo")){
+			game.anadirJugador(new CpuMimo(485-120,620));
+		}
+		/*
+		else if (tipo.equals("Destructor")){
+			game.anadirJugador(new CpuDestructor(w-120,620));
+		}
+		*/
 	}
 	
 	
