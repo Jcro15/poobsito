@@ -3,7 +3,10 @@ package aplicacion;
 import java.awt.geom.RectangularShape;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.Timer;
 import java.io.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import persistencia.*;
 
 public class Arkapoob implements Serializable{
@@ -22,6 +25,7 @@ public class Arkapoob implements Serializable{
 	private static Arkapoob tablero=null;
 	private boolean usarCpu;
 	private String tipo;
+	private Timer arkaTimer;
 	
 	private Arkapoob()  {
 		nivel=0;
@@ -32,7 +36,19 @@ public class Arkapoob implements Serializable{
 		poderes=new ArrayList<Poder>();
 		jugadores=new ArrayList<Jugador>();
 		arkaDAO=new ArkapoobDAO();
+		
+		arkaTimer = new Timer(3, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				//moverJugadores();
+			}
+
+		});
+		arkaTimer.start();
 	}
+	
 	/**
 	 * retorna una referencia al tablero de juego 
 	 * @return el tablero de juego
@@ -389,5 +405,11 @@ public class Arkapoob implements Serializable{
 	public String getTipo(){
 		
 		return tipo;
+	}
+	
+	public void moverJugadores(){}
+	
+	public void pareTimers(){
+		arkaTimer.stop();
 	}
 }

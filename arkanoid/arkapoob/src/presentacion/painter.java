@@ -322,6 +322,7 @@ public class painter extends JPanelB {
 	public void cierre() {
 		elementosTimer.stop();
 		juegoTimer.stop();
+		game.pareTimers();
 	}
 	
 	public Arkapoob getGame(){
