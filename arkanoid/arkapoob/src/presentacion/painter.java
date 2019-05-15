@@ -50,6 +50,7 @@ public class painter extends JPanelB {
 	private Color colorBola, colorPlata;
 	private int jugadores;
 	private boolean usarCpu;
+	private Timer arkaTimer;
 	
 	
 	public painter(int jugadores,boolean usarCpu,int w, int h,pantallaJuego pantallaJ){
@@ -109,6 +110,17 @@ public class painter extends JPanelB {
 			}
 		});
 		elementosTimer.start();
+		
+		arkaTimer = new Timer(3, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				//game.moverJugadores();
+			}
+
+		});
+		arkaTimer.start();
 		
 		
 	}
@@ -322,7 +334,7 @@ public class painter extends JPanelB {
 	public void cierre() {
 		elementosTimer.stop();
 		juegoTimer.stop();
-		game.pareTimers();
+		arkaTimer.stop();
 	}
 	
 	public Arkapoob getGame(){
@@ -380,6 +392,7 @@ public class painter extends JPanelB {
 	public void jugar(){
 		elementosTimer.start();
 		juegoTimer.start();
+		arkaTimer.start();
 		game.moverElementos();
 		repaint();
 	}
