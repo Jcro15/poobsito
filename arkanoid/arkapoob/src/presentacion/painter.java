@@ -49,24 +49,34 @@ public class painter extends JPanelB {
 	private boolean p1Izq, p1Der,p2Der,p2Izq= false;
 	private Color colorBola, colorPlata;
 	private int jugadores;
+	private boolean usarCpu;
 	
 	
-	public painter(int jugadores,int w, int h,pantallaJuego pantallaJ){
+	public painter(int jugadores,boolean usarCpu,int w, int h,pantallaJuego pantallaJ){
 		this.pantallaJ=pantallaJ;
 		this.jugadores=jugadores;
+		this.usarCpu=usarCpu;
+		
 		setBackground(new ImageIcon(getClass().getResource("/resources/fondo1.png")));
 		setPreferredSize(new Dimension(w, h));
 		setBackground(Color.BLACK);
 		play = true;
 		Arkapoob.nuevoTablero();
 		game=Arkapoob.demeTablero();
+		game.setUsarCpu(usarCpu);
+		game.setTipo(pantallaJ.getTipo());
 		if(jugadores==1) {
 			game.anadirJugador(new Jugador(202,620));
 		}
-		else if(jugadores==2) {
+		else if(jugadores==2&&!usarCpu) {
 			game.anadirJugador(new Jugador(0,620));
 			game.anadirJugador(new Jugador(w-120,620));
 		}
+		else if (jugadores==2&&usarCpu){
+			game.anadirJugador(new Jugador(0,620));
+			setTipo(pantallaJ.getTipo());
+		}
+		
 		game.generarNuevoNivel();
 		setFocusable(true);
 		prepareAcciones();
@@ -110,7 +120,7 @@ public class painter extends JPanelB {
 		if (p1Izq) {
 			moverPlatIzq(0);
 		}
-		if(jugadores==2){
+		if(jugadores==2&&!usarCpu){
 			if (p2Der) {
 				moverPlatDer(1);
 			}
@@ -262,7 +272,7 @@ public class painter extends JPanelB {
 		g2.setColor(Color.WHITE);
 		figura = game.getBola().getShape();
 		g2.fill(figura); // dibuja bola
-		if (jugadores==1){
+		if (jugadores==1&&!usarCpu){
 			Jugador j = game.getJugador(0);
 			Plataforma p = j.getPlatform();
 			Rectangle2D.Double pla = p.getShape();
@@ -385,4 +395,10 @@ public class painter extends JPanelB {
 	public void abrir(File file) throws ArkapoobException{
 		game = game.abrir(file);
 	}
+	
+	public void setTipo(String tipo) {
+		game.anadirMaquina(tipo);
+	}
+	
+	
 }

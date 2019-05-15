@@ -20,6 +20,8 @@ public class Arkapoob implements Serializable{
 	private Nivel generador;
 	private int ultimoJugador;
 	private static Arkapoob tablero=null;
+	private boolean usarCpu;
+	private String tipo;
 	
 	private Arkapoob()  {
 		nivel=0;
@@ -362,5 +364,30 @@ public class Arkapoob implements Serializable{
 	public static void cambiarTablero(Arkapoob game){
 		
 		tablero=game;
+	}
+	
+	public void setUsarCpu(boolean usarCpu){
+		
+		this.usarCpu=usarCpu;
+	}
+	
+	public boolean getUsarCpu(){
+		
+		return usarCpu;
+	}
+	
+	public void anadirMaquina(String tipo){
+		
+		anadirJugador(new Jugador(485-120,620));
+	}
+	
+	public void setTipo(String tipo){
+		
+		this.tipo=tipo;
+	}
+	
+	public String getTipo(){
+		
+		return tipo;
 	}
 }

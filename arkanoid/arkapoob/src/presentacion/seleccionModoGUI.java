@@ -16,18 +16,19 @@ public class seleccionModoGUI extends JFrame{
 	private myButton single;
 	private myButton  coop;
 	private myButton  jVsCpu;
-	private myButton  volverBoton,volverBoton2J;
+	private myButton  volverBoton,volverBoton2J,volverBotonPc;
 	private myButton  jugarBoton1J;
 	private myButton  jugarBoton2J;
 	private myButton  jugarBotonPc;
 	private myButton  cancelarBoton;
 	private JLabel logo;
 	private Container contenedor;
-	private JComboBox<String> selecColorBar,selecColorBar2,selecColorBarP1;
-	private JTextField nameJ1,nameP1;
+	private JComboBox<String> selecColorBar,selecColorBar2,selecColorBarP1,selecTipo,selecColorBarJu2,selecColorBarJu1;
+	private JTextField nameJ1,nameP1,nameJu1;
 	private JTextField nameJ2;
 	private JPanel cards;
 	private static final String []colores = { "Verde", "Azul","Amarillo","Rojo"};
+	private static final String []tipos = { "Curioso", "Destructor","Mimo"};
 	
 	public seleccionModoGUI(){
 		super("Seleccion Modo");
@@ -239,6 +240,72 @@ public class seleccionModoGUI extends JFrame{
 	}
 	
 	public void prepareElementosConfigPc(){
+		JPanelB configPanel = new JPanelB();
+		configPanel.setLayout(new GridLayout(3,1));
+		configPanel.setBackground(new ImageIcon(getClass().getResource("/resources/fondo.png")));
+		cards.add(configPanel,"ConfiguracionPc");
+		JPanel panelCButton = new JPanel();
+		panelCButton.setOpaque(false);
+		
+		JPanel panelConfigLogo= new JPanel(new GridBagLayout());
+		logo = new JLabel(new ImageIcon(getClass().getResource("/resources/logo.png")));
+		panelConfigLogo.add(logo);
+		panelConfigLogo.setOpaque(false);
+		
+		JPanel combo = new JPanel();
+		combo.setLayout(null);
+		combo.setOpaque(false);
+		
+		JLabel nombre = new JLabel("Nombre J1");
+		nombre.setForeground(Color.WHITE);
+		nombre.setBounds(27, 40, 85, 14);
+		combo.add(nombre);
+		nameJu1 = new JTextField();
+		nameJu1.setBounds(145, 37, 121, 23);
+		combo.add(nameJu1);
+		nameJu1.setColumns(10);
+		
+		JLabel nombre2 = new JLabel("Tipo maquina");
+		nombre2.setForeground(Color.WHITE);
+		nombre2.setBounds( 286,40,85, 14 );
+		combo.add(nombre2);
+		selecTipo = new JComboBox<>(tipos);
+		selecTipo.setBounds(414,37,121,23);
+		combo.add(selecTipo);
+		
+		
+		JLabel colorBarra = new JLabel("Color barra J1");
+		colorBarra.setForeground(Color.WHITE);
+		colorBarra.setBounds(27, 85, 85, 14);
+		combo.add(colorBarra);
+		selecColorBarJu1 = new JComboBox<>(colores);
+		selecColorBarJu1.setBounds(145, 82, 121, 17);
+		combo.add(selecColorBarJu1);
+		
+		JLabel colorBarra2 = new JLabel("Color barra J2");
+		colorBarra2.setForeground(Color.WHITE);
+		colorBarra2.setBounds(286, 85, 85, 14);
+		combo.add(colorBarra2);
+		selecColorBarJu2 = new JComboBox<>(colores);
+		selecColorBarJu2.setBounds(414, 82, 121, 17);
+		combo.add(selecColorBarJu2);
+		
+		Icon iconoCancelar = new ImageIcon(getClass().getResource("/resources/volver.png"));
+		volverBotonPc = new myButton(iconoCancelar);
+		volverBotonPc.setTransparent();
+		
+		Icon iconoJ = new ImageIcon(getClass().getResource("/resources/jugar1.png"));
+		jugarBotonPc = new myButton(iconoJ);
+		
+		jugarBotonPc.setTransparent();
+		
+		panelCButton.add(jugarBotonPc);
+		panelCButton.add(volverBotonPc);
+		
+		configPanel.add(panelConfigLogo);
+		configPanel.add(combo);
+		configPanel.add(panelCButton);
+		configPanel.setOpaque(false);
 		
 	}
 	public void prepareAcciones(){
@@ -263,7 +330,7 @@ public class seleccionModoGUI extends JFrame{
 		
 		jVsCpu.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				abrirConfig1J();
+				abrirConfigPc();
 			}
 		});
 	}
@@ -280,6 +347,11 @@ public class seleccionModoGUI extends JFrame{
 				principal();
 			}
 		});
+		volverBotonPc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				principal();
+			}
+		});
 		
 		jugarBoton1J.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -290,6 +362,11 @@ public class seleccionModoGUI extends JFrame{
 		jugarBoton2J.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				juegue2J();
+			}
+		});
+		jugarBotonPc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jueguePc();
 			}
 		});
 	}
@@ -306,6 +383,13 @@ public class seleccionModoGUI extends JFrame{
 		ajusteFrameConfig();
 		CardLayout c1 = (CardLayout)(cards.getLayout());
 		c1.show(cards,"Configuracion2J");
+	}
+	
+	public void abrirConfigPc(){
+		setTitle("Configuracion");
+		ajusteFrameConfig();
+		CardLayout c1 = (CardLayout)(cards.getLayout());
+		c1.show(cards,"ConfiguracionPc");
 	}
 	
 	public void juegue1J(){
@@ -325,7 +409,22 @@ public class seleccionModoGUI extends JFrame{
 		dispose();
 		pantallaJuego j = null;
 		try{
-			j=new pantallaJuego(2,nameP1.getText(),(String)selecColorBarP1.getSelectedItem(),nameJ2.getText(),(String)selecColorBar2.getSelectedItem());
+			j=new pantallaJuego(2,nameP1.getText(),(String)selecColorBarP1.getSelectedItem(),nameJ2.getText(),(String)selecColorBar2.getSelectedItem(),false);
+			
+			j.setVisible(true);
+		}
+		catch( ArkapoobException e){
+			JOptionPane.showMessageDialog(this,e.getMessage());
+		}
+		
+	}
+	
+	public void jueguePc(){
+		dispose();
+		pantallaJuego j = null;
+		try{
+			j=new pantallaJuego(2,nameJu1.getText(),(String)selecColorBarJu1.getSelectedItem(),"maquina",(String)selecColorBarJu2.getSelectedItem(),true,(String)selecTipo.getSelectedItem());
+			
 			j.setVisible(true);
 		}
 		catch( ArkapoobException e){

@@ -31,12 +31,16 @@ public class pantallaJuego  extends JFrame{
     private JMenuItem abra;
 	private JFileChooser chooser;
 	private int jugadores;
+	private boolean usarCpu;
+	private String tipo;
+	
 	
 	public pantallaJuego(int jugadores, String name, String colorPlata) throws ArkapoobException{
 		super("Arkapoob");
 		if(name.equals("")){throw new ArkapoobException(ArkapoobException.NOMBRE_VACIO);}
 		this.name = name;
 		this.jugadores=jugadores;
+		this.usarCpu=false;
 		setResizable(false);
 		pausa=false;
 		prepareElementos();
@@ -46,12 +50,13 @@ public class pantallaJuego  extends JFrame{
 		pin.updColor(colorPlata,0);
 	}
 	
-	public pantallaJuego(int jugadores, String name, String colorPlata,String name2, String colorPlata2)throws ArkapoobException{
+	public pantallaJuego(int jugadores, String name, String colorPlata,String name2, String colorPlata2,boolean usarCpu)throws ArkapoobException{
 		super("Arkapoob");
 		if(name.equals("")||name2.equals("")){throw new ArkapoobException(ArkapoobException.NOMBRE_VACIO);}
 		this.name = name;
 		this.name2 = name2;
 		this.jugadores=jugadores;
+		this.usarCpu=usarCpu;
 		setResizable(false);
 		pausa=false;
 		prepareElementos();
@@ -64,6 +69,29 @@ public class pantallaJuego  extends JFrame{
 		pin.updColor(colorPlata2,1);
 		
 	}
+	
+	public pantallaJuego(int jugadores, String name, String colorPlata,String name2, String colorPlata2,boolean usarCpu,String tipo)throws ArkapoobException{
+		super("Arkapoob");
+		if(name.equals("")||name2.equals("")){throw new ArkapoobException(ArkapoobException.NOMBRE_VACIO);}
+		this.name = name;
+		this.name2 = name2;
+		this.jugadores=jugadores;
+		this.usarCpu=usarCpu;
+		this.tipo=tipo;
+		setResizable(false);
+		pausa=false;
+		prepareElementos();
+		prepareAcciones();
+		this.colorPlata=colorPlata;
+		this.colorPlata2=colorPlata2;
+		pin.updName(name,0);
+		pin.updColor(colorPlata,0);
+		pin.updName(name2,1);
+		pin.updColor(colorPlata2,1);
+		
+	}
+	
+	
 	public void prepareElementos() {
 		ajusteFrame();
 		preparePantalla();
@@ -105,7 +133,8 @@ public class pantallaJuego  extends JFrame{
 		pausaBoton.setTransparent();
 		opciones.add(pausaBoton);
 		
-		pin = new painter(jugadores,485,665,this);
+		pin = new painter(jugadores,usarCpu,485,665,this);
+		
 		container.add(pin, BorderLayout.CENTER);
 		pin.setFocusable(true);
 		if(jugadores==1){
@@ -216,6 +245,8 @@ public class pantallaJuego  extends JFrame{
 		dispose();
 	}
 	
+	
+	
 	public void actualiceBotonPausa(boolean pausa) {
 		
 		
@@ -261,4 +292,9 @@ public class pantallaJuego  extends JFrame{
 	public painter getPainter(){
 		return pin;
 	}
+	
+	public String getTipo(){
+		return tipo;
+	}
+	
 }
