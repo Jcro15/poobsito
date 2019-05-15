@@ -226,16 +226,14 @@ public class Arkapoob implements Serializable{
 	 * mueve al jugador a la derecha  si es posible
 	 */
 	public void moverPlataformaDerecha(int numeroJugador) {
-		boolean colision = ColisionJugadores();
-		if (!colision)jugadores.get(numeroJugador).moverPlataformaDerecha();
+		jugadores.get(numeroJugador).moverPlataformaDerecha();
 		
 	}
 	/**
 	 * mueve al jugador a la izquierda  si es posible
 	 */
 	public void moverPlataformaIzquierda(int numeroJugador) {
-		boolean colision =ColisionJugadores();
-		if(!colision)jugadores.get(numeroJugador).moverPlataformaIzquierda();
+		jugadores.get(numeroJugador).moverPlataformaIzquierda();
 		
 	}
 	/**
@@ -393,11 +391,20 @@ public class Arkapoob implements Serializable{
 	}
 	
 	public String getTipo(){
-		
 		return tipo;
 	}
+	public void detenerJugador(int numeroJugador) {
+		jugadores.get(numeroJugador).detener();
+	}
 	
-	public void moverJugadores(){}
+	public void moverJugadores(){
+		for(Jugador jugador:jugadores) {
+			boolean colision =ColisionJugadores();
+			if(!colision) {
+				jugador.moverPlataforma();
+			}
+		}
+	}
 	
 	
 }

@@ -12,7 +12,7 @@ public class Jugador implements Serializable{
 	private int lives;
 	private int score;
 	private String name;
-	private Plataforma platform;
+	protected Plataforma platform;
 	/**
 	 * Construye un nuevo objeto de tipo jugador con un valor por defecto de vidas, de puntaje y una plataforma
 	 * en una posicion por defecto
@@ -54,13 +54,17 @@ public class Jugador implements Serializable{
 	 * ordena a la plataforma que se mueva a la derecha
 	 */
 	public void moverPlataformaDerecha() {
-		platform.moveRight();
+		platform.setDx(Plataforma.DERECHA);
 	}
 	/**
 	 * ordena a la plataforma que se mueva a la izquierda
 	 */
 	public void moverPlataformaIzquierda() {
-		platform.moveLeft();
+		platform.setDx(Plataforma.IZQUIERDA);
+	}
+
+	public void moverPlataforma() {
+		platform.move();
 	}
 	/**
 	 * reduce las vidas del jugador
@@ -127,6 +131,9 @@ public class Jugador implements Serializable{
 		Plataforma temp=jugador.getPlatform();
 		jugador.setPlataforma(platform);
 		setPlataforma(temp);
+	}
+	public void detener() {
+		platform.setDx(Plataforma.QUIETO);
 	}
 
 }

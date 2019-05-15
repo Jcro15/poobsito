@@ -20,9 +20,13 @@ public class Plataforma implements Serializable {
 	private Rectangle2D.Double shape;
 	private Color color;
 	private String colorString;
+	private int dx;
 	
 	public static final int MAXW=200;
 	public static final int MINW=80;
+	public static final int DERECHA=1;
+	public static final int IZQUIERDA=-1;
+	public static final int QUIETO=0;
 	/**
 	 * construye un objeto de tipo plataforma en una posicion dada con un ancho y alto por defecto
 	 * @param x la posicion x inicial de la plataforma
@@ -31,6 +35,7 @@ public class Plataforma implements Serializable {
 	public Plataforma(double x,double y) {
 		xPosition=x;
 		yPosition=y;
+		dx=0;
 		height=10;
 		width=120;
 		uses=0;
@@ -89,6 +94,20 @@ public class Plataforma implements Serializable {
 	 */
 	public int getWidth() {
 		return width;
+	}
+	public void setDx(int nDx) {
+		dx=nDx;
+	}
+	/**
+	 * mueve la plataforma seguna la direccion que tenga guardada en dx
+	 */
+	public void move() {
+		if(dx==1) {
+			moveRight();
+		}
+		else if(dx==-1) {
+			moveLeft();
+		}
 	}
 	
 	/**
@@ -176,6 +195,7 @@ public class Plataforma implements Serializable {
 		Arkapoob tablero=Arkapoob.demeTablero();
 		return xPosition+width+velocity<tablero.getMaxX();
 	}
+
 	/**
 	 * aumenta el tamano de la barra siempre y cuando este por debajo del limite de tamano
 	 */

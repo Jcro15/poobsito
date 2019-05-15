@@ -47,7 +47,7 @@ public class arkapoobPrueba
 		arka.anadirJugador(jugador);
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.0);
 		arka.moverPlataformaDerecha(0);
-		
+		arka.moverJugadores();
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.6);
 	}
 	
@@ -59,6 +59,7 @@ public class arkapoobPrueba
 		arka.anadirJugador(jugador);
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.0);
 		arka.moverPlataformaIzquierda(0);
+		arka.moverJugadores();
 		assertTrue(arka.getJugador(0).getPlatform().getX()==201.4);
 	}
 	
@@ -71,6 +72,7 @@ public class arkapoobPrueba
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.0);
 		for(int i=0; i<341; i++){
 			arka.moverPlataformaIzquierda(0);
+			arka.moverJugadores();
 		}
 		
 		assertTrue(arka.getJugador(0).getPlatform().getX()==0.4000000000012004);
@@ -85,6 +87,7 @@ public class arkapoobPrueba
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202);
 		for(int i=0; i<700; i++){
 			arka.moverPlataformaDerecha(0);
+			arka.moverJugadores();
 		}
 		
 		assertTrue(arka.getJugador(0).getPlatform().getX()+arka.getJugador(0).getPlatform().getWidth()==484.6000000000036);
@@ -180,6 +183,7 @@ public class arkapoobPrueba
 		arka.moverElementos();
 		assertTrue(arka.getJugador(0).getPlatform().getClass().getSimpleName().equals("PlataformaEspecial"));
 		arka.moverPlataformaIzquierda(0);
+		arka.moverJugadores();
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.6);
 		
 	}

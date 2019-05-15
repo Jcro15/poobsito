@@ -75,7 +75,8 @@ public class painter extends JPanelB {
 		}
 		else if (jugadores==2&&usarCpu){
 			game.anadirJugador(new Jugador(0,620));
-			setTipo(pantallaJ.getTipo());
+			game.anadirJugador(new CpuCurioso(w-120,620));
+			//setTipo(pantallaJ.getTipo());
 		}
 		
 		game.generarNuevoNivel();
@@ -102,7 +103,7 @@ public class painter extends JPanelB {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				movePlat();
+				
 				game.moverElementos();
 				repaint();
 				//paint(getGraphics());
@@ -115,8 +116,9 @@ public class painter extends JPanelB {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				movePlat();
+				game.moverJugadores();
 				
-				//game.moverJugadores();
 			}
 
 		});
@@ -126,6 +128,7 @@ public class painter extends JPanelB {
 	}
 	private void movePlat() {
 		
+		if(!p1Der&&!p1Izq)detenerPlat(0);
 		if (p1Der) {
 			moverPlatDer(0);
 		}
@@ -133,6 +136,7 @@ public class painter extends JPanelB {
 			moverPlatIzq(0);
 		}
 		if(jugadores==2&&!usarCpu){
+			if(!p2Der&&!p2Izq)detenerPlat(1);
 			if (p2Der) {
 				moverPlatDer(1);
 			}
@@ -276,6 +280,9 @@ public class painter extends JPanelB {
 	
 	public void moverPlatIzq(int pos){
 		game.moverPlataformaIzquierda(pos);
+	}
+	public void detenerPlat(int pos) {
+		game.detenerJugador(pos);
 	}
 	
 	public void paintComponent(Graphics g){

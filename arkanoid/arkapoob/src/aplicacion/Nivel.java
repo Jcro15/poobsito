@@ -23,7 +23,7 @@ public class Nivel implements Serializable{
 		for (int j =100;j<225;j+=25) {
 			for (int i =0;i<tablero.getMaxX();i+=45) {
 				Random random =new Random();
-				
+				//
 				Bloque b =generarBloque(i,j,random.nextInt(100));
 				
 				if(b!=null) {
