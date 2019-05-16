@@ -37,7 +37,9 @@ public class arkapoobPrueba
      *
      * Called after every test case method.
      */
-    @Test
+    
+	
+	@Test
     public void deberiaMoverPlataformaDerecha()
     {
 		Arkapoob.nuevoTablero();
@@ -47,6 +49,7 @@ public class arkapoobPrueba
 		arka.anadirJugador(jugador);
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.0);
 		arka.moverPlataformaDerecha(0);
+		arka.getJugador(0).moverPlataforma();
 		
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.6);
 	}
@@ -59,6 +62,7 @@ public class arkapoobPrueba
 		arka.anadirJugador(jugador);
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.0);
 		arka.moverPlataformaIzquierda(0);
+		arka.getJugador(0).moverPlataforma();
 		assertTrue(arka.getJugador(0).getPlatform().getX()==201.4);
 	}
 	
@@ -71,6 +75,7 @@ public class arkapoobPrueba
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.0);
 		for(int i=0; i<341; i++){
 			arka.moverPlataformaIzquierda(0);
+			arka.getJugador(0).moverPlataforma();
 		}
 		
 		assertTrue(arka.getJugador(0).getPlatform().getX()==0.4000000000012004);
@@ -85,6 +90,7 @@ public class arkapoobPrueba
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202);
 		for(int i=0; i<700; i++){
 			arka.moverPlataformaDerecha(0);
+			arka.getJugador(0).moverPlataforma();
 		}
 		
 		assertTrue(arka.getJugador(0).getPlatform().getX()+arka.getJugador(0).getPlatform().getWidth()==484.6000000000036);
@@ -180,6 +186,7 @@ public class arkapoobPrueba
 		arka.moverElementos();
 		assertTrue(arka.getJugador(0).getPlatform().getClass().getSimpleName().equals("PlataformaEspecial"));
 		arka.moverPlataformaIzquierda(0);
+		arka.getJugador(0).moverPlataforma();
 		assertTrue(arka.getJugador(0).getPlatform().getX()==202.6);
 		
 	}
@@ -290,6 +297,38 @@ public class arkapoobPrueba
 		assertTrue(arka.getJugador(0).getScore()==300);
 		assertTrue(len-bloques1.size()==1);
 		assertTrue(poderes.size()==1);
+	}
+	
+	@Test
+	public void deberiaMoverseMimo(){
+		Arkapoob.nuevoTablero();
+		Arkapoob arka = Arkapoob.demeTablero();
+		Jugador jugador = new Jugador(0,620);
+		arka.anadirJugador(jugador);
+		Jugador jugador1 = new CpuMimo(200,620);
+		arka.anadirJugador(jugador1);
+		arka.moverPlataformaDerecha(0);
+		arka.getJugador(0).moverPlataforma();
+		assertTrue(arka.getJugador(0).getPlatform().getX()==0.6);
+		arka.getJugador(1).moverPlataforma();
+		assertTrue(arka.getJugador(1).getPlatform().getX()==200.6);
+	}
+	
+	@Test
+	public void deberiaMoverseCurioso(){
+		Arkapoob.nuevoTablero();
+		Arkapoob arka = Arkapoob.demeTablero();
+		Jugador jugador = new Jugador(0,620);
+		arka.anadirJugador(jugador);
+		Jugador jugador1 = new CpuCurioso(200,620);
+		arka.anadirJugador(jugador1);
+		arka.moverPlataformaDerecha(0);
+		arka.getJugador(0).moverPlataforma();
+		assertTrue(arka.getJugador(0).getPlatform().getX()==0.6);
+		Poder poder = new PoderCambioEspecial(198,618);
+		arka.anadirPoder(poder);
+		arka.getJugador(1).moverPlataforma();
+		assertTrue(arka.getJugador(1).getPlatform().getX()==199.4);
 	}
 	
 }
