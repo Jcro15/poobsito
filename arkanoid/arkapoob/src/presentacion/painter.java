@@ -292,7 +292,7 @@ public class painter extends JPanelB {
 		g2.setColor(Color.WHITE);
 		figura = game.getBola().getShape();
 		g2.fill(figura); // dibuja bola
-		if (jugadores==1&&!usarCpu){
+		if (jugadores==1){
 			Jugador j = game.getJugador(0);
 			Plataforma p = j.getPlatform();
 			Rectangle2D.Double pla = p.getShape();
