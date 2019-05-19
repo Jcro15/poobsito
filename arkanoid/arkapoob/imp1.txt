@@ -1,0 +1,6 @@
+2 juan Verde carlos Azul false
+BloqueCamaleon BloqueCamaleon null null null null null null null BloqueCamaleon null
+BloqueCamaleon BloqueCamaleon null BloqueCamaleon BloqueCamaleon null BloqueCamaleon BloqueCamaleon null BloqueCamaleon null
+BloqueCamaleon BloqueCamaleon null BloqueCamaleon BloqueCamaleon null BloqueCamaleon BloqueCamaleon null BloqueCamaleon BloqueCamaleon
+BloqueCamaleon null null BloqueCamaleon BloqueCamaleon null BloqueCamaleon BloqueCamaleon null BloqueCamaleon BloqueCamaleon
+BloqueCamaleon null null BloqueCamaleon BloqueCamaleon null BloqueCamaleon BloqueCamaleon null BloqueCamaleon BloqueCamaleon

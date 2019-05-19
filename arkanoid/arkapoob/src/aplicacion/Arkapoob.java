@@ -92,6 +92,18 @@ public class Arkapoob implements Serializable{
 		nivel+=1;
 		poderes.clear();
 	}
+	
+	public void setNivel(File file) throws ArkapoobException{
+		setBall();
+		try{
+			bloques = generador.generarNivel(file);
+			nivel+=1;
+			poderes.clear();
+		}
+		catch(ArkapoobException e){
+			throw new ArkapoobException(e.getMessage());
+		}
+	}
 	/**
 	 * retorna la bola que se esta usando en el juego
 	 * @return la bola usada en el juego

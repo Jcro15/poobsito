@@ -1,6 +1,7 @@
 package aplicacion;
 import java.util.*;
 import java.io.*;
+import java.lang.reflect.*;
 
 /**
  * Representa un generador de niveles
@@ -52,5 +53,48 @@ public class Nivel implements Serializable{
 		else if(valor>59&&valor<80)b=new Bloque(i,j);
 		else if(valor>79&&valor<100)b=new BloqueResistente(i,j);
 		return b;
+	}
+	
+	public ArrayList<Bloque>  generarNivel(File file) throws ArkapoobException {
+		Arkapoob tablero=Arkapoob.demeTablero();
+		ArrayList<Bloque> bloques=new ArrayList<Bloque>();
+		if (!file.getName().endsWith(".txt")) throw new ArkapoobException(ArkapoobException.TIPO_DE_ARCHIVO_INCORRECTO);
+		try{
+			BufferedReader in = new BufferedReader(new FileReader(file));
+			String l = in.readLine();
+			int Line = 1;
+			int j=75;
+			while(l!=null){
+				
+				String[] lis = l.split(" ");
+				if (lis.length==11){
+					j=j+25;
+						
+					for (int i =0;i<tablero.getMaxX();i+=45) {
+						if (lis[i/45].equals("null")){}
+						else{
+							try{
+								Class <?> clase = Class.forName("aplicacion."+lis[i/45]);
+								Object o = clase.getDeclaredConstructor(int.class,int.class).newInstance(i,j);
+								bloques.add((Bloque)o);
+							}
+							catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+								in.close();
+								throw new ArkapoobException("Error en linea "+Line+": el dato "+lis[i/45]+" no es una clase definida");
+							}
+						}
+					
+					}
+				}
+				Line += 1;
+				l = in.readLine();
+			}
+			in.close();
+			
+		}
+		catch(IOException e ) {
+			throw new ArkapoobException("Ocurrio un error al importar el archivo " + file.getName());
+		}
+		return bloques;
 	}
 }

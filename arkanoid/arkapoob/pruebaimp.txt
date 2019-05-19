@@ -1,0 +1,6 @@
+2 juan Verde carlos Azul false
+Bloque null null null null null null null null null Bloque
+Bloque BloqueResistente null null null null null null null BloqueResistente Bloque
+Bloque BloqueResistente BloqueSorpresa null null null null null BloqueSorpresa BloqueResistente Bloque
+Bloque BloqueResistente BloqueSorpresa BloqueCamaleon null BloqueNivel null BloqueCamaleon BloqueSorpresa BloqueResistente Bloque
+Bloque BloqueResistente BloqueSorpresa BloqueCamaleon BloqueEscurridizo BloqueIndestructible BloqueVida BloqueCamaleon BloqueSorpresa BloqueResistente Bloque

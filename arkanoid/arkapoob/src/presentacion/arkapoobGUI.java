@@ -24,6 +24,7 @@ public class arkapoobGUI extends JFrame {
 	private JLabel logo;
 	private myButton jugarBoton;
 	private myButton abrirBoton;
+	private myButton importarBoton;
 	private JFileChooser chooser;
 	private transient Clip sonido;
 	private static transient ArkapoobDAO arkaDAO;
@@ -113,6 +114,12 @@ public class arkapoobGUI extends JFrame {
 				abra();
 			}
 		});
+		
+		importarBoton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				importe();
+			}
+		});
 	}
 	
 	public void preparePanelBotones(){
@@ -132,7 +139,10 @@ public class arkapoobGUI extends JFrame {
 		panelBotones.add(new JLabel());
 		
 		panelBotones.add(new JLabel());
-		panelBotones.add(new JLabel());
+		Icon icono2 = new ImageIcon(getClass().getResource("/resources/importar.png"));
+		importarBoton = new myButton(icono2);
+		importarBoton.setTransparent();
+		panelBotones.add(importarBoton);
 		panelBotones.add(new JLabel());
 	}
 	
@@ -170,7 +180,24 @@ public class arkapoobGUI extends JFrame {
 		}
 	}
 	
-	
+	public void importe(){
+		int opc =chooser.showOpenDialog(this);
+		arkaDAO=new ArkapoobDAO();
+		try{
+			if (opc==JFileChooser.APPROVE_OPTION){
+				File file =chooser.getSelectedFile();
+				arkaDAO.setPantalla(file);
+				Arkapoob tablero = Arkapoob.demeTablero();
+				tablero.setNivel(file);
+			}
+		}
+		catch (ArkapoobException e){
+			arkaDAO.registre(e);
+			JOptionPane.showMessageDialog(this,e.getMessage());
+		}
+		
+		
+	}
 	public void opcionEnConstruccion(String operacion){
 		JOptionPane.showMessageDialog(this,operacion ,"Operacion en construccion",JOptionPane.INFORMATION_MESSAGE  );
 	}
