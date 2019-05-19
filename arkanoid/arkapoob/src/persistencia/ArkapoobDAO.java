@@ -125,8 +125,8 @@ public class ArkapoobDAO{
 					if(!lis[4].equals("Verde")&&!lis[4].equals("Azul")&&!lis[4].equals("Amarillo")&&!lis[4].equals("Rojo")){
 						throw new ArkapoobException("Error en la linea "+Line+": el dato "+lis[4]+" no es un color valido.");
 					}
-					if(!lis[3].equals("Curioso")&&!lis[3].equals("Destructor")&&!lis[3].equals("Mimo")){
-						throw new ArkapoobException("Error en la linea "+Line+": el dato "+lis[3]+" no es un color valido.");
+					if(!lis[6].equals("Curioso")&&!lis[6].equals("Destructor")&&!lis[6].equals("Mimo")){
+						throw new ArkapoobException("Error en la linea "+Line+": el dato "+lis[6]+" no es un tipo valido.");
 					}
 					try{
 						Integer.parseInt(lis[0]);

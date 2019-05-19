@@ -1,4 +1,4 @@
-2 juan Verde carlos Azul false
+2 juan Verde Maquina Azul false Curioso
 BloqueCamaleon BloqueCamaleon null null null null null null null BloqueCamaleon null
 BloqueCamaleon BloqueCamaleon null BloqueCamaleon BloqueCamaleon null BloqueCamaleon BloqueCamaleon null BloqueCamaleon null
 BloqueCamaleon BloqueCamaleon null BloqueCamaleon BloqueCamaleon null BloqueCamaleon BloqueCamaleon null BloqueCamaleon BloqueCamaleon
