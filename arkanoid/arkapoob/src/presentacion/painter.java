@@ -425,11 +425,11 @@ public class painter extends JPanelB {
 		else if (tipo.equals("Mimo")){
 			game.anadirJugador(new CpuMimo(485-120,620));
 		}
-		/*
+		
 		else if (tipo.equals("Destructor")){
-			game.anadirJugador(new CpuDestructor(w-120,620));
+			game.anadirJugador(new CpuDestructor(485-120,620));
 		}
-		*/
+		
 	}
 	
 	

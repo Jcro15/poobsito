@@ -62,8 +62,11 @@ public class Jugador implements Serializable{
 	public void moverPlataformaIzquierda() {
 		platform.setDx(Plataforma.IZQUIERDA);
 	}
-
+	/**
+	 * mueve la plataforma y verifica si se debe cambiar una plataforma con poder por una normal
+	 */
 	public void moverPlataforma() {
+		comprobarUsos();
 		platform.move();
 	}
 	/**
@@ -116,10 +119,18 @@ public class Jugador implements Serializable{
 	 */
 	public void usarHabilidadPlataforma() {
 		platform.usarHabilidad();
+		comprobarUsos();
+		
+	}
+	
+	/**
+	 * comprueba si la plataforma aun tiene usos de su habilidad
+	 */
+	protected void comprobarUsos() {
 		if(platform.getUses()==0) {
 			platform=new Plataforma(platform.getX(),platform.getY(),platform.getHeight(),platform.getWidth());
 		}
-	}
+	} 
 	/**
 	 * Describe el comportamiento que tiene un jugador al colisionar
 	 * con la plataforma de otro jugador
@@ -132,6 +143,9 @@ public class Jugador implements Serializable{
 		jugador.setPlataforma(platform);
 		setPlataforma(temp);
 	}
+	/**
+	 * detiene la plataforma
+	 */
 	public void detener() {
 		platform.setDx(Plataforma.QUIETO);
 	}

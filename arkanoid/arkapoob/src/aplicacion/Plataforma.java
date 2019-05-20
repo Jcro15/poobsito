@@ -38,7 +38,7 @@ public class Plataforma implements Serializable {
 		dx=0;
 		height=10;
 		width=120;
-		uses=0;
+		uses=-1;
 		shape=new Rectangle2D.Double(xPosition, yPosition, width, height);
 		velocity=0.6;
 	}

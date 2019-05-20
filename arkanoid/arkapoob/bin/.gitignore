@@ -1,4 +1,6 @@
 /aplicacion/
-/pruebas/
-/presentacion/
+/junit-4.12.jar
 /persistencia/
+/presentacion/
+/pruebas/
+/resources/

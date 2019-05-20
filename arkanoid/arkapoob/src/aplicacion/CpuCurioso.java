@@ -7,6 +7,7 @@ public class CpuCurioso extends Jugador {
 		// TODO Auto-generated constructor stub
 	}
 	public void moverPlataforma() {
+		comprobarUsos();
 		double minDelta=999999;
 		int x=0;
 		for(Poder poder:Arkapoob.demeTablero().getPoderes()) {

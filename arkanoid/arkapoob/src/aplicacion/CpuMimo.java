@@ -8,6 +8,7 @@ public class CpuMimo extends Jugador {
 		ultimoXJugador=tablero.getJugador(0).getPlatform().getX();
 	}
 	public void moverPlataforma() {
+		comprobarUsos();
 		Arkapoob tablero=Arkapoob.demeTablero();
 		double actualXJugador=tablero.getJugador(0).getPlatform().getX();
 		if(actualXJugador-ultimoXJugador>0) {
