@@ -1,4 +1,4 @@
-2 juan Verde carlos Azul false
+2 juan Verde carlos Azul false 
 Bloque null null null null null null null null null Bloque
 Bloque BloqueResistente null null null null null null null BloqueResistente Bloque
 Bloque BloqueResistente BloqueSorpresa null null null null null BloqueSorpresa BloqueResistente Bloque

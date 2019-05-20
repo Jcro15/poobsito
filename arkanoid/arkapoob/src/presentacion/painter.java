@@ -75,8 +75,6 @@ public class painter extends JPanelB {
 		}
 		else if (jugadores==2&&usarCpu){
 			game.anadirJugador(new Jugador(0,620));
-			//game.anadirJugador(new CpuCurioso(w-120,620));
-			System.out.println(pantallaJ.getTipo());
 			setTipo(pantallaJ.getTipo());
 		}
 		
